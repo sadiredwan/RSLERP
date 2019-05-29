@@ -1,0 +1,189 @@
+﻿@model demo.Models.user
+@using demo.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@{ 
+    List<dropdown> dropdownlst = (List<dropdown>)ViewBag.dropdownlist;
+    List<checkbox> checkboxList = (List<checkbox>)ViewBag.checkboxlist;
+    List<ModelStateError> errormsg = (List<ModelStateError>)ViewBag.errormsg;
+}
+
+@using (Html.BeginForm("SetData","home",FormMethod.Post,new {@id="FormID" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>user</h4>
+        <hr />
+        <ul>
+            @foreach (var itm in errormsg)
+            {
+                <li class="text-danger">@itm.ErrorMessage</li>
+            }
+        </ul>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+        @ViewData.ModelState.IsValid
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="Name" value="@Model.Name" onchange="onchangeevent(this)" />
+                @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @onchange = "onchangeevent(this)" } })*@
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("Name", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input type="hidden" name="news" id="chnageName" value="" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" type="email" name="Email" value="@Model.Email" onchange="onchangeevent(this)" />
+            </div>
+        </div>
+  
+            <div class="col-md-offset-2 col-md-10">
+                <select multiple="multiple" size="10" name="duallistbox_demo1[]">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3" selected="selected">Option 3</option>
+                    <option value="option4">Option 4</option>
+                    <option value="option5">Option 5</option>
+                    <option value="option6" selected="selected">Option 6</option>
+                    <option value="option7">Option 7</option>
+                    <option value="option8">Option 8</option>
+                    <option value="option9">Option 9</option>
+                    <option value="option0">Option 10</option>
+                </select>
+                </div>
+      
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <select class="form-control" name="WillAttend" onchange="onselectchnage(this)">
+                    @for (int i = 0; i < dropdownlst.Count; i++)
+                    {
+                        if(Model.WillAttend==dropdownlst[i].value){
+                            <option value="@dropdownlst[i].value" selected>@dropdownlst[i].name</option>
+                        }
+                        else
+                        {
+                            <option value="@dropdownlst[i].value">@dropdownlst[i].name</option>
+                        }
+
+                    }
+                   
+                </select>
+            </div>
+        </div>
+        <div class="checkboxList">
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @for (int i = 0; i < checkboxList.Count; i++)
+                {
+                    if (Model.checkBoxLst != null )
+                    {
+                        if (Model.checkBoxLst.FindAll(itm => itm.name == checkboxList[i].name).Count > 0)
+                        {
+                          <input type="checkbox" name="checkBoxLst[]" value="@checkboxList[i].name" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="checkBoxLst[]" value="@checkboxList[i].name">
+                        }
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="checkBoxLst[]" value="@checkboxList[i].name">
+                    }
+
+                    <label class="control-label">@checkboxList[i].name</label>
+                }
+             
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox();
+    $("#demoform").submit(function() {
+      alert($('[name="duallistbox_demo1[]"]').val());
+      return false;
+    });
+</script>
+
+<script type="text/javascript">
+    function onchangeevent(obj)
+    {
+        $("#chnageName").val("neat");
+        obj.form.submit();
+
+       // location.reload();
+    }
+    function onselectchnage(obj) {
+
+        var id = $(obj).val();
+       // alert(id);
+       // var id = 1;
+        var jsonstrigify = JSON.stringify(id);
+        $(".checkboxList").html("Loading...");
+        $.ajax({
+            url: "/Home/checklist?id=test"+id,
+            type: 'GET',
+                success: function (s) {
+                    $(".checkboxList").html(s);
+                }
+
+        });
+
+        //$.ajax({
+        //    url: "/Home/CheckBoxList",
+        //    type: 'POST',
+        //    dataType: 'json',
+        //    contentType: 'application/json',
+        //    cache: false,
+        //    data: JSON.stringify({ id: JSON.stringify(id) }),
+        //    success: function (s) {
+        //        $('#HireProductPrices').html('£' + s.TotalHireCost + ' per day');
+
+        //        $('#totalHirePrices').html('£' + s.TotalHireCost);
+        //        window.location.href = "/basket/index"
+        //        //getTotalBasketItem();
+        //        return false;
+        //    }
+        //});
+
+        //$("#chnageName").val("select");
+        //obj.form.submit();
+
+        // location.reload();
+    }
+
+
+
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

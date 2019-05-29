@@ -1,0 +1,45 @@
+﻿@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+
+
+<div class="login-box">
+  
+    <div class="login-logo">
+        <a href="~/"><b>Enterprise Resource Planning(ERP)</b></a>
+    </div>
+    @if (Model.SaveChangeMessage != null && Model.SaveChangeMessage != "")
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            @Html.Raw(Model.SaveChangeMessage)
+        </div>
+    }
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        @using (Html.BeginForm("Signin", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+        {
+            <div class="form-group has-feedback">
+                <input class="form-control" id="username" type="text" aria-describedby="emailHelp" placeholder="Username" name="VM_USER.u_LoginName" value="@Model.VM_USER.u_LoginName">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="VM_USER.u_Password" value="@Model.VM_USER.u_Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" name="Login">Login</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        }
+    </div>
+    <!-- /.login-box-body -->
+</div>

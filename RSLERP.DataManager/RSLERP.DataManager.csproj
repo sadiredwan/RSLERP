@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{10668ED2-F353-4FC2-891A-8F448DE6D50F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RSLERP.DataManager</RootNamespace>
+    <AssemblyName>RSLERP.DataManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>C:\Users\Rajit\Dropbox\Employee Task Management\EmployeeTaskManagement\EmployeeTaskManagement\Bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\Common\CmnTransectionalYearsBLL.cs" />
+    <Compile Include="BLL\CRM\EmployeeBLL.cs" />
+    <Compile Include="BLL\CRM\SupportTicketBLL.cs" />
+    <Compile Include="BLL\CRM\SupportTypeBLL.cs" />
+    <Compile Include="BLL\CRM\SupportUserBLL.cs" />
+    <Compile Include="BLL\CRM\TaskBLL.cs" />
+    <Compile Include="BLL\CRM\TaskCommentBLL.cs" />
+    <Compile Include="BLL\CRM\UserBLL.cs" />
+    <Compile Include="BLL\Role\RoleBLL.cs" />
+    <Compile Include="BLL\Settings\CompanyBLL.cs" />
+    <Compile Include="BLL\Settings\ApplicationBLL.cs" />
+    <Compile Include="BLL\Settings\ModuleBLL.cs" />
+    <Compile Include="BLL\Security\SecurityUserAccessBLL.cs" />
+    <Compile Include="DataManager.cs" />
+    <Compile Include="DBContext\DBContext.cs" />
+    <Compile Include="DLL\Common\CmnTransectionalYearsDLL.cs" />
+    <Compile Include="DLL\CRM\EmployeeDLL.cs" />
+    <Compile Include="DLL\CRM\SupportTicketDLL.cs" />
+    <Compile Include="DLL\CRM\SupportUserDLL.cs" />
+    <Compile Include="DLL\CRM\TaskCommentDLL.cs" />
+    <Compile Include="DLL\CRM\TaskDLL.cs" />
+    <Compile Include="DLL\CRM\UserDLL.cs" />
+    <Compile Include="DLL\Role\RoleDLL.cs" />
+    <Compile Include="DLL\Settings\CompanyDLL.cs" />
+    <Compile Include="DLL\Settings\ApplicationDLL.cs" />
+    <Compile Include="DLL\Settings\ModulesDLL.cs" />
+    <Compile Include="DLL\Security\SecurityAccessDLL.cs" />
+    <Compile Include="DLL\CRM\SupportTypeDLL.cs" />
+    <Compile Include="Entity\BaseModel\IBaseModel.cs" />
+    <Compile Include="Entity\Common\CmnTransactionalYears.cs" />
+    <Compile Include="Entity\CRM\Employees.cs" />
+    <Compile Include="Entity\CRM\Support_Solutions.cs" />
+    <Compile Include="Entity\CRM\Support_Tickets.cs" />
+    <Compile Include="Entity\CRM\Support_Types.cs" />
+    <Compile Include="Entity\CRM\Support_Users.cs" />
+    <Compile Include="Entity\CRM\TasksSummarys.cs" />
+    <Compile Include="Entity\CRM\Task_Comments.cs" />
+    <Compile Include="Entity\CRM\Users.cs" />
+    <Compile Include="Entity\Settings\AutoComplete.cs" />
+    <Compile Include="Entity\DynamicClass.cs" />
+    <Compile Include="Entity\Settings\Module.cs" />
+    <Compile Include="Entity\Settings\Resource.cs" />
+    <Compile Include="Entity\Settings\Role.cs" />
+    <Compile Include="Entity\Settings\RolePermission.cs" />
+    <Compile Include="Entity\Settings\SecRoles.cs" />
+    <Compile Include="Entity\Settings\Company.cs" />
+    <Compile Include="Entity\Settings\Menus.cs" />
+    <Compile Include="Entity\Settings\RolePermissions.cs" />
+    <Compile Include="Entity\Settings\s_ApplicationState.cs" />
+    <Compile Include="Entity\Settings\s_Modules.cs" />
+    <Compile Include="Entity\Settings\s_Company.cs" />
+    <Compile Include="Entity\Settings\s_Resource.cs" />
+    <Compile Include="Entity\Settings\s_User.cs" />
+    <Compile Include="Entity\CRM\Tasks.cs" />
+    <Compile Include="GlobalVariables\GlobalAttributes.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_CmnTransactionalYears.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_Menu.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\CRM\GlobalSp_CRM.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Role\GlobalSp_Role.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Security\GlobalSp_Account.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Settings\GlobalSp_Company.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Settings\GlobalSp_Application.cs" />
+    <Compile Include="GlobalVariables\GlobalSpNames\Settings\GlobalSp_Resource.cs" />
+    <Compile Include="IDataManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RSLERPConnection.cs" />
+    <Compile Include="SqlHelper.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,232 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@using RSLERP.DataManager;
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Task Index";
+    Layout = "~/Views/Shared/_LayoutCrm.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Tasks</li>
+        </ol>
+        <br>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Tasks</h3>
+                        @*@if (HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_ROLE].ToString() == "Admin")
+                        {
+                            <a style="margin-left:15px; float: right;" class="btn btn-primary" href="~/Task/Load"><span class="fa fa-plus"></span> Add</a>
+                        }*@
+                        <a style="margin-left:15px; float: right;" class="btn btn-primary" href="~/Task/Load"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @using (Html.BeginForm("Search", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <select class="form-control select2" style="width: 100%;" name="VM_EMPLOYEE.id">
+                                    <option value="0">Select Employee</option>
+                                    @foreach (Employees emp in Model.VM_EMPLOYEES)
+                                        {
+                                        <option @(Model.VM_EMPLOYEE.id == @emp.id ? "selected" : "") value="@emp.id">@emp.name</option>
+                                        }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-1 col-sm-1 col-md-1">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="VM_TASK.task_title" id="inputEmail3" placeholder="Task" value="@Model.VM_TASK.task_title">
+                            </div>
+                            @*<select class="form-control select2" style="width: 100%;" name="VM_TASK.task_title">
+                                    <option value="">Select Task Title</option>
+                                    @foreach (Tasks tsk in Model.VM_TASKS)
+                                    {
+                                        <option @(Model.VM_TASK.task_title == @tsk.task_title ? "selected" : "") value="@tsk.task_title">@tsk.task_title</option>
+                                    }
+                                </select>*@
+                        </div>
+                        <div class="col-xl-3 col-sm-3 col-md-3">
+                            <input type="hidden" value="@((Model.VM_TASK.from_date==null) ?"": ((DateTime)Model.VM_TASK.from_date).ToString("dd MMMM yyyy"))" name="VM_TASK.from_date" class="form-control pull-right st" id="datepicker1">
+                            <input type="hidden" value="@((Model.VM_TASK.to_date==null) ?"": ((DateTime)Model.VM_TASK.to_date).ToString("dd MMMM yyyy"))" name="VM_TASK.to_date" class="form-control pull-right end" id="datepicker2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="daterange">
+                                </div>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <div class="col-xl-1 col-sm-1 col-md-1">
+                            <div class="form-group">
+                                <select class="form-control select2" style="width: 100%;" name="VM_TASK.progress">
+                                    <option value="-1">Prog.</option>
+                                    <option @(Model.VM_TASK.progress == 0 ? "selected" : "") value="0">0%</option>
+                                    <option @(Model.VM_TASK.progress == 10 ? "selected" : "") value="10">10%</option>
+                                    <option @(Model.VM_TASK.progress == 20 ? "selected" : "") value="20">20%</option>
+                                    <option @(Model.VM_TASK.progress == 30 ? "selected" : "") value="30">30%</option>
+                                    <option @(Model.VM_TASK.progress == 40 ? "selected" : "") value="40">40%</option>
+                                    <option @(Model.VM_TASK.progress == 50 ? "selected" : "") value="50">50%</option>
+                                    <option @(Model.VM_TASK.progress == 60 ? "selected" : "") value="60">60%</option>
+                                    <option @(Model.VM_TASK.progress == 70 ? "selected" : "") value="70">70%</option>
+                                    <option @(Model.VM_TASK.progress == 80 ? "selected" : "") value="80">80%</option>
+                                    <option @(Model.VM_TASK.progress == 90 ? "selected" : "") value="90">90%</option>
+                                    <option @(Model.VM_TASK.progress == 100 ? "selected" : "") value="100">100%</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <select class="form-control select2" style="width: 100%;" name="VM_TASK.status">
+                                    <option value="0">Status</option>
+                                    <option @(Model.VM_TASK.status == 1 ? "selected" : "") value="1">Open</option>
+                                    <option @(Model.VM_TASK.status == 2 ? "selected" : "") value="2">Closed</option>
+                                    <option @(Model.VM_TASK.status == 3 ? "selected" : "") value="3">Resolved</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <select class="form-control select2" style="width: 100%;" name="VM_TASK.created_by">
+                                    <option value="0">Assigned By</option>
+                                    @foreach (Employees emp in Model.VM_EMPLOYEES)
+                                        {
+                                        <option @(Model.VM_TASK.created_by == @emp.id ? "selected" : "") value="@emp.id">@emp.name</option>
+                                        }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-1 col-sm-1 col-md-1">
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-filter"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                        <table class="table table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>Employee Name</th>
+                                <th>Task Title</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Progress</th>
+                                <th>Status</th>
+                                <th>Completion Date</th>
+                                @if (HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_ROLE].ToString() == "Admin")
+                            {
+                            <th>Edit</th>
+                            }
+                                <th>Comment</th>
+                            </tr>
+                            @foreach (Tasks tsk in Model.VM_TASKS)
+                        {
+                        <tr>
+                            <td>@tsk.id</td>
+                            <td>@tsk.employee_name</td>
+                            <td>@tsk.task_title</td>
+                            <td>@tsk.start_date.ToString("dd MMMM, yyyy")</td>
+                            <td>@tsk.end_date.ToString("dd MMMM, yyyy")</td>
+                            @if (@tsk.progress < 26)
+                                {
+                                <td><span class="badge bg-red">@tsk.progress%</span></td>
+                                }
+                                else if (@tsk.progress < 51)
+                                {
+                                <td><span class="badge bg-yellow">@tsk.progress%</span></td>
+                                }
+                                else if (@tsk.progress < 76)
+                                {
+                                <td><span class="badge bg-light-blue">@tsk.progress%</span></td>
+                                }
+                                else
+                                {
+                                <td><span class="badge bg-green">@tsk.progress%</span></td>
+                                }
+                            @if (@tsk.status_name == "Open")
+                                {
+                                <td><span class="label label-warning">@tsk.status_name</span></td>
+                                }
+                                else if (@tsk.status_name == "Closed")
+                                {
+                                <td><span class="label label-success">@tsk.status_name</span></td>
+                                }
+                                else
+                                {
+                                <td><span class="label label-primary">@tsk.status_name</span></td>
+                                }
+                            @if (@tsk.completion_date == null)
+                                {
+                                <td>@tsk.completion_date</td>
+                                }
+                                else
+                                {
+                                <td>@(((DateTime)(@tsk.completion_date)).ToString("dd MMMM, yyyy"))</td>
+                                }
+                            @if (HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_ROLE].ToString() == "Admin")
+                                {
+                                <td><a href="~/Task/Load?id=@tsk.id"><span class="fa fa-pencil"></span></a></td>
+                                }
+                            <td><a href="~/Task/Task_Comment?id=@tsk.id"><span class="fa fa-comment"></span></a></td>
+                        </tr>
+                        }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+
+    </div>
+    @section masterJs
+{
+        @UserHelper.Pagination(Model.TotalRow, Model.PageIndex, Model.PageSize, "form")
+
+        <script type="text/javascript">
+
+            $(function () {
+                $('.select2').select2();
+            });
+            $('.datepicker').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+
+            $('#daterange').daterangepicker({
+                locale: {
+                    format: "DD MMMM YYYY",
+                    "separator": " -to- ",
+                },
+                "startDate": '@((Model.VM_TASK.from_date==null) ? DateTime.Now.ToString("dd MMMM yyyy"): ((DateTime)Model.VM_TASK.from_date).ToString("dd MMMM yyyy"))',
+                "endDate": '@((Model.VM_TASK.to_date==null) ? DateTime.Now.ToString("dd MMMM yyyy") : ((DateTime)Model.VM_TASK.to_date).ToString("dd MMMM yyyy"))',
+            }, function (start, end, label) {
+                $('#datepicker1').val(start.format('DD MMMM YYYY'));
+                $('#datepicker2').val(end.format('DD MMMM YYYY'));
+            });
+        </script>
+    }

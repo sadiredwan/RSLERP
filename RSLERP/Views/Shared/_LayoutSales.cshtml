@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  @{ Html.RenderAction("PageTitle", "CommonLayout"); }
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+   @Html.Partial("_header")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        @{Html.RenderAction("UserAccountMenu", "CommonLayout"); }
+        @{Html.RenderAction("LeftSideBar", "CommonLayout",new { applicationid = 6 }); }
+
+        @RenderBody()
+
+        @{ Html.RenderAction("Footer", "CommonLayout"); }
+        
+        <div class="control-sidebar-bg"></div>
+    </div>
+ 
+    @Html.Partial("_htmlfooter")
+
+    @RenderSection("masterjs", required: false)
+
+
+</body>
+</html>

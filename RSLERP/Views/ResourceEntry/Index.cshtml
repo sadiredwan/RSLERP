@@ -1,0 +1,214 @@
+﻿@model List<RSLERP.DataManager.Entity.s_Resource>
+@using RSLERP.DataManager.Entity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+@{
+    List<Menus> lstMenu = (List<Menus>)ViewBag.appmenus;
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header"></section>
+
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Applications</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Main Application</label>
+                            <select class="form-control select2 input-sm" onchange="appSelect(this)" style="width: 100%;">
+                                <option value="0">Select Application</option>
+                                @foreach (Menus menuMdl in lstMenu)
+                                {
+                                    <option value="@menuMdl.id">@menuMdl.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <div class="form-group">
+                            <label></label>
+
+                            <a onclick="loadmappingApp(0)" class="btn bg-purple margin"><i class="fa fa-plus " aria-hidden="true"></i><span class="hidden-xs">New Resource Under Application</span></a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div id="treeview-selectable" class="treeview treeViewID"></div>
+            </div>
+
+            <!--
+            @*<div class="col-lg-8 col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Search</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                        <label>Main Application</label>
+                                        <select class="form-control select2 input-sm" style="width: 100%;">
+                                            @foreach (Menu menuMdl in lstMenu)
+                                            {
+                                                <option value="@menuMdl.id">@menuMdl.Name</option>
+                                            }
+                                        </select>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <label>Search Resource</label>
+                                    <input id="example1" type="text" name="resource" placeholder="Enter a Resource Name" class="form-control input-sm">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Search Result</h3>
+
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+
+                                <tr>
+                                    <th>R ID</th>
+                                    <th>Resource Name</th>
+                                    <th>Icon</th>
+                                    <th>Is Menu</th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>*@-->
+
+            <div class="col-md-8 col-lg-8">
+                <div id="resourceMapping"></div>
+            </div>
+
+        </div>
+
+
+    </section>
+
+</div>
+
+
+
+@section masterjs
+{
+    <script type="text/javascript">
+
+    function appSelect(obj) {
+        $("#resourceMapping").html("");
+        $("#treeview-selectable").html("Loading...");
+
+        var id = $(obj).val();
+        if (id.length == 1)
+        {
+            id = "0" + id;
+        }
+        $.ajax({
+            url: '/Menu/TreeView?appID=' + id,
+            type: 'POST',
+            dataType: 'json',
+            data: { treeName: "resource" },
+            success: function (data) {
+                var treeviewRecords = data;
+                var $selectableTree = initSelectableTree(treeviewRecords);
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    var initSelectableTree = function (treeData) {
+        return $('#treeview-selectable').treeview({
+            data: treeData,
+            multiSelect: $('#chk-select-multi').is(':checked'),
+            onNodeSelected: function (event, node) {
+                loadmappingApp(node.href);
+                //$('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
+                //alert(node.text);
+            },
+            onNodeUnselected: function (event, node) {
+                $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
+            }
+        });
+    };
+
+
+    function loadmappingApp(id) {
+        var appid = $(".select2").val();
+        if (appid.length == 1)
+        {
+            appid = "0" + appid;
+        }
+        $("#resourceMapping").html("Loading...");
+        $.ajax({
+            url: '/ResourceEntry/ResourceMapping?id=' + id + "&appid=" + appid,
+            type: 'GET',
+            success: function (data) {
+                $("#resourceMapping").html(data);
+
+            },
+            error: function () {
+
+            }
+        });
+
+    }
+
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+
+
+
+        $('#example1').bootcomplete({
+            minLength: 1,
+            url: 'http://localhost:9814/ResourceEntry/FindResource'
+        });
+
+
+    });
+
+    </script>
+}
+
+

@@ -1,0 +1,122 @@
+﻿@helper HelperName(string name) {
+    // your helper can contain code and/or markup, e.g.
+    // var msg = "Hello " + name;
+    // <p>@msg</p>
+    // For more information, visit http://go.microsoft.com/fwlink/?LinkID=204658
+}
+
+
+@helper ModelStateMsg(System.Web.Mvc.ModelStateDictionary model, String keyname)
+{
+if (model != null)
+{
+    var errors = model.Select(x => new { x.Value, x.Key }).Distinct()
+                    .OrderByDescending(x => x.Key)
+                    .Where(x => x.Value.Errors.Count > 0 && x.Key == keyname)
+                    .ToList();
+    if (errors.Count() > 0)
+    {
+        foreach (var error in errors.FirstOrDefault().Value.Errors)
+        {
+                <span id="helpBlock2" class="text-danger text-warning">@error.ErrorMessage</span>
+        }
+    }
+
+}
+}
+
+
+@helper CheckBox(String CheckBoxName_field, bool boolean_value, string id_vale, string idname_field, String uniqueIDFiled)
+{
+    uniqueIDFiled = (uniqueIDFiled == "" ? id_vale : uniqueIDFiled);
+    <input type="checkbox" @(boolean_value == true ? "checked" : "") name="@CheckBoxName_field" class="@CheckBoxName_field"  id="chk_@uniqueIDFiled" />
+    <input class="@CheckBoxName_field" type="hidden" name="@idname_field" value="@(boolean_value==true?"true":"false")" id="hdn_chk_@uniqueIDFiled" />
+
+
+    <script type="text/javascript">
+
+        @*window.onload=function(){
+            
+            document.getElementById("#chk_@uniqueIDFiled").addEventListener("change", function(e){
+                alert("ok2");
+            });
+
+        };
+
+      
+            
+            
+            = function() {
+           // var lfckv = document.getElementById("#chk_@uniqueIDFiled").checked;
+            //  alert(lfckv);
+            alert("ok");
+        
+        };*@
+
+  
+
+
+        $("#chk_@uniqueIDFiled").change(function () {
+            if (this.checked) {
+                $("#hdn_chk_@uniqueIDFiled").val('true');
+            }
+            else {
+                $("#hdn_chk_@uniqueIDFiled").val('false');
+            }
+        });
+
+
+
+    </script>
+
+}
+
+@helper Pagination(int totalRow, int pageIndex, int pageSize, String formSearchID)
+{
+
+
+double totalD = (double)totalRow / (double)pageSize;
+int totalpage = (Int32)Math.Ceiling(Convert.ToDouble(totalD));
+string pageIndexFiledName = "PageIndex";
+string pageIndexSizeFiledName = "PageSize";
+
+
+
+
+    <script type="text/javascript">
+
+
+        $("#@formSearchID").append("<input type=\"hidden\" id=\"pageIndex\" name=\"@pageIndexFiledName\" value=\"@pageIndex\"/>");
+        $("#@formSearchID").append("<input type=\"hidden\" id=\"pageSize\" name=\"@pageIndexSizeFiledName\" value=\"@pageSize\"/>");
+
+        $('.demo4_top,.demo4_bottom').bootpag({
+        total: @totalpage,
+        page: @pageIndex,
+        maxVisible: 10,
+            leaps: true,
+        firstLastUse: true,
+        first: '<span aria-hidden="true">&larr;</span>',
+        last: '<span aria-hidden="true">&rarr;</span>',
+        wrapClass: 'pagination',
+        activeClass: 'active',
+        disabledClass: 'disabled',
+        nextClass: 'next',
+        prevClass: 'prev',
+        lastClass: 'last',
+        firstClass: 'first'
+        }).on("page", function (event, num) {
+            $("#pageIndex").val(num);
+            $("#@formSearchID").submit();
+        }).find('.pagination');
+
+        @*function onpageDrpDwn(pageSize)
+        {
+            $("#@pageIndexFieldName").val("1");
+            $("#@ddlPageSizeID").val(pageSize);
+            $("#@formSearchID").submit();
+        }*@
+
+
+    </script>
+
+}

@@ -1,0 +1,250 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@using RSLERP.DataManager;
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Task_Comment";
+    Layout = "~/Views/Shared/_LayoutCrm.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Task
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/Views/Task">Tasks</a></li>
+            <li class="active">Task Edit/Comment</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+    {
+        <section class="content">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xl-12 col-sm-12 col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <a href="~/Task" class="btn btn-primary">« Back</a>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_TASK.id" value="@Model.VM_TASK.id" />
+                            <input type="hidden" name="VM_TASK.created_by" value="@Model.VM_TASK.created_by" />
+                            <div class="row">
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Employee Name</label>
+                                        <input readonly type="text" class="form-control" name="VM_TASK.employee_name" id="inputEmail3" placeholder="Employee Name" value="@Model.VM_TASK.employee_name">
+                                        <input readonly type="hidden" class="form-control" name="VM_TASK.employee_id" id="inputEmail3" placeholder="Employee Name" value="@Model.VM_TASK.employee_id">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Task Title</label>
+                                        <input readonly type="text" class="form-control" name="VM_TASK.task_title" id="inputEmail3" placeholder="Task Title" value="@Model.VM_TASK.task_title">
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_TASK.task_title")
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Task Description</label>
+                                        <input readonly type="text" class="form-control" name="VM_TASK.task_desc" id="inputEmail3" placeholder="Task Description" value="@Model.VM_TASK.task_desc">
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_TASK.task_desc")
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Start Date</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" readonly name="VM_TASK.start_date" class="form-control pull-right" id="datepicker" value="@(Model.VM_TASK.start_date == null ? "" : Model.VM_TASK.start_date.ToString("dd MMMM yyyy"))">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="">End Date</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" readonly name="VM_TASK.end_date" class="form-control pull-right" id="datepicker" value="@(Model.VM_TASK.end_date == null ? "" : Model.VM_TASK.end_date.ToString("dd MMMM yyyy"))">
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model.VM_TASK.status == 2 && HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_ROLE].ToString() == "User")
+                                {
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Progress</label>
+                                        <input readonly type="text" class="form-control" name="VM_TASK.progress" placeholder="Progress" value="@Model.VM_TASK.progress">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <input readonly type="text" class="form-control" name="VM_TASK.status" placeholder="Status" value="@Model.VM_TASK.status">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Completion Date</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" readonly name="VM_TASK.completion_date" class="form-control pull-right" id="datepicker" value="@(Model.VM_TASK.completion_date == null ? "" : ((DateTime)(Model.VM_TASK.completion_date)).ToString("dd MMMM yyyy"))">
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                else
+                                {
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Progress</label>
+                                        <select class="form-control select2" style="width: 100%;" name="VM_TASK.progress" onchange="selectViewChange(this)">
+                                            <option @(Model.VM_TASK.progress == 0 ? "selected" : "") value="0">0%</option>
+                                            <option @(Model.VM_TASK.progress == 10 ? "selected" : "") value="10">10%</option>
+                                            <option @(Model.VM_TASK.progress == 20 ? "selected" : "") value="20">20%</option>
+                                            <option @(Model.VM_TASK.progress == 30 ? "selected" : "") value="30">30%</option>
+                                            <option @(Model.VM_TASK.progress == 40 ? "selected" : "") value="40">40%</option>
+                                            <option @(Model.VM_TASK.progress == 50 ? "selected" : "") value="50">50%</option>
+                                            <option @(Model.VM_TASK.progress == 60 ? "selected" : "") value="60">60%</option>
+                                            <option @(Model.VM_TASK.progress == 70 ? "selected" : "") value="70">70%</option>
+                                            <option @(Model.VM_TASK.progress == 80 ? "selected" : "") value="80">80%</option>
+                                            <option @(Model.VM_TASK.progress == 90 ? "selected" : "") value="90">90%</option>
+                                            <option @(Model.VM_TASK.progress == 100 ? "selected" : "") value="100">100%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2" style="width: 100%;" name="VM_TASK.status">
+                                            <option @(Model.VM_TASK.status == 1 ? "selected" : "") value="1">Open</option>
+                                            <option @(Model.VM_TASK.status == 2 ? "selected" : "") value="2">Closed</option>
+                                            <option @(Model.VM_TASK.status == 3 ? "selected" : "") value="3">Resolved</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-sm-4 col-md-4">
+                                    <div class="form-group completion_date" style="@(Model.VM_TASK.progress == 100 ? "display:block" : "display:none")">
+                                        <label for="">Completion Date</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" name="VM_TASK.completion_date" class="form-control pull-right datepicker" id="datepicker" value="@(Model.VM_TASK.completion_date == null ? "" : ((DateTime)(Model.VM_TASK.completion_date)).ToString("dd MMMM yyyy"))">
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xl-12 col-sm-12 col-md-12">
+                    <!-- Box Comment -->
+                    <div class="box box-widget">
+                        <div class="box-header with-border">
+                            <div class="user-block">
+                                @*<img class="img-circle" src="~/content/dist/img/user1-128x128.jpg" alt="User Image">
+                                    <span class="username"><h2>Comments</h2></span>*@
+                                <img class="img" src="~/dist/img/comments-icon.png" alt="Comment Header Icon">
+                                <span class="username">Comments</span>
+                            </div>
+                            <div class="box-footer box-comments">
+                                <input type="hidden" id="delCommnetID" name="VM_TASK_COMMENT.id" value="@Model.VM_TASK_COMMENT.id" />
+                                @foreach (Task_Comments tcom in Model.VM_TASK_COMMENTS)
+                                {
+                                <div class="box-comment">
+                                    <img class="img-circle img-sm" src="~/dist/img/sub_comment.png" alt="Comment Icon">
+                                    <div class="comment-text">
+                                        <span class="username">
+                                            @tcom.commenter
+                                            <span class="text-muted pull-right">@tcom.comment_date</span>
+                                        </span><!-- /.username -->
+                                        @tcom.comment
+                                        @if (HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString() == "" + tcom.comment_by)
+                                            {
+                                            <button onclick="deletleEvent(this,@tcom.id)" class="btn btn-primary text-muted pull-right">Delete</button>
+                                            }
+                                    </div>
+                                    <!-- /.comment-text -->
+                                </div>
+                                }
+                                <!-- /.box-comment -->
+                            </div>
+                            <!-- /.box-footer -->
+                            <div class="box-footer">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Comment</label>
+                                        <textarea class="form-control" rows="3" name="VM_TASK_COMMENT.comment" placeholder="Comment ..." value="@Model.VM_TASK_COMMENT.comment"></textarea>
+                                        @*<input type="text" class="form-control" name="VM_TASK_COMMENT.comment" id="inputEmail3" placeholder="Comment" value="@Model.VM_TASK_COMMENT.comment">*@
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_TASK_COMMENT.comment")
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">@(Model.VM_TASK.id == 0 ? "Save" : "Update")</button>
+                                </div>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </section>
+    }
+
+    <!-- /.content -->
+</div>
+    @*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+    @section masterJs
+{
+        <script type="text/javascript">
+
+        function deletleEvent(obj,id) {
+            $("#delCommnetID").val(id);
+            $("#form").attr("action", "/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Delete");
+            obj.form.submit();
+            // location.reload();
+        }
+
+        function selectViewChange(obj) {
+            if ($(obj).val() == "100") {
+                $(".completion_date").css("display", "block");
+            }
+            else {
+                $(".completion_date").css("display", "none");
+            }
+        }
+        $(function () {
+            $('.select2').select2();
+        });
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+        </script>
+    }

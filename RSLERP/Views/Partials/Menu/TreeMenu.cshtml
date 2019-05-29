@@ -1,0 +1,22 @@
+﻿@*@model List<RSLERP.Models.TreeMenu>*@
+
+
+@{ 
+
+
+   
+
+
+}
+
+
+
+        <ul class="sidebar-menu" data-widget="tree">
+          
+
+            @Html.Raw((string)ViewBag.MenuUlLi)
+            <li><a href="/Account/SignOut"><i class="fa fa-power-off"></i><span>Log Off</span></a></li>
+            <li><a href="/Start"><i class="fa fa-home"></i><span>Home Page</span></a></li>
+           
+
+        </ul>

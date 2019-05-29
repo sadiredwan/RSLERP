@@ -1,0 +1,85 @@
+﻿@using IpCameraSetup.Models
+@model IpCameraSetup.Models.ViewModel
+@using RSLERP.DataManager.Entity
+@{
+    ViewBag.Title = "Company Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="margin-left:15px;">Company</h2>
+@{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+@using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data",@class="form-horizontal" }))
+{
+
+    @Html.AntiForgeryToken()
+    <input type="hidden" value="@Model.VM_COMPANY.id" name="VM_COMPANY.id" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="VM_COMPANY.name" id="inputEmail3" placeholder="Name" value="@Model.VM_COMPANY.name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Contact Person</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="VM_COMPANY.contact_person" id="inputEmail3" placeholder="Contact Person Name" value="@Model.VM_COMPANY.contact_person">
+            @UserHelper.ModelStateMsg(Model.ModelStateErrors, "VM_COMPANY.contact_person")
+          </div>
+    </div>
+    <div class="form-group has-warning  has-feedback">
+        <label class="col-sm-2 control-label">Mobile No:</label>
+        <div class="col-sm-10 ">
+            <input type="text" class="form-control" id="inputWarning"  name="VM_COMPANY.mobile"  placeholder="Mobile No." value="@Model.VM_COMPANY.mobile">
+            <label class="col-sm-2 control-label" for="inputWarning">Input with error and glyphicon</label>
+            @UserHelper.ModelStateMsg(Model.ModelStateErrors, "VM_COMPANY.mobile")
+        </div>
+    </div>
+    <div class="form-group has-warning has-feedback">
+        <label class="col-sm-2 control-label" for="inputWarning">Input with warning and glyphicon</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputWarning">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="VM_COMPANY.address" id="inputPassword3" placeholder="Address" value="@Model.VM_COMPANY.address">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Address</label>
+        <div class="col-sm-10">
+            <div class="input-group date">
+
+             
+                <input type="text" value="@(Model.CommitDate==null?"":Model.CommitDate.ToString("dd MMMM yyyy"))" name="CommitDate" class="form-control pull-right" id="datepicker">
+                <div class="input-group-addon pull-right">
+                    <i class="fa fa-calendar"></i>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">@(Model.VM_COMPANY.id == 0 ? "Save" : "Update")</button>
+        </div>
+    </div>
+}
+
+
+@section masterJs
+{
+    <script type="text/javascript">
+        $(function () {
+
+            $('#datepicker').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+        })
+        </script>
+
+
+}

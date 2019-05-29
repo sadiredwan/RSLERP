@@ -1,0 +1,78 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStart.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+
+    <section class="content">
+
+
+
+
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Select Company</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                @{ Html.RenderAction("SubmitStatus", "CommonLayout", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { transaction = Model, id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2"></div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Select Company</label>
+                                <select id="ddlModule" name="VM_APPLICATION.company_id" class="form-control select2" >
+                                    <option value="all">-- Select Company --</option>
+                                    @foreach (s_Company mdl in Model.VM_COMPANYS)
+                                    {
+                                        <option value="@mdl.c_ID">@mdl.c_Name</option>
+                                    }
+
+                                </select>
+
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_APPLICATION.company_id")
+                            </div>
+
+                        </div>
+
+                    </div>
+                
+
+
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right" value="tab_2"> START >></button>
+                        </div>
+                    }
+
+                
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+@section masterjs {
+
+    <script type="text/javascript">
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+                });
+
+    </script>
+
+}

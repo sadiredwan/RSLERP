@@ -1,0 +1,55 @@
+﻿@model RSLERP.Models.ViewModel
+@using RSLERP.DataManager.Entity
+@Html.Partial("_header")
+@{
+    var groups =
+    from rlp in Model.VM_ROLEPERMISSIONS
+    group rlp by rlp.rp_m_ID into g
+    orderby g.Key
+    select g;
+
+}
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var rl in groups)
+        {
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@rl.ToList()[0].ModuleName</h3>
+                </div>
+               
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Resource Name</th>
+                                <th>View</th>
+                                <th>Add</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                                <th>Print</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rlp in @rl.ToList())
+                            {
+                                <tr>
+                                    <td>@rlp.R_DisplayName</td>
+                                    <td><i class="@(rlp.rp_ReadOnly?"fa fa-fw fa-check-square" : "fa fa-fw fa-times")"></i></td>
+                                    <td><i class="@(rlp.rp_add?"fa fa-fw fa-check-square" : "fa fa-fw fa-times")"></i></td>
+                                    <td><i class="@(rlp.rp_Edit?"fa fa-fw fa-check-square" : "fa fa-fw fa-times")"></i></td>
+                                    <td><i class="@(rlp.rp_Delete?"fa fa-fw fa-check-square" : "fa fa-fw fa-times")"></i></td>
+                                    <td><i class="@(rlp.rp_Print?"fa fa-fw fa-check-square" : "fa fa-fw fa-times")"></i></td>
+                                </tr>
+                            }
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+        
+        </div>
+    </div>
+

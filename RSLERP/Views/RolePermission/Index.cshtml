@@ -1,0 +1,324 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+@using RSLERP.DataManager
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <section class="content-header">
+        <h1>
+            Mapping
+
+        </h1>
+        @*<ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>*@
+    </section>
+    <!-- Main content -->
+    <section class="content">
+
+
+
+
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Role Permission</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                @{ Html.RenderAction("SubmitStatus", "CommonLayout", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { transaction = Model, id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                {
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2"></div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Select Module</label>
+                                <select id="ddlModule" name="VM_MODULE.m_ID" class="form-control select2" onchange="onchangeevent(this)">
+                                    <option value="0" >--- Select Modules -------</option>
+                                    @foreach (Module mdl in Model.VM_MODULES)
+                                    {
+                                        <option @(Model.VM_MODULE.m_ID == mdl.m_ID ? "selected" : "") value="@mdl.m_ID">@mdl.m_Name</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2"></div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Select Role</label>
+                                <select id="ddlRole" name="VM_SECROLE.Id" class="form-control select2" onchange="onchangeevent(this)">
+                                    <option value="0">--- Select Roles -------</option>
+                                    @foreach (SecRoles mdl in Model.VM_SECROLES)
+                                    {
+                                        <option @(Model.VM_SECROLE.Id == mdl.Id ? "selected" : "") value="@mdl.Id">@mdl.Name</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    if (Model.VM_ROLEPERMISSIONS.Count > 0)
+                    {
+                        <table id="datatable2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Resource Name </th>
+                                    <th>View <br /> <input type="checkbox" class="all" value="ALL" id="view-all" name="Status"></th>
+                                    <th>Add  <br /> <input type="checkbox" class="all" value="ALL" id="add-all" name="Status"> </th>
+                                    <th>Edit <br /> <input type="checkbox" class="all" value="ALL" id="edit-all" name="Status"> </th>
+                                    <th>Delete <br /><input type="checkbox" class="all" value="ALL" id="delete-all" name="Status"> </th>
+                                    <th>Print<br /> <input type="checkbox" class="all" value="ALL" id="print-all" name="Status"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.VM_ROLEPERMISSIONS.Count; i++)
+                                {
+                                    String d_name = new DBContext().Roles.Find(Model.VM_ROLEPERMISSIONS[i].rp_rl_ID).Name;
+
+                                    <tr>
+                                        <td>@d_name
+                                        </td>
+                                        <td>@UserHelper.CheckBox("view", Model.VM_ROLEPERMISSIONS[i].rp_ReadOnly, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_ReadOnly", "view_" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
+                                        <td>@UserHelper.CheckBox("add", Model.VM_ROLEPERMISSIONS[i].rp_add,""+Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS["+i+ "].rp_add","add_"+ Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
+                                        <td>@UserHelper.CheckBox("edit", Model.VM_ROLEPERMISSIONS[i].rp_Edit, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Edit", "edit" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
+                                        <td>@UserHelper.CheckBox("delete", Model.VM_ROLEPERMISSIONS[i].rp_Delete, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Delete", "delete" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
+                                        <td>@UserHelper.CheckBox("print", Model.VM_ROLEPERMISSIONS[i].rp_Print, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Print", "print" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+
+                        <table id="extratb" class="hidden"></table>
+
+                        <div class="box-footer">
+                            <button type="submit"  class="btn btn-primary pull-right" value="tab_2">Submit</button>
+                        </div>
+                    }
+
+                                        }
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+@section masterjs {
+
+<script type="text/javascript">
+
+    $("[type=checkbox]").click(function (e) {
+
+        var checkBoxClass = e.target.className;
+        if (checkBoxClass == 'all')
+        {
+            var allcheckBoxID = e.target.id;
+            var childNodeClassName = allcheckBoxID.split('-')[0];
+            $('input:checkbox.' + childNodeClassName).not(this).prop('checked', this.checked);
+            $('input[type=checkbox].' + childNodeClassName).each(function () {
+                var hiddenFieldID = "hdn_"+$(this).attr("id");
+                var valueChk = (this.checked ? 'true' : 'false');
+                $("#" + hiddenFieldID).val(valueChk);
+
+            });
+        }
+        else {
+            var currentAllCheckBoxid = checkBoxClass + "-" + "all";
+            $('input:checkbox#' + currentAllCheckBoxid).prop('checked', false);
+
+        }
+
+
+
+
+        //$("#extratb tr").remove();
+        //var checkBoxID = e.target.id;
+        //var uid = $("#dropdownCompany").val();
+        //if (checkBoxID == "checkAll") {
+        //    $('input:checkbox.checkboxStatus').not(this).prop('checked', this.checked);
+
+        //}
+        //else if (checkBoxID == "checksingle") {
+        //    $('input:checkbox.checkAll').prop('checked', false);
+
+        //}
+    });
+
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+                });
+
+    function myFunction() {
+        var x = document.getElementById("fname");
+        x.value = x.value.toUpperCase();
+    }
+
+    function onchangeevent(obj)
+    {
+        if ($("#ddlRole").val() != 0 && $("#ddlModule").val() != 0) {
+            $('#form').attr('action', '@Url.Action("PostBack", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())');
+            $("#chnageName").val("neat");
+            obj.form.submit();
+        }
+
+        // location.reload();
+    }
+</script>
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        @*@section masterjs
+                                        {
+    <script type="text/javascript">
+
+        $(".checkboxStatus").click(function (e) {
+            $("#extratb tr").remove();
+            var checkBoxID = e.target.id;
+            var uid = $("#dropdownCompany").val();
+            if (checkBoxID == "checkAll")
+            {
+                $('input:checkbox.checkboxStatus').not(this).prop('checked', this.checked);
+
+            }
+            else if (checkBoxID == "checksingle")
+            {
+                $('input:checkbox.checkAll').prop('checked', false);
+
+            }
+        });
+
+
+        $("[type=checkbox]").click(function (e) {
+
+            var checkBoxClassName = e.target.className;
+            var singleClassName = '';
+            var allClassName = '';
+            var isAllCheckBox= false;
+            if (checkBoxClassName.indexOf('-') > -1)
+            {
+                singleClassName = checkBoxClassName.split('-')[0];
+                allClassName = checkBoxClassName;
+                isAllCheckBox = true;
+
+            }
+            else
+            {
+                singleClassName = checkBoxClassName;
+                allClassName = singleClassName+"-All";
+                isAllCheckBox = false;
+            }
+            //var isAllCheckBox=$(e.target).hasClass('checkviewAll');
+
+
+            if (isAllCheckBox) {
+                $('input:checkbox.' + singleClassName).not(this).prop('checked', this.checked);
+            }
+            else  {
+                $('input:checkbox.' + allClassName).prop('checked', false);
+            }
+
+
+
+
+        });
+
+        function selectViewChange(obj)
+        {
+
+            $('#datatable2 tr').remove();
+            obj.form.submit();
+
+        }
+
+
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2();
+
+
+
+        });
+
+
+
+
+
+        $('.demo4_top,.demo4_bottom').bootpag({
+            total:0,
+            page: 1,
+            maxVisible: 5,
+            leaps: true,
+            firstLastUse: true,
+            first: '<span aria-hidden="true">&larr;</span>',
+            last: '<span aria-hidden="true">&rarr;</span>',
+            wrapClass: 'pagination',
+            activeClass: 'active',
+            disabledClass: 'disabled',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first'
+        }).on("page", function (event, num) {
+            $("#pageIndex").val(num);
+            $("#formSearch").submit();
+        }).find('.pagination');
+
+
+
+        function onpageDrpDwn(pageSize)
+        {
+            $("#pageIndex").val("1");
+            $("#pagesize").val(pageSize);
+            $("#formSearch").submit();
+        }
+
+    </script>
+
+}*@
+

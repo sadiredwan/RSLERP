@@ -1,0 +1,208 @@
+﻿@using RSLERP.Lib.Global.Utilities
+@using RSLERP.Lib.Entities.Security
+@using System.Globalization
+@model RSLERP.Lib.Entities.Security.CmnProject
+@{
+    ViewBag.Title = "SaveChanges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<CmnBusiness> bs = (List<CmnBusiness>)ViewBag.BsLst;
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1></h1>
+        <div class="row">
+
+            <div class="col-md-4 col-lg-4">
+                <a href="/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Index" class="btn bg-purple btn-flat margin"><i class="fa fa-backward"></i></a>
+            </div>
+
+        </div>
+        @*<ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>*@
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Project</h3>
+            </div>
+
+            <!-- /.box-header -->
+            <!-- form start -->
+            @using (Html.BeginForm("Submit_Project", "Project", FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="box-body">
+                    @{Html.RenderAction("SubmitStatus", "CommonLayout", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    <input type="hidden" class="procode" value="@Model.Code" name="Code" />
+                    <input type="hidden" value="@Model.Id" name="Id" />
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group">
+                                <label>Select Business</label>
+                                <select id="bs" name="CmnBusinessSectorId" class="form-control select2" onchange="loadProjectCode(this.value)">
+                                    <option value="0" @((Model.CmnBusinessSectorId == 0) ? "selected" : "")>Select Group</option>
+                                    @foreach (CmnBusiness bsMdl in bs)
+                                    {
+                                        <option @((Model.CmnBusinessSectorId == bsMdl.Id) ? "selected" : "") value="@bsMdl.Id">@bsMdl.Name</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                            <input type="hidden"  class="form-control procode"  name="Code" value="@Model.Code" placeholder="">
+
+                            <div class="form-group">
+                                <label for="">Project Code</label>
+                                <input type="text" disabled class="form-control disabled procode" value="@Model.Code" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Name</label>
+                                <input type="text" class="form-control"  name="Name" value="@Model.Name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Location</label>
+                                <textarea class="form-control" name="Location">@Model.Location</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Project Manager</label>
+                                <input type="text" class="form-control" name="Mnager" value="@Model.Mnager" placeholder="Name">
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contact No</label>
+                                <input type="text" class="form-control" name="ContactNo" value="@Model.ContactNo" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Start date</label>
+                                <div class="input-group date">
+
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" data-date-end-date="-2d" value="@(Model.StartDate==null?"":Model.StartDate.Value.ToString("dd MMMM yyyy"))" name="StartDate" class="form-control pull-right" id="datepicker">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">End date</label>
+                                <div class="input-group date">
+
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" data-date-end-date="-2d" value="@(Model.EndDate==null?"":Model.EndDate.Value.ToString("dd MMMM yyyy"))" name="EndDate" class="form-control pull-right" id="datepicker2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Remarks</label>
+                                <textarea class="form-control" name="Remarks">@Model.Remarks</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Status</label>
+                                <input type="checkbox"  name="Status" @(Model.Status==1?"checked":"") placeholder="Name">
+                            </div>
+
+
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </div>
+                        }
+        </div>
+    </section>
+</div>
+@section masterJs
+{
+    <script type="text/javascript">
+
+
+
+        $(function () {
+           // $('.select2').select2();
+            $('form').validator();
+
+            $("#logoFile").change(function () {
+                readURL(this);
+            });
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#logoImg').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+           
+            $('#datepicker').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+            $('#datepicker2').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+            //$('form').validator({
+            //    custom: {
+            //        equals: function ($el) {
+            //            var matchValue = $el.data("equals") // foo
+            //            if ($el.val() !== matchValue) {
+            //                return "Hey, that's not valid! It's gotta be " + matchValue
+            //            }
+            //        }
+            //    }
+            //}).on('submit', function (e) {
+            //    if (e.isDefaultPrevented()) {
+            //        // handle the invalid form...
+            //    } else {
+            //        // everything looks good!
+            //    }
+            //});
+
+
+        });
+
+
+        function loadProjectCode(value)
+        {
+            $.ajax({
+                url: '/Project/projectcode?bsID=' + value,
+                type: 'GET',
+                success: function (data) {
+                    $(".procode").val(data);
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+
+    </script>
+
+}
+
+
+
+

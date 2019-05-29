@@ -1,0 +1,32 @@
+﻿@model RSLERP.DataManager.Entity.Users
+@using RSLERP.Lib.Global.Utilities
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    @*<span class="hidden-xs">@Model.u_LoginName</span>*@
+</a>     
+
+
+
+
+
+    <ul class="dropdown-menu">
+        <!-- User image -->
+        <li class="user-header">
+            <img src="~/dist/img/avatar.png" class="img-circle" alt="User Image">
+            <p>
+                @*@EnumClass.loginName
+                <small>@EnumClass.companyName</small>
+                <small>@EnumClass.groupName</small>*@
+            </p>
+        </li>
+      
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Profile</a>
+            </div>
+            <div class="pull-right">
+                <a href="/Account/SignOut" class="btn btn-default btn-flat">Sign out</a>
+            </div>
+        </li>
+    </ul>

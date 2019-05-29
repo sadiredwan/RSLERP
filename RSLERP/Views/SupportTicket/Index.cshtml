@@ -1,0 +1,161 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@using RSLERP.DataManager;
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Support Ticket Index";
+    Layout = "~/Views/Shared/_LayoutCrm.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Support Tickets</li>
+        </ol>
+        <br>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Support Tickets</h3>
+                        <a style="margin-left:15px; float: right;" class="btn btn-primary" href="~/SupportTicket/Load"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @using (Html.BeginForm("Search", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <select class="form-control select2" style="width: 100%;" name="VM_SUPPORT_TYPE.id">
+                                        <option value="0">Select Support Type</option>
+                                        @foreach (Support_Types spt in Model.VM_SUPPORT_TYPES)
+                                        {
+                                            <option @(Model.VM_SUPPORT_TYPE.id == @spt.id ? "selected" : "") value="@spt.id">@spt.type</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    <select class="form-control select2" style="width: 100%;" name="VM_SUPPORT_USER.id">
+                                        <option value="0">Select Support User</option>
+                                        @foreach (Support_Users spu in Model.VM_SUPPORT_USERS)
+                                        {
+                                            <option @(Model.VM_SUPPORT_USER.id == @spu.id ? "selected" : "") value="@spu.id">@spu.name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            @if (HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_ROLE].ToString() == "Admin")
+                            {
+                                <div class="col-xl-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <select class="form-control select2" style="width: 100%;" name="VM_EMPLOYEE.id">
+                                            <option value="0">Select Employee</option>
+                                            @foreach (Employees emp in Model.VM_EMPLOYEES)
+                                            {
+                                                <option @(Model.VM_EMPLOYEE.id == @emp.id ? "selected" : "") value="@emp.id">@emp.name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-xl-2 col-sm-2 col-md-2">
+                                <div class="form-group">
+                                    <select class="form-control select2" style="width: 100%;" name="VM_SUPPORT_TICKET.status">
+                                        <option value="0">Status</option>
+                                        <option @(Model.VM_SUPPORT_TICKET.status == 1 ? "selected" : "") value="1">Open</option>
+                                        <option @(Model.VM_SUPPORT_TICKET.status == 2 ? "selected" : "") value="2">Closed</option>
+                                        <option @(Model.VM_SUPPORT_TICKET.status == 3 ? "selected" : "") value="3">Resolved</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-sm-1 col-md-1">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-filter"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                        <table class="table table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>Support Title</th>
+                                <th>Type</th>
+                                <th>Support User</th>
+                                <th>Created By</th>
+                                <th>Assigned To</th>
+                                <th>Status</th>
+                                <th>Completion Date</th>
+                                <th>Edit</th>
+                            </tr>
+                            @foreach (Support_Tickets sptc in Model.VM_SUPPORT_TICKETS)
+                        {
+                            <tr>
+                                <td>@sptc.id</td>
+                                <td>@sptc.support_title</td>
+                                <td>@sptc.type_name</td>
+                                <td>@sptc.support_user_name</td>
+                                <td>@sptc.created_by_name</td>
+                                <td>@sptc.assigned_to_name</td>
+                                @if (@sptc.status_name == "Open")
+                                {
+                                    <td><span class="label label-warning">@sptc.status_name</span></td>
+                                }
+                                else if (@sptc.status_name == "Closed")
+                                {
+                                    <td><span class="label label-success">@sptc.status_name</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="label label-primary">@sptc.status_name</span></td>
+                                }
+                                @if (@sptc.completion_date == null)
+                                {
+                                    <td>@sptc.completion_date</td>
+                                }
+                                else
+                                {
+                                    <td>@(((DateTime)(@sptc.completion_date)).ToString("dd MMMM, yyyy"))</td>
+                                }
+                                <td><a href="~/SupportTicket/Load?id=@sptc.id"><span class="fa fa-pencil"></span></a></td>
+                            </tr>
+                        }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>
+    @section masterJs
+{
+        @UserHelper.Pagination(Model.TotalRow, Model.PageIndex, Model.PageSize, "form")
+
+        <script type="text/javascript">
+
+            $(function () {
+                $('.select2').select2();
+            });
+            $('.datepicker').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+        </script>
+    }

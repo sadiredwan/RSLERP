@@ -1,0 +1,22 @@
+﻿@helper CheckBox(String CheckBoxName_field, bool boolean_value, string id_vale,string idname_field, String classname)
+{
+    <input type="hidden" value="@id_vale" name="@idname_field" />
+    <input type="checkbox" @(boolean_value == true ? "checked" : "") class="checkboxstatus" id="chk_@id_vale" />
+    <input type="hidden" name="@CheckBoxName_field" value="@(boolean_value==true?"true":"false")" id="hdn_chk_@id_vale" />
+
+
+            <script type="text/javascript">
+                $("#chk_@id_vale").change(function () {
+                    if (this.checked) {
+                        $("#hdn_chk_@id_vale").val('true');
+                    }
+                    else {
+                        $("#hdn_chk_@id_vale").val('false');
+                    }
+                });
+
+
+
+            </script>
+
+}

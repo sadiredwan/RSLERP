@@ -1,0 +1,82 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@using RSLERP.DataManager;
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Employees Index";
+    Layout = "~/Views/Shared/_LayoutCrm.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Employees</li>
+        </ol>
+        <br>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Employees</h3>
+                        <a style="margin-left:15px; float: right;" class="btn btn-primary" href="~/Employee/Load"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @using (Html.BeginForm("Search", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="VM_EMPLOYEE.name" id="inputEmail3" placeholder="Name" value="@Model.VM_EMPLOYEE.name">
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-sm-1 col-md-1">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-filter"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                        <table class="table table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Mobile No.</th>
+                                <th>Joining Date</th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach (Employees emp in Model.VM_EMPLOYEES)
+                        {
+                            <tr>
+                                <td>@emp.id</td>
+                                <td>@emp.name</td>
+                                <td>@emp.mobile</td>
+                                <td>@emp.joining_date.ToString("dd MMMM, yyyy")</td>
+                                <td><a href="~/Employee/Load?id=@emp.id"><span class="fa fa-pencil"></span> Edit</a></td>
+                            </tr>
+                        }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>
+    @section masterJs
+{
+        @UserHelper.Pagination(Model.TotalRow, Model.PageIndex, Model.PageSize, "form")
+    }

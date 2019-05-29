@@ -1,0 +1,112 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <section class="content-header">
+        @*<h1>
+            Role
+
+        </h1>*@
+        @*<ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>*@
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Roles</h3>
+                        <a  class="btn btn-primary pull-right" href="~/SupportTicket/Load"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @using (Html.BeginForm("Search", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row">
+                                <div class="col-xl- col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="VM_SECROLE.Name" id="inputEmail3" placeholder="Role Name" value="@Model.VM_SECROLE.Name">
+                                       
+                                    </div>
+                                       
+                                </div>
+                                @*<div class="col-xl-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                    </div>
+                                </div>*@
+                                <div class="col-xl-3 col-sm-3 col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                
+                            </div>
+                        }
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Role ID</th>
+                                <th>Role Name</th>
+                                <th>Edit</th>
+                            </tr>
+                            @foreach (SecRoles secrl in Model.VM_SECROLES)
+                            {
+                                <tr>
+                                    <td>@secrl.Id</td>
+                                    <td>@secrl.Name</td>
+                                
+                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.Id"><span class="fa fa-pencil"></span></a></td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+@section masterJs
+{
+    @UserHelper.Pagination(Model.TotalRow, Model.PageIndex, Model.PageSize, "form")
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('.select2').select2();
+        });
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
