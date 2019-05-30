@@ -66,6 +66,10 @@ namespace RSLERP.Models
 
         public List<Resource> VM_MODULE_RESOURCES { get; set; }
 
+        public PriorityLevel VM_PRIORITY_LEVEL { get; set; }
+
+        public List<PriorityLevel> VM_PRIORITY_LEVELS { get; set; }
+
     }
 
 

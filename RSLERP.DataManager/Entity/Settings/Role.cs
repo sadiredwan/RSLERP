@@ -20,6 +20,8 @@ namespace RSLERP.DataManager.Entity
         public int CreatorId { get; set; }
         public bool Status { get; set; }
         public int CmnCompanyId { get; set; }
+
+        public int CompanyId { get; set; }
         public int created_by { get; set; }
         public DateTime? created_at { get; set; }
         public int modified_by { get; set; }

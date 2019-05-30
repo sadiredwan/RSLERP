@@ -47,7 +47,7 @@ namespace RSLERP.Controllers.Accounts
                 app.company_id = Convert.ToInt32(cmp.c_ID);
                 app.group_id = cmp.c_g_ID;
                 app.user_id = Convert.ToInt32(HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID]);
-                app.financial_year = (cTyr != null) ? ""+cTyr.Id : "";
+                app.financial_year = (cTyr != null) ? ""+cTyr.Id : "0";
                 app.status = true;
                 app.role_id = usrLoggedIn.RoleID;
                 app.role_level = usrLoggedIn.Role_Level;

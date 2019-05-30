@@ -8975,8 +8975,6 @@
     <Content Include="Views\Common\SubmitStatus.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Task\Load.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Employee\Load.cshtml" />
     <Content Include="Views\SupportTicket\Index.cshtml" />
     <Content Include="Views\SupportTicket\Load.cshtml" />
     <Content Include="Views\SupportType\Index.cshtml" />

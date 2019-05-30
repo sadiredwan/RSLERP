@@ -76,8 +76,15 @@ namespace RSLERP.Controllers.RoleManagement
                 vmdl.VM_ROLE = mdlRole;
             }
 
+            int levelStart = 1;
+            int levelEnd = 2;
 
-
+            for(int i= levelStart; i<= levelEnd; i++)
+            {
+                vmdl.VM_PRIORITY_LEVELS = new List<PriorityLevel>();
+                vmdl.VM_PRIORITY_LEVELS.Add(new PriorityLevel { Id = i, Value = "" + i });
+            }
+            vmdl.VM_PRIORITY_LEVEL = new PriorityLevel();
 
             return View(vmdl);
         }
@@ -96,14 +103,14 @@ namespace RSLERP.Controllers.RoleManagement
             {
 
                 //check if already exist then update
-                if (new DBContext().Roles.ToList().FindAll(x => x.c_ID == vmdl.VM_COMPANE.c_ID).Count > 0)
+                if (new DBContext().Roles.ToList().FindAll(x => x.Id == vmdl.VM_ROLE.Id).Count > 0)
                 {
                     //Update Role
                     //RoleMdl.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
                         contxt.Roles.Attach(vmdl.VM_ROLE);
-                        contxt.Entry(vmdl.VM_COMPANE).State = EntityState.Modified;
+                        contxt.Entry(vmdl.VM_ROLE).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }

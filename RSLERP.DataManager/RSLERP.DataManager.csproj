@@ -96,9 +96,11 @@
     <Compile Include="Entity\CRM\TasksSummarys.cs" />
     <Compile Include="Entity\CRM\Task_Comments.cs" />
     <Compile Include="Entity\CRM\Users.cs" />
+    <Compile Include="Entity\Settings\ApplicationState.cs" />
     <Compile Include="Entity\Settings\AutoComplete.cs" />
     <Compile Include="Entity\DynamicClass.cs" />
     <Compile Include="Entity\Settings\Module.cs" />
+    <Compile Include="Entity\Settings\PriorityLevel.cs" />
     <Compile Include="Entity\Settings\Resource.cs" />
     <Compile Include="Entity\Settings\Role.cs" />
     <Compile Include="Entity\Settings\RolePermission.cs" />

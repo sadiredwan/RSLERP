@@ -18,7 +18,7 @@ if (model != null)
     {
         foreach (var error in errors.FirstOrDefault().Value.Errors)
         {
-                <span id="helpBlock2" class="text-danger text-warning">@error.ErrorMessage</span>
+                <span id="helpBlock2" class="text-danger text-warning" style="font-weight:bold">@error.ErrorMessage</span>
         }
     }
 
@@ -34,24 +34,6 @@ if (model != null)
 
 
     <script type="text/javascript">
-
-        @*window.onload=function(){
-            
-            document.getElementById("#chk_@uniqueIDFiled").addEventListener("change", function(e){
-                alert("ok2");
-            });
-
-        };
-
-      
-            
-            
-            = function() {
-           // var lfckv = document.getElementById("#chk_@uniqueIDFiled").checked;
-            //  alert(lfckv);
-            alert("ok");
-        
-        };*@
 
   
 

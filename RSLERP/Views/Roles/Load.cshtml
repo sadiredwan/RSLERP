@@ -1,8 +1,84 @@
-﻿
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
 @{
     ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutSettings.cshtml";
 }
 
-<h2>load</h2>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Role Create
+        </h1>
+        
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <a href="@Url.Action("index",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())" class="btn btn-primary">« Back</a>
+                    </div>
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        <input type="hidden" value="@Model.VM_ROLE.Id" name="VM_ROLE.Id" />
+                       
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="VM_ROLE.Name" id="inputEmail3" placeholder="Name" value="@Model.VM_ROLE.Name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
+                            </div>
+                          
+                            <div class="form-group">
+                                <label>Priority Level</label>
+                                <select name="VM_ROLE.PriorityLevel" class="form-control">
+                                    <option value="0">Select Priority Level</option>
+                                    @foreach (PriorityLevel lvl in Model.VM_PRIORITY_LEVELS)
+                                    {
+                                        <option value="@lvl.Id" @(lvl.Id == Model.VM_ROLE.PriorityLevel ? "selected" : "")>@lvl.Value</option>
+                                    }
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_ROLE.Id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@section masterJs
+    {
+    <script type="text/javascript">
+
+            $(function () {
+
+                $('.select2').select2();
+
+            });
+
+
+            $('.datepicker').datepicker({
+                format: 'dd MM yyyy',
+                autoclose: true
+            });
+    </script>
+}
+
+
+
 

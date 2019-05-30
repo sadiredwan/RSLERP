@@ -31,15 +31,25 @@ namespace RSLERP.DataManager
 
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<ApplicationState> ApplicationStates { get; set; }
+
 
         public DbSet<RolePermission> RolePermissions { get; set; }
 
         private void OnBeforeSaving()
         {
             int user_id = 0;
+            int app_id = 0;
+            int company_id = 0;
+
+            app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
+            ApplicationState appState = new DBContext().ApplicationStates.Find(app_id);
+          
             try
             {
-                user_id = Convert.ToInt32(HttpContext.Current.User.Identity.Name);
+              
+                user_id = appState.user_id;
+                company_id = appState.company_id;
             }
             catch
             {
@@ -53,8 +63,8 @@ namespace RSLERP.DataManager
                     ((IBaseModel)entity.Entity).created_at = DateTime.Now;
                     ((IBaseModel)entity.Entity).created_by = user_id;
                 }
-
-               ((IBaseModel)entity.Entity).modified_at = DateTime.Now;
+                ((IBaseModel)entity.Entity).CompanyId = company_id;
+                ((IBaseModel)entity.Entity).modified_at = DateTime.Now;
                 ((IBaseModel)entity.Entity).modified_by = user_id;
             }
 

@@ -23,6 +23,8 @@ namespace RSLERP.DataManager.Entity
         public bool rp_Print { get; set; }
         public int rp_m_ID { get; set; }
         public int rp_companyID { get; set; }
+
+        public int CompanyId { get; set; }
         public int created_by { get; set; }
         public DateTime? created_at { get; set; }
         public int modified_by { get; set; }
