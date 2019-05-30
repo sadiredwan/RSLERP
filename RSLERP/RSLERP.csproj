@@ -8972,7 +8972,6 @@
     <Content Include="Views\ResourceEntry\ResourceMapping.cshtml" />
     <Content Include="Views\RolePermission\Index.cshtml" />
     <Content Include="Views\SigninCompany\Index.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Common\SubmitStatus.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Task\Load.cshtml" />
@@ -8988,6 +8987,10 @@
     <Content Include="Views\CRM\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\load.cshtml" />
+    <Content Include="Views\RolePermission\PrtialRolePermission.cshtml" />
+    <Content Include="Views\Shared\_PartialLayout.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

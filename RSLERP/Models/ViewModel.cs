@@ -56,6 +56,16 @@ namespace RSLERP.Models
 
         public List<Role> VM_ROLES { get; set; }
 
+
+        public Module VM_MDULE { get; set; }
+
+        public List<Module> VM_MDULES { get; set; }
+
+
+        public Resource VM_MODULE_RESOURCE { get; set; }
+
+        public List<Resource> VM_MODULE_RESOURCES { get; set; }
+
     }
 
 

@@ -17,10 +17,10 @@ namespace RSLERP.DataManager.Entity
         public String R_ResourceName { get; set; }
         public String R_DisplayName { get; set; }
         public String R_M_ID { get; set; }
-        public bool R_Status { get; set; }
+        public bool? R_Status { get; set; }
         public String R_Tag { get; set; }
-        public int Parent_R_ID { get; set; }
-        public bool Is_Menu { get; set; }
+        public int? Parent_R_ID { get; set; }
+        public bool? Is_Menu { get; set; }
         public int R_Order { get; set; }
         public String R_SM_ID { get; set; }
         public String R_Url { get; set; }

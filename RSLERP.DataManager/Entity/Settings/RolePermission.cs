@@ -26,6 +26,6 @@ namespace RSLERP.DataManager.Entity
         public int created_by { get; set; }
         public DateTime? created_at { get; set; }
         public int modified_by { get; set; }
-        public DateTime? modified_at { get; set; }
+        public DateTime? modified_at { get; set; }        [NotMapped]        [ForeignKey("rp_rl_ID")]        public virtual Role ROLE { get; set; }
     }
 }

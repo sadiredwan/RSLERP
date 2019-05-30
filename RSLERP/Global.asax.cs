@@ -1,4 +1,5 @@
 ﻿
+using RSLERP.DataManager;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -34,7 +35,12 @@ namespace RSLERP
 
         protected void Application_Error(object sender, EventArgs e)
         {
-           // Response.Redirect("/Account/Signout");
+            if (Application[GLobalSessionName.GLOBAL_SESSION_USERID] == null)
+            {
+                FormsAuthentication.SignOut();
+                Response.Redirect("/Account/Signout");
+            }
+            // Response.Redirect("/Account/Signout");
         }
 
         //protected void Application_BeginRequest(object sender,EventArgs e)

@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+  
+    @RenderSection("partialjs", required: false)
+</body>
+</html>

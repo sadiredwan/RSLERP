@@ -1,0 +1,133 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+@using RSLERP.DataManager
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PartialLayout.cshtml";
+}
+
+    @if (Model.VM_MODULE_RESOURCES.Count > 0)
+    {
+    <table id="datatable2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Resource Name </th>
+                <th>View <br /> <input type="checkbox" class="all" value="ALL" id="view-all" name="Status"></th>
+                <th>Add  <br /> <input type="checkbox" class="all" value="ALL" id="add-all" name="Status"> </th>
+                <th>Edit <br /> <input type="checkbox" class="all" value="ALL" id="edit-all" name="Status"> </th>
+                <th>Delete <br /><input type="checkbox" class="all" value="ALL" id="delete-all" name="Status"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Resource rsc in Model.VM_MODULE_RESOURCES)
+            {
+                RolePermission rprsc = new DBContext().RolePermissions.Where(x => x.rp_m_ID == Model.VM_MDULE.m_ID).Where(x => x.rp_rl_ID == Model.VM_ROLE.Id).Where(x => x.rp_r_ID == rsc.R_ID).FirstOrDefault();
+                if (rprsc == null)
+                {
+                    rprsc = new RolePermission();
+                }
+                <tr>
+                    <td>@rsc.R_DisplayName </td>
+                    <td><input type="checkbox" class="view" name="chk_view_@rsc.R_ID" @(rprsc.rp_ReadOnly ? "checked" : "")></td>
+                    <td><input type="checkbox" class="add" name="chk_add_@rsc.R_ID" @(rprsc.rp_add ? "checked" : "")></td>
+                    <td><input type="checkbox" class="edit" name="chk_edit_@rsc.R_ID" @(rprsc.rp_Edit ? "checked" : "")></td>
+                    <td><input type="checkbox" class="delete" name="chk_delete_@rsc.R_ID" @(rprsc.rp_Delete ? "checked" : "")></td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary pull-right" value="tab_2">Submit</button>
+    </div>
+    }
+
+
+@section partialjs {
+
+    <script type="text/javascript">
+
+    $("[type=checkbox]").click(function (e) {
+
+        var checkBoxClass = e.target.className;
+        if (checkBoxClass == 'all')
+        {
+            var allcheckBoxID = e.target.id;
+            var childNodeClassName = allcheckBoxID.split('-')[0];
+            $('input:checkbox.' + childNodeClassName).not(this).prop('checked', this.checked);
+            $('input[type=checkbox].' + childNodeClassName).each(function () {
+                var hiddenFieldID = "hdn_"+$(this).attr("id");
+                var valueChk = (this.checked ? 'true' : 'false');
+                $("#" + hiddenFieldID).val(valueChk);
+
+            });
+        }
+        else {
+            var currentAllCheckBoxid = checkBoxClass + "-" + "all";
+            $('input:checkbox#' + currentAllCheckBoxid).prop('checked', false);
+
+        }
+
+
+
+
+        //$("#extratb tr").remove();
+        //var checkBoxID = e.target.id;
+        //var uid = $("#dropdownCompany").val();
+        //if (checkBoxID == "checkAll") {
+        //    $('input:checkbox.checkboxStatus').not(this).prop('checked', this.checked);
+
+        //}
+        //else if (checkBoxID == "checksingle") {
+        //    $('input:checkbox.checkAll').prop('checked', false);
+
+        //}
+    });
+    // Notice that e is not used or needed.
+    function onchangerolemdule(obj) {
+        $("#rolepermission").html("Loading...");
+        if ($("#ddlRole").val() != 0 && $("#ddlModule").val() != 0) {
+            var roleID = $("#ddlRole").val();
+            var moduleID = $("#ddlModule").val();
+            $.ajax({
+                url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/PrtialRolePermission?roleID=' + roleID + '&modelID=' + moduleID,
+                type: 'GET',
+                success: function (data) {
+                    $("#rolepermission").html(data);
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+        // alert(id);
+    }
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+                });
+
+    function myFunction() {
+        var x = document.getElementById("fname");
+        x.value = x.value.toUpperCase();
+    }
+
+    function onchangeevent(obj)
+    {
+        if ($("#ddlRole").val() != 0 && $("#ddlModule").val() != 0) {
+            $('#form').attr('action', '@Url.Action("PostBack", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())');
+            $("#chnageName").val("neat");
+            obj.form.submit();
+        }
+
+        // location.reload();
+    }
+    </script>
+
+}

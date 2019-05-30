@@ -10,61 +10,129 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using static RSLERP.DataManager.Utility;
 
 namespace RSLERP.Controllers.RoleManagement
 {
     public class RolesController : Controller
     {
+        ViewModel vmdl = new ViewModel();
         /// <summary>
-
-        RoleBLL rlBll = new RoleBLL();
-        ViewModel vm = new ViewModel();
-
-        /// <summary>
-        /// Index View/List/Table
-        /// Table of roles 
+        /// Index page 
+        /// for show all Roles list
         /// </summary>
         /// <returns></returns>
+        // GET: Role
         public ActionResult Index()
         {
-            vm.VM_SECROLES = rlBll.GetRoleAll();
-            vm.VM_SECROLE = new SecRoles();
-            vm.TotalRow = (vm.VM_SECROLES.Count>0? vm.VM_SECROLES[0].TotalRow : 0);
-            //vm.TotalRow = vm.VM_SECROLE[0].To
-           return View(vm);
-        }
 
+            if (TempData["ViewModel"] != null)
+            {
+                vmdl = (ViewModel)TempData["ViewModel"];
+
+            }
+            vmdl.VM_ROLES = new DBContext().Roles.ToList();
+
+
+            return View(vmdl);
+        }
 
         /// <summary>
-        /// Create , Edit Roles Page
+        /// Create Page for Role 
         /// </summary>
-        /// <param name="roleid"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Load(String roleid)
+        public ActionResult load(String id)
         {
            
-            return View();
+            String message = "";
 
+
+            int dID = Convert.ToInt32(id);
+
+
+            //pass model to view
+            Role mdlRole = new Role();
+
+            //Check if id doesnot null
+            if (id != null)
+            {
+                //check if Role already exist
+                if (new DBContext().Roles.ToList().FindAll(x => x.Id == dID).Count > 0)
+                {
+                    //pass model to view with Role info
+                    mdlRole = new DBContext().Roles.Find(dID);
+                }
+            }
+
+            //Check Temp error or successmessage 
+            if (TempData["ViewModel"] != null)
+            {
+                vmdl = (ViewModel)TempData["ViewModel"];
+            }
+            else
+            {
+                vmdl.VM_ROLE = mdlRole;
+            }
+
+
+
+
+            return View(vmdl);
         }
-
 
         /// <summary>
-        /// Submit Create, Edit  role
+        /// Store Role 
+        /// Create or Update
         /// </summary>
-        /// <param name="vmdl"></param>
+        /// <param name="RoleMdl"></param>
         /// <returns></returns>
-        public ActionResult Store(ViewModel vmdl)
+        public ActionResult store(ViewModel vmdl)
         {
-            return View("Index");
            
-        }
+            //Check Model state is valid or not
+            if (ModelState.IsValid)
+            {
 
-        public ActionResult Search(ViewModel vmdl)
-        {
-            vmdl.VM_SECROLES = rlBll.SearchRole(vmdl.VM_SECROLE.Name, vmdl.PageIndex, vmdl.PageSize);
-            vmdl.TotalRow = vmdl.VM_SECROLES.Count();
-            vmdl.TotalRow = (vmdl.VM_SECROLES.Count > 0 ? vmdl.VM_SECROLES[0].TotalRow : 0);
-            return View("Index",vmdl);
+                //check if already exist then update
+                if (new DBContext().Roles.ToList().FindAll(x => x.c_ID == vmdl.VM_COMPANE.c_ID).Count > 0)
+                {
+                    //Update Role
+                    //RoleMdl.updated_at = DateTime.Now;
+                    using (var contxt = new DBContext())
+                    {
+                        contxt.Roles.Attach(vmdl.VM_ROLE);
+                        contxt.Entry(vmdl.VM_COMPANE).State = EntityState.Modified;
+                        contxt.SaveChanges();
+
+                    }
+                    GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
+                }
+                else
+                {
+                    //Add new Role
+                    using (var contxt = new DBContext())
+                    {
+
+                        contxt.Roles.Add(vmdl.VM_ROLE);
+                        contxt.SaveChanges();
+
+                    }
+                    GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
+                }
+                TempData["ViewModel"] = vmdl;
+                return RedirectToAction("index", vmdl);
+            }
+            else
+            {
+                string errors = errorstate.errors(ModelState);
+                //GLobalStatus.Global_Status<ViewModel>(ref vmdl, false, errorstate.errors(ModelState), ModelState);
+                GLobalStatus.Global_Status<ViewModel>(ref vmdl, false, "", ModelState);
+                TempData["ViewModel"] = vmdl;
+                //redirect back to Registration page 
+                return RedirectToAction("load");
+            }
 
         }
 

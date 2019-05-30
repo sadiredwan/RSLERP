@@ -1,63 +1,8 @@
-﻿@model RSLERP.Models.ViewModel
-@using RSLERP.DataManager.Entity
-
-
+﻿
 @{
-    ViewBag.Title = "Load";
+    ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutSettings.cshtml";
 }
-<section class="content-wrapper">
-    <section class="content-header">
-        <h1>
-            Role Manage
-        </h1>
 
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <!-- left column -->
-            <div class="col-md-8">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" class="btn btn-primary">« Back</a>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
-                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="box-body">
-                            <input type="hidden" name="VM_SECROLE.id" value="@Model.VM_SECROLE.Id" />
-
-                            <div class="form-group">
-                                <label class="control-label">Role Name</label>
-                                <input type="text" class="form-control" name="VM_SECROLE.Name" id="inputEmail3" placeholder="Task Title" value="@Model.VM_SECROLE.Name">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SECROLE.Name")
-
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Status</label>
-                                @UserHelper.CheckBox("Status",Model.VM_SECROLE.Status,""+Model.VM_SECROLE.Id, "VM_SECROLE.status","")
-
-                            </div>
-
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">        
-                            <button type="submit" class="btn btn-primary pull-right">@(Model.VM_SECROLE.Id == 0 ? "Save" : "Update")</button>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-       
-        <!-- /.row -->
-    </section>
-
-</section>
-
-
+<h2>load</h2>
 

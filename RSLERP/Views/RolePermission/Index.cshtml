@@ -6,7 +6,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutSettings.cshtml";
 }
+@{
 
+  
+}
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,85 +43,86 @@
                         <div class="col-md-2 col-lg-2"></div>
                         <div class="col-lg-8 col-md-8">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Select Module</label>
-                                <select id="ddlModule" name="VM_MODULE.m_ID" class="form-control select2" onchange="onchangeevent(this)">
-                                    <option value="0" >--- Select Modules -------</option>
-                                    @foreach (Module mdl in Model.VM_MODULES)
+                                <label for="exampleInputPassword1">Select Role</label>
+                                <select id="ddlRole" name="VM_ROLE.Id" class="form-control select2" onchange="onchangerolemdule(this)">
+                                    <option value="0">--- Select Roles -------</option>
+                                    @foreach (Role mdl in Model.VM_ROLES)
                                     {
-                                        <option @(Model.VM_MODULE.m_ID == mdl.m_ID ? "selected" : "") value="@mdl.m_ID">@mdl.m_Name</option>
+                                        <option @(Model.VM_ROLE.Id == mdl.Id ? "selected" : "") value="@mdl.Id">@mdl.Name</option>
                                     }
 
                                 </select>
                             </div>
 
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-lg-2"></div>
                         <div class="col-lg-8 col-md-8">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Select Role</label>
-                                <select id="ddlRole" name="VM_SECROLE.Id" class="form-control select2" onchange="onchangeevent(this)">
-                                    <option value="0">--- Select Roles -------</option>
-                                    @foreach (SecRoles mdl in Model.VM_SECROLES)
+                                <label for="exampleInputPassword1">Select Module</label>
+                                <select id="ddlModule" name="VM_MDULE.m_ID" class="form-control select2" onchange="onchangerolemdule(this)">
+                                    <option value="0" >--- Select Modules -------</option>
+                                    @foreach (Module mdl in Model.VM_MDULES)
                                     {
-                                        <option @(Model.VM_SECROLE.Id == mdl.Id ? "selected" : "") value="@mdl.Id">@mdl.Name</option>
+                                        <option @(Model.VM_MDULE.m_ID == mdl.m_ID ? "selected" : "") value="@mdl.m_ID">@mdl.m_Name</option>
                                     }
 
                                 </select>
                             </div>
 
                         </div>
+
+                    </div>
+              
+
+
+
+                    <div id="rolepermission">
+
+                        @if (Model.VM_MODULE_RESOURCES.Count > 0)
+                        {
+                            <table id="datatable2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Resource Name </th>
+                                        <th>View <br /> <input type="checkbox" class="all" value="ALL" id="view-all" name="Status"></th>
+                                        <th>Add  <br /> <input type="checkbox" class="all" value="ALL" id="add-all" name="Status"> </th>
+                                        <th>Edit <br /> <input type="checkbox" class="all" value="ALL" id="edit-all" name="Status"> </th>
+                                        <th>Delete <br /><input type="checkbox" class="all" value="ALL" id="delete-all" name="Status"> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Resource rsc in Model.VM_MODULE_RESOURCES)
+                                    {
+                                        RolePermission rprsc = new DBContext().RolePermissions.Where(x => x.rp_m_ID == Model.VM_MDULE.m_ID).Where(x => x.rp_rl_ID == Model.VM_ROLE.Id).Where(x => x.rp_r_ID == rsc.R_ID).FirstOrDefault();
+                                        if (rprsc == null)
+                                        {
+                                            rprsc = new RolePermission();
+                                        }
+                                        <tr>
+                                            <td>@rsc.R_DisplayName </td>
+                                            <td><input type="checkbox" class="view" name="chk_view_@rsc.R_ID" @(rprsc.rp_ReadOnly ? "checked" : "")></td>
+                                            <td><input type="checkbox" class="add" name="chk_add_@rsc.R_ID" @(rprsc.rp_add ? "checked" : "")></td>
+                                            <td><input type="checkbox" class="edit" name="chk_edit_@rsc.R_ID" @(rprsc.rp_Edit ? "checked" : "")></td>
+                                            <td><input type="checkbox" class="delete" name="chk_delete_@rsc.R_ID" @(rprsc.rp_Delete ? "checked" : "")></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+
+                            <table id="extratb" class="hidden"></table>
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary pull-right" value="tab_2">Submit</button>
+                            </div>
+                        }
                     </div>
 
-
-
-
-
-                    if (Model.VM_ROLEPERMISSIONS.Count > 0)
-                    {
-                        <table id="datatable2" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Resource Name </th>
-                                    <th>View <br /> <input type="checkbox" class="all" value="ALL" id="view-all" name="Status"></th>
-                                    <th>Add  <br /> <input type="checkbox" class="all" value="ALL" id="add-all" name="Status"> </th>
-                                    <th>Edit <br /> <input type="checkbox" class="all" value="ALL" id="edit-all" name="Status"> </th>
-                                    <th>Delete <br /><input type="checkbox" class="all" value="ALL" id="delete-all" name="Status"> </th>
-                                    <th>Print<br /> <input type="checkbox" class="all" value="ALL" id="print-all" name="Status"> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < Model.VM_ROLEPERMISSIONS.Count; i++)
-                                {
-                                    String d_name = new DBContext().Roles.Find(Model.VM_ROLEPERMISSIONS[i].rp_rl_ID).Name;
-
-                                    <tr>
-                                        <td>@d_name
-                                        </td>
-                                        <td>@UserHelper.CheckBox("view", Model.VM_ROLEPERMISSIONS[i].rp_ReadOnly, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_ReadOnly", "view_" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
-                                        <td>@UserHelper.CheckBox("add", Model.VM_ROLEPERMISSIONS[i].rp_add,""+Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS["+i+ "].rp_add","add_"+ Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
-                                        <td>@UserHelper.CheckBox("edit", Model.VM_ROLEPERMISSIONS[i].rp_Edit, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Edit", "edit" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
-                                        <td>@UserHelper.CheckBox("delete", Model.VM_ROLEPERMISSIONS[i].rp_Delete, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Delete", "delete" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
-                                        <td>@UserHelper.CheckBox("print", Model.VM_ROLEPERMISSIONS[i].rp_Print, "" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID, "VM_ROLEPERMISSIONS[" + i + "].rp_Print", "print" + Model.VM_ROLEPERMISSIONS[i].rp_r_ID)</td>
-
-                                    </tr>
-                                }
-
-                            </tbody>
-
-                        </table>
-
-
-                        <table id="extratb" class="hidden"></table>
-
-                        <div class="box-footer">
-                            <button type="submit"  class="btn btn-primary pull-right" value="tab_2">Submit</button>
-                        </div>
-                    }
-
-                                        }
+                }
             </div>
             <!-- /.box-body -->
 
@@ -170,7 +174,28 @@
 
         //}
     });
+    // Notice that e is not used or needed.
+    function onchangerolemdule(obj) {
+        $("#rolepermission").html("Loading...");
+        if ($("#ddlRole").val() != 0 && $("#ddlModule").val() != 0) {
+            var roleID = $("#ddlRole").val();
+            var moduleID = $("#ddlModule").val();
+            $.ajax({
+                url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/PrtialRolePermission?roleID=' + roleID + '&modelID=' + moduleID,
+                type: 'GET',
+                success: function (data) {
+                    $("#rolepermission").html(data);
 
+                },
+                error: function () {
+
+                }
+            });
+        }
+      
+
+        // alert(id);
+    }
 
     $(function () {
         //Initialize Select2 Elements

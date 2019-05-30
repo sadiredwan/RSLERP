@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RSLERP.DataManager.Entity
 {
-    [Table("s_Module")]
+    [Table("SecRoles")]
     public class Role : IBaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
