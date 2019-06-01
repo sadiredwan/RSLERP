@@ -206,7 +206,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Authorization\RSLERPAuthorize.cs" />
+    <Compile Include="Authorization\SecurityAuthAuthorize.cs" />
     <Compile Include="Controllers\AccountFinance\AccountFinanceController.cs" />
     <Compile Include="Controllers\Accounts\AccountController.cs" />
     <Compile Include="Controllers\Accounts\SigninCompanyController.cs" />
@@ -8995,6 +8995,7 @@
     <Content Include="Views\Users\load.cshtml" />
     <Content Include="Views\Users\LoadPassowrdChange.cshtml" />
     <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\UserRole\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

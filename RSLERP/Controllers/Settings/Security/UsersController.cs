@@ -126,7 +126,7 @@ namespace RSLERP.Controllers.Settings
                     using (var contxt = new DBContext())
                     {
                         vmdl.VM_COMPANY_USER.u_Type = 0;
-                        vmdl.VM_COMPANY_USER.u_ParentUserID = CurentApplication.CurrentState().user_id;
+                        vmdl.VM_COMPANY_USER.u_ParentUserID = RSLERPApplication.CurrentState().user_id;
                         contxt.CompanyUsers.Add(vmdl.VM_COMPANY_USER);
                         contxt.SaveChanges();
 
@@ -245,7 +245,7 @@ namespace RSLERP.Controllers.Settings
                     using (var contxt = new DBContext())
                     {
                         vmdl.VM_COMPANY_USER.u_Type = 0;
-                        vmdl.VM_COMPANY_USER.u_ParentUserID = CurentApplication.CurrentState().user_id;
+                        vmdl.VM_COMPANY_USER.u_ParentUserID = RSLERPApplication.CurrentState().user_id;
                         contxt.CompanyUsers.Add(vmdl.VM_COMPANY_USER);
                         contxt.SaveChanges();
 

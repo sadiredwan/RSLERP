@@ -16,12 +16,15 @@ namespace RSLERP.DataManager.Entity
         public int ur_u_ID { get; set; }
         public int ur_rl_ID { get; set; }
         public bool ur_Status { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public int ModifiedBy { get; set; }
-        public DateTime ModifiedDate { get; set; }
-        public int CompanyId { get; set; }
-        public int app_id { get; set; }                [ForeignKey("ur_rl_ID")]
+        public int? created_by { get; set; }
+        public DateTime? created_at { get; set; }
+        public int? modified_by { get; set; }
+        public DateTime? modified_at { get; set; }
+        public int? CompanyId { get; set; }
+        public int? app_id { get; set; }
+
+
+        [ForeignKey("ur_rl_ID")]
 
         public virtual Role ROLE { get; set; }
     }

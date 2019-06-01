@@ -18,8 +18,7 @@
                     <div class="box-header">
                         @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
                         <h3 class="box-title">User Role</h3>
-                        <a class="btn btn-primary pull-right" href="@Url.Action("load",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())"><span class="fa fa-plus"></span> Add</a>
-                        <div class="box-tools">
+                                               <div class="box-tools">
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -66,3 +65,35 @@
 
 </div>
 
+@section masterJs
+{
+
+    <script>
+
+        var base_rel= "@Url.Action("delete","Employee")";
+
+  $(function () {
+      $('#example2').DataTable({
+          'paging': true,
+          'lengthChange': true,
+          'searching': true,
+          'ordering': true,
+          'info': true,
+          'autoWidth': true
+      })
+  })
+
+  function remove(obj)
+  {
+      var r = confirm("Are you Sure ,you want to delete this?");
+      if (r == true) {
+          window.location.href = base_rel + "?id=" + obj;
+      } else {
+          txt = "You pressed Cancel!";
+      }
+
+
+  }
+
+    </script>
+}
