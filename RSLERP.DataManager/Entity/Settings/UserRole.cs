@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace RSLERP.DataManager.Entity
 {
     [Table("s_UserRole")]
-    public class UserRole
+    public class UserRole : IBaseModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -21,11 +21,6 @@ namespace RSLERP.DataManager.Entity
         public int? modified_by { get; set; }
         public DateTime? modified_at { get; set; }
         public int? CompanyId { get; set; }
-        public int? app_id { get; set; }
-
-
-        [ForeignKey("ur_rl_ID")]
-
-        public virtual Role ROLE { get; set; }
+        public int? app_id { get; set; }        
     }
 }

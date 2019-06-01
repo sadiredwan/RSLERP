@@ -38,7 +38,7 @@
                                 List<UserRole> userRoles = new DBContext().UserRoles.Where(x => x.ur_u_ID == secrl.u_ID).ToList();
                                 if(userRoles.Count>0)
                                 {
-                                    rl_name = userRoles.FirstOrDefault().ROLE.Name;
+                                    rl_name = new DBContext().Roles.Find(userRoles.FirstOrDefault().ur_rl_ID).Name;
                                 }
                                 <tr>
                                     <td>@secrl.u_LoginName</td>

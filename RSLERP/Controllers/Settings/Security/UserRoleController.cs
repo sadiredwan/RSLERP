@@ -85,7 +85,7 @@ namespace RSLERP.Controllers.Settings.Security
             ApplicationState app = RSLERPApplication.CurrentState();
 
             vmdl.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(dID);
-            vmdl.VM_ROLES = new DBContext().Roles.Where(x => x.CompanyId == RSLERPApplication.CurrentState().company_id).ToList();
+            vmdl.VM_ROLES = new DBContext().Roles.Where(x => x.CompanyId == app.company_id).ToList();
             return View(vmdl);
         }
 
