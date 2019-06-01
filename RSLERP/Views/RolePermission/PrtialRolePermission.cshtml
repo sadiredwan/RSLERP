@@ -26,9 +26,10 @@
                 if (rprsc == null)
                 {
                     rprsc = new RolePermission();
+
                 }
                 <tr>
-                    <td>@rsc.R_DisplayName </td>
+                    <td>@rsc.R_DisplayName</td>
                     <td><input type="checkbox" class="view" name="chk_view_@rsc.R_ID" @(rprsc.rp_ReadOnly ? "checked" : "")></td>
                     <td><input type="checkbox" class="add" name="chk_add_@rsc.R_ID" @(rprsc.rp_add ? "checked" : "")></td>
                     <td><input type="checkbox" class="edit" name="chk_edit_@rsc.R_ID" @(rprsc.rp_Edit ? "checked" : "")></td>

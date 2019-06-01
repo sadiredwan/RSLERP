@@ -26,12 +26,12 @@ namespace RSLERP.DataManager.Entity
         public String c_Email { get; set; }
         public String c_Web { get; set; }
         public String Prefix { get; set; }
-        public int created_by { get; set; }
+        public int? created_by { get; set; }
 
-        public int CompanyId { get; set; }
+        public int? CompanyId { get; set; }
         public DateTime? created_at { get; set; }
-        public int modified_by { get; set; }
-        public DateTime? modified_at { get; set; }
+        public int? modified_by { get; set; }
+        public DateTime? modified_at { get; set; }        public int? app_id { get; set; }
     }
 
 

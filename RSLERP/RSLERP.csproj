@@ -222,12 +222,13 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
-    <Compile Include="Controllers\Settings\RolePermissionController.cs" />
-    <Compile Include="Controllers\Settings\RolesController.cs" />
-    <Compile Include="Controllers\Settings\CompanyController.cs" />
-    <Compile Include="Controllers\Settings\ModuleController.cs" />
-    <Compile Include="Controllers\Settings\ResourceEntryController.cs" />
+    <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
+    <Compile Include="Controllers\Settings\Role Management\RolesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\ResourceEntryController.cs" />
+    <Compile Include="Controllers\Settings\Security\UserRoleController.cs" />
     <Compile Include="Controllers\Settings\SettingsController.cs" />
+    <Compile Include="Controllers\Settings\Security\UsersController.cs" />
     <Compile Include="Controllers\SupplyChain\SupplyChainController.cs" />
     <Compile Include="Controllers\Tender\TenderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -7543,6 +7544,7 @@
     <Content Include="dist\js\application.js" />
     <Content Include="dist\js\custom.js" />
     <Content Include="dist\js\demo.js" />
+    <Content Include="dist\js\jquery.bootcomplete.js" />
     <Content Include="dist\js\jquery.bootpag.js" />
     <Content Include="dist\js\jquery.bootpag.min.js" />
     <Content Include="dist\js\pages\dashboard.js" />
@@ -8989,13 +8991,15 @@
     <Content Include="Views\Shared\_PartialLayout.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\load.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\load.cshtml" />
+    <Content Include="Views\Users\LoadPassowrdChange.cshtml" />
+    <Content Include="Views\UserRole\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CRM\" />
     <Folder Include="Views\Partials\OnChange\" />
-    <Folder Include="Views\UserRole\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

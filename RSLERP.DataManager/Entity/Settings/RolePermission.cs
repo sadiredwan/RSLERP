@@ -24,10 +24,13 @@ namespace RSLERP.DataManager.Entity
         public int rp_m_ID { get; set; }
         public int rp_companyID { get; set; }
 
-        public int CompanyId { get; set; }
-        public int created_by { get; set; }
+        public int? CompanyId { get; set; }
+        public int? created_by { get; set; }
         public DateTime? created_at { get; set; }
-        public int modified_by { get; set; }
-        public DateTime? modified_at { get; set; }        [NotMapped]        [ForeignKey("rp_rl_ID")]        public virtual Role ROLE { get; set; }
+        public int? modified_by { get; set; }
+        public DateTime? modified_at { get; set; }
+
+        public int? app_id { get; set; }
+
     }
 }

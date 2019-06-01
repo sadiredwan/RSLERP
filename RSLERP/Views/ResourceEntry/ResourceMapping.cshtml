@@ -9,7 +9,10 @@
 
 <div class="row">
     <div class="col-lg-2 col-md-2">
-        <a onclick="loadmapping(0,@Model.R_M_ID, @Model.R_ID)" class="btn bg-purple margin">+ New </a>
+        @if (@Model.R_ID > 0)
+        {
+        <a onclick="loadmapping(0,@Model.R_M_ID, @Model.R_ID)" class="btn bg-purple margin">+ New Resource Under [ @Model.R_DisplayName ]</a>
+        }
     </div>
 </div>
 
@@ -33,12 +36,18 @@
                     </div>
                 </div>
                 <div class="box-body">
-
+                    @if (Model.R_ID > 0)
+                    { 
+                        <div class="form-group">
+                            <label>Resource  Name with ID</label>
+                            <input id="example1" type="text" readonly="readonly" value="@Model.R_DisplayName ( @Model.R_ID )" placeholder="Enter a Resource Display Name" class="form-control input-sm" onkeydown="resourceName(this)" onchange="resourceName(this)">
+                        </div>
+                    }
                     <div class="form-group">
                         <label>Resource Display Name</label>
-                        <input id="example1" type="text" name="R_DisplayName" value="@Model.R_DisplayName" placeholder="Enter a Resource Display Name" class="form-control input-sm" onkeydown="resourceName(this)" onchange="resourceName(this)">
+                        <input id="example112" type="text" name="R_DisplayName" value="@Model.R_DisplayName" placeholder="Enter a Resource Display Name" class="form-control input-sm" onkeydown="resourceName(this)" onchange="resourceName(this)">
                     </div>
-                    <div class="form-group">
+                    <div style="display:none" class="form-group">
                         <label>Resource Name</label>
                         <input id="example1" type="text" name="R_ResourceName" value="@Model.R_ResourceName" placeholder="Enter a Resource Name" class="form-control input-sm">
                     </div>
@@ -56,17 +65,28 @@
                     <input type="hidden" name="R_ID" value="@Model.R_ID" />
                     <input type="hidden" name="Parent_R_ID" value="@Model.Parent_R_ID" />
 
-                    <div class="form-group">
+                    <div style="display:none" class="form-group">
                         <label>Url</label>
                         <textarea class="form-control" rows="3" name="R_Url" placeholder="">@Model.R_Url</textarea>
                     </div>
                     <div class="form-group">
+                        <label>Controllner Name</label>
+                        <input id="example1" type="text" name="Controller_Name" value="@Model.Controller_Name" placeholder="Enter a Resource Name" class="form-control input-sm">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Action Name</label>
+                        <input id="example1" type="text" name="Action_Name" value="@Model.Action_Name" placeholder="Enter a Resource Name" class="form-control input-sm">
+
+                    </div>
+
+                    <div class="form-group">
                         <label>icon</label>
                         <input type="text" class="form-control" name="icon" value="@Model.icon" placeholder="">
                     </div>
-                    <div class="form-group">
+                    <div  class="form-group">
                         <label>Parent Resource</label>
-                        <input id="example2" type="text" name="parent_resource" placeholder="Enter a Parent Resource Name" class="form-control input-sm">
+                        <input id="example2" type="text" value="0" name="parent_resource_id" placeholder="Enter a Parent Resource Name" class="form-control input-sm">
                     </div>
                     <div class="form-group">
                         <div class="checkbox">

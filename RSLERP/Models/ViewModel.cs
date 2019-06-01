@@ -70,6 +70,13 @@ namespace RSLERP.Models
 
         public List<PriorityLevel> VM_PRIORITY_LEVELS { get; set; }
 
+        public CompanyUser VM_COMPANY_USER { get; set; }
+
+        public List<CompanyUser> VM_COMPANY_USERS { get; set; }
+
+
+
+
     }
 
 

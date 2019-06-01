@@ -16,7 +16,7 @@
             wrapperClass : "bc-wrapper",
             menuClass : "bc-menu",
             idField : true,
-            idFieldName : $(this).attr('name')+"_id",
+            idFieldName : $(this).attr('name'),
             minLength : 3,
             dataParams : {},
             formParams : {}

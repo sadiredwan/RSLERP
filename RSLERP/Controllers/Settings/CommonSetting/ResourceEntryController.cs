@@ -45,10 +45,24 @@ namespace RSLERP.Controllers.SecurityNSettings.Settings
             List<s_Resource> lstresource = new ModuleBLL().getAllResource(id);
             if(lstresource.Count>0)
             {
+                if (lstresource[0].R_Url.Contains("/"))
+                {
+                    String controller_name = lstresource[0].R_Url.Split('/')[0];
+                    String action_name = lstresource[0].R_Url.Split('/')[1];
+
+                    lstresource[0].Controller_Name = controller_name;
+                    lstresource[0].Controller_Name = action_name;
+                }
+                else
+                {
+                    lstresource[0].Controller_Name = "";
+                    lstresource[0].Controller_Name = "";
+                }
                 return PartialView(lstresource[0]);
             }
             else
             {
+
                 appid = appid.Length < 2 ? "0" + appid : appid;
                 return PartialView(new s_Resource {R_M_ID=appid,Parent_R_ID=(Parent_ID==null?"0":Parent_ID) });
             }
@@ -58,6 +72,15 @@ namespace RSLERP.Controllers.SecurityNSettings.Settings
         [HttpPost]
         public ActionResult ChangeResource(s_Resource model)
         {
+
+            if (model.Controller_Name != "")
+            {
+                model.R_Url = model.Controller_Name + "/" + model.Action_Name;
+            }
+            if(model.parent_resource_id>0)
+            {
+                model.Parent_R_ID = ""+model.parent_resource_id;
+            }
             if(Request.Form["R_DisplayName_id"] !=null)
             {
                 string parentModeulID = Request.Form["R_DisplayName_id"].ToString();

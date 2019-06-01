@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using RSLERP.DataManager.Entity;
 using System.Web;
+using System.Data.Entity.Validation;
 
 namespace RSLERP.DataManager
 {
@@ -17,8 +18,10 @@ namespace RSLERP.DataManager
         }
         public override int SaveChanges()
         {
-            OnBeforeSaving();
-            return base.SaveChanges();
+            
+                OnBeforeSaving();
+                return base.SaveChanges();
+          
         }
        
 
@@ -36,18 +39,20 @@ namespace RSLERP.DataManager
 
         public DbSet<RolePermission> RolePermissions { get; set; }
 
+        public DbSet<CompanyUser> CompanyUsers { get; set; }
+
+        public DbSet<UserRole> UserRoles { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
             int app_id = 0;
             int company_id = 0;
-
-            app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
-            ApplicationState appState = new DBContext().ApplicationStates.Find(app_id);
-          
+            
             try
             {
-              
+                app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
+                ApplicationState appState = new DBContext().ApplicationStates.Find(app_id);
                 user_id = appState.user_id;
                 company_id = appState.company_id;
             }
@@ -64,6 +69,7 @@ namespace RSLERP.DataManager
                     ((IBaseModel)entity.Entity).created_by = user_id;
                 }
                 ((IBaseModel)entity.Entity).CompanyId = company_id;
+                ((IBaseModel)entity.Entity).CompanyId = app_id;
                 ((IBaseModel)entity.Entity).modified_at = DateTime.Now;
                 ((IBaseModel)entity.Entity).modified_by = user_id;
             }

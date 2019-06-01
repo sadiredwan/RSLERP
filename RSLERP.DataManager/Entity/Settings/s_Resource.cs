@@ -24,13 +24,19 @@ namespace RSLERP.DataManager.Entity
         public string R_SM_ID { get; set; }
         public string R_Url { get; set; }
 
+        public string Controller_Name { get; set; }
+
+        public string Action_Name { get; set; }
+
+        public int parent_resource_id { get; set; }
+
         public string Parent_R_ID { get; set; }
         public bool Is_Menu { get; set; }
 
         public int R_Order { get; set; }
 
         public int Menu_Order { get; set; }
-
+        
         public string icon { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
