@@ -10,13 +10,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Employee
+            Company
             @*<small>Preview</small>*@
         </h1>
         <ol class="breadcrumb">
             <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="~/Views/Employee">Employees</a></li>
-            <li class="active">Employee Add/Edit</li>
+            <li><a href="~/Views/Compant">Company</a></li>
+            <li class="active">Company Add/Edit</li>
         </ol>
     </section>
 
@@ -36,20 +36,30 @@
                     @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
-                        <div class="box-body">
-                            <input type="hidden" name="VM_COMPANE.c_ID" value="@Model.VM_COMPANE.c_ID" />
-                        
-                            <div class="form-group">
-                                <label class="control-label">Name</label>
-                                <input type="text" class="form-control" name="VM_COMPANE.c_Name" id="inputEmail3" placeholder="Name" value="@Model.VM_COMPANE.c_Name">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Address</label>
-                                <input type="text" class="form-control" name="VM_COMPANE.c_Address" id="input3" placeholder="Address" value="@Model.VM_COMPANE.c_Address">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Address")
-                            </div>
+                    <div class="box-body">
+                        <input type="hidden" name="VM_COMPANE.c_ID" value="@Model.VM_COMPANE.c_ID" />
+
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <input type="text" class="form-control" name="VM_COMPANE.c_Name" id="input_companyname" placeholder="Name" value="@Model.VM_COMPANE.c_Name">
+                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="text" class="form-control" name="VM_COMPANE.c_Email" id="input_companyemail" placeholder="Email" value="@Model.VM_COMPANE.c_Email">
+                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Email")
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input type="text" class="form-control" name="VM_COMPANE.c_Address" id="input_companyaddress" placeholder="Address" value="@Model.VM_COMPANE.c_Address">
+                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Address")
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Remarks</label>
+                            <input type="text" class="form-control" name="VM_COMPANE.c_Remarks" id="input_companyremarks" placeholder="Remarks" value="@Model.VM_COMPANE.c_Remarks">
+                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Remarks")
+                        </div>
+                    </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">@(Model.VM_COMPANE.c_ID == 0 ? "Save" : "Update")</button>

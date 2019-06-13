@@ -27,6 +27,8 @@ namespace RSLERP.DataManager
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Department> Departments { get; set; }
+
         public DbSet<Resource> Resources { get; set; }
 
         public DbSet<Module> Modules { get; set; }

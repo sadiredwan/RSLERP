@@ -31,7 +31,9 @@ namespace RSLERP.DataManager.Entity
         public int? created_by { get; set; }
         public DateTime? created_at { get; set; }
         public int? modified_by { get; set; }
-        public DateTime? modified_at { get; set; }        public int? app_id { get; set; }
-        
+        public DateTime? modified_at { get; set; }
+        public int? app_id { get; set; }
+
+
     }
 }

@@ -8,7 +8,7 @@
 <div class="content-wrapper">
 
     <section class="content-header">
-        <h1>Company</h1>
+        <h1>Department</h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -18,7 +18,7 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
-                        <h3 class="box-title">Company</h3>
+                        <h3 class="box-title">Department</h3>
                         <a class="btn btn-primary pull-right" href="@Url.Action("load",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())"><span class="fa fa-plus"></span> Add</a>
                         <div class="box-tools">
                         </div>
@@ -29,18 +29,18 @@
                         <table id="example2" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Company ID</th>
-                                    <th>Company Name</th>
+                                    <th>Department ID</th>
+                                    <th>Department Name</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
-                            @foreach (Company secrl in Model.VM_COMPANIES)
+                            @foreach (Department secrl in Model.VM_DEPARTMENTS)
                             {
                                 <tr>
-                                    <td>@secrl.c_ID</td>
-                                    <td>@secrl.c_Name</td>
+                                    <td>@secrl.id</td>
+                                    <td>@secrl.name</td>
 
-                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.c_ID"><span class="fa fa-pencil"></span></a></td>
+                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.id"><span class="fa fa-pencil"></span></a></td>
                                 </tr>
                             }
                         </table>
@@ -55,13 +55,13 @@
         </div>
     </section>
 
-
-
 </div>
+
 
 @section masterJs
 {
     <script>
+
         $(function () {
             $('#example2').DataTable({
             'paging': true,
@@ -72,5 +72,7 @@
             'autoWidth': true
             })
         })
+
+     
     </script>
 }
