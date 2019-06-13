@@ -27,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -222,6 +223,7 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\DepartmentController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolesController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
@@ -8995,6 +8997,8 @@
     <Content Include="Views\Users\load.cshtml" />
     <Content Include="Views\Users\LoadPassowrdChange.cshtml" />
     <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Department\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

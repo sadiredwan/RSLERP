@@ -52,6 +52,10 @@ namespace RSLERP.Models
 
         public Company VM_COMPANE { get; set; }
 
+        public List<Department> VM_DEPARTMENTS { get; set; }
+
+        public Department VM_DEPARTMENT { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }
