@@ -27,17 +27,21 @@ namespace RSLERP.DataManager
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Currency> Currencies { get; set; }
+
         public DbSet<Department> Departments { get; set; }
+
+        public DbSet<Financialyear> Financialyears { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
 
         public DbSet<Module> Modules { get; set; }
 
-
         public DbSet<Role> Roles { get; set; }
 
         public DbSet<ApplicationState> ApplicationStates { get; set; }
-
 
         public DbSet<RolePermission> RolePermissions { get; set; }
 

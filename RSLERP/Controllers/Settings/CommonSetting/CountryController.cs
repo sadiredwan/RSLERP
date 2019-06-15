@@ -11,77 +11,73 @@ using static RSLERP.DataManager.Utility;
 
 namespace RSLERP.Controllers.Settings
 {
-    public class CompanyController : Controller
+    public class CountryController : Controller
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
         /// Index page 
-        /// for show all Companys list
+        /// for show all Country list
         /// </summary>
         /// <returns></returns>
-        // GET: Company
+        // GET: Country
         public ActionResult Index()
         {
 
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
-               
             }
-                vmdl.VM_COMPANIES = new DBContext().Companies.ToList();
-            
-            
+            vmdl.VM_COUNTRIES = new DBContext().Countries.ToList();
+
             return View(vmdl);
         }
 
         /// <summary>
-        /// Create Page for Company 
+        /// Create Page for Country 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult load(String id)
         {
             //Get Current UserName
-           // int user_id = Convert.ToInt32(User.Identity.Name);
+            //int user_id = Convert.ToInt32(User.Identity.Name);
             //Current Compamy
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
             //Set  Message
             String message = "";
 
-
-            int dID = Convert.ToInt32(id);
-
+            int cnID = Convert.ToInt32(id);
 
             //pass model to view
-            Company mdlCompany = new Company();
+            Country mdlCountry = new Country();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Company already exist
-                if (new DBContext().Companies.ToList().FindAll(x => x.c_ID == dID).Count > 0)
+                //check if Country already exist
+                if (new DBContext().Countries.ToList().FindAll(x => x.id == cnID).Count > 0)
                 {
-                    //pass model to view with Company info
-                    mdlCompany = new DBContext().Companies.Find(dID);
+                    //pass model to view with Country info
+                    mdlCountry = new DBContext().Countries.Find(cnID);
                 }
             }
 
             //Check Temp error or successmessage 
-            if (TempData["ViewModel"] !=null)
+            if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
             else
             {
-                vmdl.VM_COMPANE = mdlCompany;
+                vmdl.VM_COUNTRY = mdlCountry;
             }
-            
+
             return View(vmdl);
         }
 
         /// <summary>
-        /// Store Company 
+        /// Store Country 
         /// Create or Update
         /// </summary>
         /// <param name="vmdl"></param>
@@ -93,14 +89,14 @@ namespace RSLERP.Controllers.Settings
             {
 
                 //check if already exist then update
-                if (new DBContext().Companies.ToList().FindAll(x => x.c_ID == vmdl.VM_COMPANE.c_ID).Count > 0)
+                if (new DBContext().Countries.ToList().FindAll(x => x.id == vmdl.VM_COUNTRY.id).Count > 0)
                 {
-                    //Update Company
-                    //CompanyMdl.updated_at = DateTime.Now;
+                    //Update Country
+                    //VM_COUNTRY.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Companies.Attach(vmdl.VM_COMPANE);
-                        contxt.Entry(vmdl.VM_COMPANE).State = EntityState.Modified;
+                        contxt.Countries.Attach(vmdl.VM_COUNTRY);
+                        contxt.Entry(vmdl.VM_COUNTRY).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
@@ -108,18 +104,18 @@ namespace RSLERP.Controllers.Settings
                 }
                 else
                 {
-                    //Add new Company
+                    //Add new Country
                     using (var contxt = new DBContext())
                     {
-                      
-                        contxt.Companies.Add(vmdl.VM_COMPANE);
+
+                        contxt.Countries.Add(vmdl.VM_COUNTRY);
                         contxt.SaveChanges();
 
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
                 TempData["ViewModel"] = vmdl;
-                return RedirectToAction("index",vmdl);
+                return RedirectToAction("index", vmdl);
             }
             else
             {
@@ -130,10 +126,10 @@ namespace RSLERP.Controllers.Settings
                 //redirect back to Registration page 
                 return RedirectToAction("load");
             }
-           
+
         }
 
 
-       
+
     }
 }

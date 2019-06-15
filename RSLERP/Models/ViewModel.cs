@@ -44,10 +44,6 @@ namespace RSLERP.Models
 
         public List<s_ApplicationState> VM_APPLICATIONS { get; set; }
 
-        public CmnTransactionalYears VM_FINANCIALYEAR{ get; set; }
-
-        public List<CmnTransactionalYears> VM_FINANCIALYEARS { get; set; }
-
         public List<Company> VM_COMPANIES { get; set; }
 
         public Company VM_COMPANE { get; set; }
@@ -56,15 +52,25 @@ namespace RSLERP.Models
 
         public Department VM_DEPARTMENT { get; set; }
 
+        public List<Financialyear> VM_FINANCIALYEARS { get; set; }
+
+        public Financialyear VM_FINANCIALYEAR { get; set; }
+
+        public List<Country> VM_COUNTRIES { get; set; }
+
+        public Country VM_COUNTRY { get; set; }
+
+        public List<Currency> VM_CURRENCIES { get; set; }
+
+        public Currency VM_CURRENCY { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }
 
-
         public Module VM_MDULE { get; set; }
 
         public List<Module> VM_MDULES { get; set; }
-
 
         public Resource VM_MODULE_RESOURCE { get; set; }
 

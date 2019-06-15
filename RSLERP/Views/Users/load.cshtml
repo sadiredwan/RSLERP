@@ -38,9 +38,9 @@
                                 <input type="text" class="form-control" name="VM_COMPANY_USER.u_LoginName" id="inputEmail3" placeholder="User Name" value="@Model.VM_COMPANY_USER.u_LoginName">
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANY_USER.u_LoginName")
                             </div>
-                            @if (Model.VM_COMPANY_USER.u_ID <1)
+                            @if (Model.VM_COMPANY_USER.u_ID < 1)
                             {
-                                
+
                                 <div class="form-group">
                                     <label class="control-label">Password</label>
                                     <input type="password" class="form-control" name="VM_COMPANY_USER.u_Password" id="inputEmail3" placeholder="passsword" value="@Model.VM_COMPANY_USER.u_Password">
@@ -60,8 +60,7 @@
                             }
                             <div class="checkbox">
                                 <label>
-                                    @UserHelper.CheckBox("view", Model.VM_COMPANY_USER.u_Status,"statusID", "VM_COMPANY_USER.u_Status", "statusID") Active
-
+                                    @UserHelper.CheckBox("view", Model.VM_COMPANY_USER.u_Status, "statusID", "VM_COMPANY_USER.u_Status", "statusID") Active
                                 </label>
                             </div>
                         </div>
@@ -87,17 +86,17 @@
                 x.type = "password";
             }
         }
-            $(function () {
+        $(function () {
 
-                $('.select2').select2();
+            $('.select2').select2();
 
-            });
+        });
 
 
-            $('.datepicker').datepicker({
-                format: 'dd MM yyyy',
-                autoclose: true
-            });
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
     </script>
 }
 
