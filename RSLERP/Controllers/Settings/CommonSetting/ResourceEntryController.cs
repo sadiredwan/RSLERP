@@ -51,12 +51,12 @@ namespace RSLERP.Controllers.SecurityNSettings.Settings
                     String action_name = lstresource[0].R_Url.Split('/')[1];
 
                     lstresource[0].Controller_Name = controller_name;
-                    lstresource[0].Controller_Name = action_name;
+                    lstresource[0].Action_Name = action_name;
                 }
                 else
                 {
                     lstresource[0].Controller_Name = "";
-                    lstresource[0].Controller_Name = "";
+                    lstresource[0].Action_Name = "";
                 }
                 return PartialView(lstresource[0]);
             }

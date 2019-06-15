@@ -326,6 +326,7 @@ C:\Workspace\rslerp\RSLERP\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Workspace\rslerp\RSLERP\bin\Microsoft.Web.Infrastructure.dll
 C:\Workspace\rslerp\RSLERP\bin\Newtonsoft.Json.dll
 C:\Workspace\rslerp\RSLERP\bin\Owin.dll
+C:\Workspace\rslerp\RSLERP\bin\RSLERP.DataManager.dll
 C:\Workspace\rslerp\RSLERP\bin\System.Web.Helpers.dll
 C:\Workspace\rslerp\RSLERP\bin\System.Web.Mvc.dll
 C:\Workspace\rslerp\RSLERP\bin\System.Web.Optimization.dll
@@ -370,4 +371,3 @@ C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.csproj.CoreCompileInputs.cache
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.csproj.CopyComplete
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.dll
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.pdb
-C:\Workspace\rslerp\RSLERP\bin\RSLERP.DataManager.dll

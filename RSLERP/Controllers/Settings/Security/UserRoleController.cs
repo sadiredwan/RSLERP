@@ -1,4 +1,5 @@
-﻿using RSLERP.DataManager;
+﻿using RSLERP.Authorization;
+using RSLERP.DataManager;
 using RSLERP.DataManager.Entity;
 using RSLERP.Models;
 using System;
@@ -21,6 +22,7 @@ namespace RSLERP.Controllers.Settings.Security
         /// </summary>
         /// <returns></returns>
         // GET: Company
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] {AccessLevel.View})]
         public ActionResult Index()
         {
 
@@ -55,16 +57,17 @@ namespace RSLERP.Controllers.Settings.Security
 
 
             //pass model to view
-            CompanyUser mdlCompany = new CompanyUser();
+            UserRole mdl = new UserRole();
 
             //Check if id doesnot null
             if (id != null)
             {
                 //check if Company already exist
-                if (new DBContext().CompanyUsers.ToList().FindAll(x => x.u_ID == dID).Count > 0)
+                if (new DBContext().UserRoles.ToList().FindAll(x => x.ur_u_ID == dID).Count > 0)
                 {
                     //pass model to view with Company info
-                    mdlCompany = new DBContext().CompanyUsers.Find(dID);
+                    mdl = new DBContext().UserRoles.Where(x=>x.ur_u_ID==dID).FirstOrDefault();
+                    vmdl.VM_ROLE = new DBContext().Roles.Find(mdl.ur_rl_ID);
                 }
             }
 
@@ -72,15 +75,17 @@ namespace RSLERP.Controllers.Settings.Security
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
+                vmdl.VM_ROLE = new Role();
             }
             else
             {
-                vmdl.VM_COMPANY_USER = mdlCompany;
+                vmdl.VM_USER_ROLE = mdl;
             }
 
+            ApplicationState app = RSLERPApplication.CurrentState();
 
-
-
+            vmdl.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(dID);
+            vmdl.VM_ROLES = new DBContext().Roles.Where(x => x.CompanyId == app.company_id).ToList();
             return View(vmdl);
         }
 
@@ -100,38 +105,29 @@ namespace RSLERP.Controllers.Settings.Security
             if (ModelState.IsValid)
             {
 
-                //check if already exist then update
-                if (new DBContext().CompanyUsers.ToList().FindAll(x => x.u_ID == vmdl.VM_COMPANY_USER.u_ID).Count > 0)
+                //check if already exist then delete
+                if (new DBContext().UserRoles.Where(x => x.ur_u_ID == vmdl.VM_USER_ROLE.ur_u_ID).Count() > 0)
                 {
-                    CompanyUser findUser = new DBContext().CompanyUsers.Find(vmdl.VM_COMPANY_USER.u_ID);
-                    vmdl.VM_COMPANY_USER.u_ParentUserID = findUser.u_ParentUserID;
-                    vmdl.VM_COMPANY_USER.u_Type = 0;
-                    //Update Company
-                    //CompanyMdl.updated_at = DateTime.Now;
+                    UserRole findUserROle = new DBContext().UserRoles.Where(x => x.ur_u_ID == vmdl.VM_USER_ROLE.ur_u_ID).FirstOrDefault();
+                    //Delete The Designation
                     using (var contxt = new DBContext())
                     {
-                        contxt.CompanyUsers.Attach(vmdl.VM_COMPANY_USER);
-                        contxt.Entry(vmdl.VM_COMPANY_USER).State = EntityState.Modified;
+                        contxt.Entry(findUserROle).State = EntityState.Deleted;
                         contxt.SaveChanges();
-
                     }
-                    GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
-                else
-                {
-                    vmdl.VM_COMPANY_USER.u_Password = vmdl.VM_COMPANY_USER.confirm_password = util.Encode(vmdl.VM_COMPANY_USER.u_Password);
+                   
+                  
                     //Add new Company
                     using (var contxt = new DBContext())
                     {
-                        vmdl.VM_COMPANY_USER.u_Type = 0;
-                        vmdl.VM_COMPANY_USER.u_ParentUserID = CurentApplication.CurrentState().user_id;
-                        contxt.CompanyUsers.Add(vmdl.VM_COMPANY_USER);
+                        contxt.UserRoles.Add(vmdl.VM_USER_ROLE);
                         contxt.SaveChanges();
 
                     }
 
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
-                }
+                
                 TempData["ViewModel"] = vmdl;
                 return RedirectToAction("index", vmdl);
             }

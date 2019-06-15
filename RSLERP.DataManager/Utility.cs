@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web;
+using RSLERP.DataManager;
+
 namespace RSLERP.DataManager
 {
     public class Utility
@@ -142,15 +144,7 @@ namespace RSLERP.DataManager
             }
             return sb.ToString();
         }
-
-        public static class Application
-        {
-            public static ApplicationState CurrentState()
-            {
-                int app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
-                return new DBContext().ApplicationStates.Find(app_id);
-            }
-        }
+        
 
         public static class errorstate
         {
@@ -185,9 +179,10 @@ namespace RSLERP.DataManager
 
         }
 
+      
     }
 
-    public static class CurentApplication
+    public static class RSLERPApplication
     {
         public static ApplicationState CurrentState()
         {
@@ -195,4 +190,6 @@ namespace RSLERP.DataManager
             return new DBContext().ApplicationStates.Find(app_id);
         }
     }
+
+    
 }

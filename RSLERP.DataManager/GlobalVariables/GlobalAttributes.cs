@@ -72,7 +72,7 @@ namespace RSLERP.DataManager
                         pro.SetValue(model, status, null);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
 
                 }

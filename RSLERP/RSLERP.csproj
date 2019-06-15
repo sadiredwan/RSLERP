@@ -207,7 +207,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Authorization\RSLERPAuthorize.cs" />
+    <Compile Include="Authorization\SecurityAuthAuthorize.cs" />
     <Compile Include="Controllers\AccountFinance\AccountFinanceController.cs" />
     <Compile Include="Controllers\Accounts\AccountController.cs" />
     <Compile Include="Controllers\Accounts\SigninCompanyController.cs" />
@@ -223,7 +223,10 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\CountryController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\CurrencyController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\DepartmentController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\FinancialyearController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolesController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
@@ -8999,6 +9002,12 @@
     <Content Include="Views\UserRole\Index.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Department\load.cshtml" />
+    <Content Include="Views\Financialyear\Index.cshtml" />
+    <Content Include="Views\Financialyear\load.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\load.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Currency\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
