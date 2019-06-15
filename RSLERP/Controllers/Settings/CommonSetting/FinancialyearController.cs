@@ -11,38 +11,38 @@ using static RSLERP.DataManager.Utility;
 
 namespace RSLERP.Controllers.Settings
 {
-    public class CompanyController : Controller
+    public class FinancialyearController : Controller
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
         /// Index page 
-        /// for show all Companys list
+        /// for show all Financialyear list
         /// </summary>
         /// <returns></returns>
-        // GET: Company
+        // GET: Financialyear
         public ActionResult Index()
         {
 
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
-               
+
             }
-                vmdl.VM_COMPANIES = new DBContext().Companies.ToList();
-            
-            
+            vmdl.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
+
+
             return View(vmdl);
         }
 
         /// <summary>
-        /// Create Page for Company 
+        /// Create Page for Financialyear 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult load(String id)
         {
             //Get Current UserName
-           // int user_id = Convert.ToInt32(User.Identity.Name);
+            // int user_id = Convert.ToInt32(User.Identity.Name);
             //Current Compamy
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
@@ -50,38 +50,38 @@ namespace RSLERP.Controllers.Settings
             String message = "";
 
 
-            int dID = Convert.ToInt32(id);
+            int fID = Convert.ToInt32(id);
 
 
             //pass model to view
-            Company mdlCompany = new Company();
+            Financialyear mdlFinancialyear = new Financialyear();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Company already exist
-                if (new DBContext().Companies.ToList().FindAll(x => x.c_ID == dID).Count > 0)
+                //check if Financialyear already exist
+                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == fID).Count > 0)
                 {
-                    //pass model to view with Company info
-                    mdlCompany = new DBContext().Companies.Find(dID);
+                    //pass model to view with Financialyear info
+                    mdlFinancialyear = new DBContext().Financialyears.Find(fID);
                 }
             }
 
             //Check Temp error or successmessage 
-            if (TempData["ViewModel"] !=null)
+            if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
             else
             {
-                vmdl.VM_COMPANE = mdlCompany;
+                vmdl.VM_FINANCIALYEAR = mdlFinancialyear;
             }
-            
+
             return View(vmdl);
         }
 
         /// <summary>
-        /// Store Company 
+        /// Store Financialyear 
         /// Create or Update
         /// </summary>
         /// <param name="vmdl"></param>
@@ -93,14 +93,14 @@ namespace RSLERP.Controllers.Settings
             {
 
                 //check if already exist then update
-                if (new DBContext().Companies.ToList().FindAll(x => x.c_ID == vmdl.VM_COMPANE.c_ID).Count > 0)
+                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == vmdl.VM_FINANCIALYEAR.id).Count > 0)
                 {
-                    //Update Company
-                    //CompanyMdl.updated_at = DateTime.Now;
+                    //Update Financialyear
+                    //VM_FINANCIALYEAR.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Companies.Attach(vmdl.VM_COMPANE);
-                        contxt.Entry(vmdl.VM_COMPANE).State = EntityState.Modified;
+                        contxt.Financialyears.Attach(vmdl.VM_FINANCIALYEAR);
+                        contxt.Entry(vmdl.VM_FINANCIALYEAR).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
@@ -108,18 +108,18 @@ namespace RSLERP.Controllers.Settings
                 }
                 else
                 {
-                    //Add new Company
+                    //Add new Financialyear
                     using (var contxt = new DBContext())
                     {
-                      
-                        contxt.Companies.Add(vmdl.VM_COMPANE);
+
+                        contxt.Financialyears.Add(vmdl.VM_FINANCIALYEAR);
                         contxt.SaveChanges();
 
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
                 TempData["ViewModel"] = vmdl;
-                return RedirectToAction("index",vmdl);
+                return RedirectToAction("index", vmdl);
             }
             else
             {
@@ -130,10 +130,10 @@ namespace RSLERP.Controllers.Settings
                 //redirect back to Registration page 
                 return RedirectToAction("load");
             }
-           
+
         }
 
 
-       
+
     }
 }

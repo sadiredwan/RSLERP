@@ -39,13 +39,13 @@ namespace RSLERP.Controllers.Home
                 List<s_User> usrs = new List<s_User>();
                 vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];// new SecurityUserAccessBLL().GetUserByUserID(uID).FirstOrDefault();
                 vm.VM_COMPANY=(s_Company)HttpContext.Application[GLobalSessionName.GLOBAL_COMPANY_GROUP];
-                vm.VM_FINANCIALYEAR=(CmnTransactionalYears)HttpContext.Application[GLobalSessionName.GLOBAL_TRANSECTIONAL_YEAR];
+                //vm.VM_FINANCIALYEAR=(CmnTransactionalYears)HttpContext.Application[GLobalSessionName.GLOBAL_TRANSECTIONAL_YEAR];
             }
             else
             {
                 vm.VM_USER = new s_User();
                 vm.VM_COMPANY = new s_Company();
-                vm.VM_FINANCIALYEAR = new CmnTransactionalYears();
+                //vm.VM_FINANCIALYEAR = new CmnTransactionalYears();
             }
 
             return PartialView(vm);

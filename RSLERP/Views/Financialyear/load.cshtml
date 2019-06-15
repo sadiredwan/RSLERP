@@ -1,0 +1,110 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Financial Year
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/Views/Financialyear/">Financial Year</a></li>
+            <li class="active">Financial Year Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/Department" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_FINANCIALYEAR.id" value="@Model.VM_FINANCIALYEAR.id" />
+
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="VM_FINANCIALYEAR.name" id="dept_inputname" placeholder="Name" value="@Model.VM_FINANCIALYEAR.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_FINANCIALYEAR.name")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Start Date:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input readonly="readonly" type="text" class="form-control datepicker pull-right" id="datepicker" name="VM_FINANCIALYEAR.opening_date" value="@((Model.VM_FINANCIALYEAR.opening_date == null || Convert.ToDateTime(Model.VM_FINANCIALYEAR.opening_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_FINANCIALYEAR.opening_date).ToString("dd MMMM yyyy"))">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="form-group">
+                                <label>End Date:</label>
+
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input readonly="readonly" type="text" class="form-control pull-right datepicker" id="datepicker2" name="VM_FINANCIALYEAR.closing_date" value="@((Model.VM_FINANCIALYEAR.closing_date == null || Convert.ToDateTime(Model.VM_FINANCIALYEAR.closing_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_FINANCIALYEAR.closing_date).ToString("dd MMMM yyyy"))">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_FINANCIALYEAR.closing_date")
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    @UserHelper.CheckBox("view", Model.VM_FINANCIALYEAR.status, "statusID", "VM_FINANCIALYEAR.status", "statusID") Active
+                                </label>
+                            </div>
+
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_FINANCIALYEAR.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
