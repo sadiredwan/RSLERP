@@ -47,9 +47,7 @@ namespace RSLERP.Controllers.Settings
             //Set  Message
             String message = "";
 
-
             int cnID = Convert.ToInt32(id);
-
 
             //pass model to view
             Country mdlCountry = new Country();
@@ -60,7 +58,7 @@ namespace RSLERP.Controllers.Settings
                 //check if Country already exist
                 if (new DBContext().Countries.ToList().FindAll(x => x.id == cnID).Count > 0)
                 {
-                    //pass model to view with Financialyear info
+                    //pass model to view with Country info
                     mdlCountry = new DBContext().Countries.Find(cnID);
                 }
             }

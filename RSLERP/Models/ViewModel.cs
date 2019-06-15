@@ -60,15 +60,17 @@ namespace RSLERP.Models
 
         public Country VM_COUNTRY { get; set; }
 
+        public List<Currency> VM_CURRENCIES { get; set; }
+
+        public Currency VM_CURRENCY { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }
 
-
         public Module VM_MDULE { get; set; }
 
         public List<Module> VM_MDULES { get; set; }
-
 
         public Resource VM_MODULE_RESOURCE { get; set; }
 

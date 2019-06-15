@@ -29,6 +29,8 @@ namespace RSLERP.DataManager
 
         public DbSet<Country> Countries { get; set; }
 
+        public DbSet<Currency> Currencies { get; set; }
+
         public DbSet<Department> Departments { get; set; }
 
         public DbSet<Financialyear> Financialyears { get; set; }

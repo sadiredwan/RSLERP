@@ -11,15 +11,15 @@ using static RSLERP.DataManager.Utility;
 
 namespace RSLERP.Controllers.Settings
 {
-    public class FinancialyearController : Controller
+    public class CurrencyController : Controller
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
         /// Index page 
-        /// for show all Financialyear list
+        /// for show all Currency list
         /// </summary>
         /// <returns></returns>
-        // GET: Financialyear
+        // GET: Currency
         public ActionResult Index()
         {
 
@@ -27,13 +27,13 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
-            vmdl.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
+            vmdl.VM_CURRENCIES = new DBContext().Currencies.ToList();
 
             return View(vmdl);
         }
 
         /// <summary>
-        /// Create Page for Financialyear 
+        /// Create Page for Currency 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -47,19 +47,19 @@ namespace RSLERP.Controllers.Settings
             //Set  Message
             String message = "";
 
-            int fID = Convert.ToInt32(id);
+            int crID = Convert.ToInt32(id);
 
             //pass model to view
-            Financialyear mdlFinancialyear = new Financialyear();
+            Currency mdlCurrency = new Currency();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Financialyear already exist
-                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == fID).Count > 0)
+                //check if Currency already exist
+                if (new DBContext().Currencies.ToList().FindAll(x => x.id == crID).Count > 0)
                 {
-                    //pass model to view with Financialyear info
-                    mdlFinancialyear = new DBContext().Financialyears.Find(fID);
+                    //pass model to view with Currency info
+                    mdlCurrency = new DBContext().Currencies.Find(crID);
                 }
             }
 
@@ -70,14 +70,14 @@ namespace RSLERP.Controllers.Settings
             }
             else
             {
-                vmdl.VM_FINANCIALYEAR = mdlFinancialyear;
+                vmdl.VM_CURRENCY = mdlCurrency;
             }
 
             return View(vmdl);
         }
 
         /// <summary>
-        /// Store Financialyear 
+        /// Store Currency 
         /// Create or Update
         /// </summary>
         /// <param name="vmdl"></param>
@@ -89,14 +89,14 @@ namespace RSLERP.Controllers.Settings
             {
 
                 //check if already exist then update
-                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == vmdl.VM_FINANCIALYEAR.id).Count > 0)
+                if (new DBContext().Currencies.ToList().FindAll(x => x.id == vmdl.VM_CURRENCY.id).Count > 0)
                 {
-                    //Update Financialyear
-                    //VM_FINANCIALYEAR.updated_at = DateTime.Now;
+                    //Update Currency
+                    //VM_COUNTRY.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Financialyears.Attach(vmdl.VM_FINANCIALYEAR);
-                        contxt.Entry(vmdl.VM_FINANCIALYEAR).State = EntityState.Modified;
+                        contxt.Currencies.Attach(vmdl.VM_CURRENCY);
+                        contxt.Entry(vmdl.VM_CURRENCY).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
@@ -104,11 +104,11 @@ namespace RSLERP.Controllers.Settings
                 }
                 else
                 {
-                    //Add new Financialyear
+                    //Add new Currency
                     using (var contxt = new DBContext())
                     {
 
-                        contxt.Financialyears.Add(vmdl.VM_FINANCIALYEAR);
+                        contxt.Currencies.Add(vmdl.VM_CURRENCY);
                         contxt.SaveChanges();
 
                     }
