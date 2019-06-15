@@ -83,6 +83,9 @@ namespace RSLERP.Models
         public List<UserRole> VM_USER_ROLES { get; set; }
 
 
+        public CompanyModule VM_COMPANY_MODULE { get; set; }
+
+        public List<CompanyModule> VM_COMPANY_MODULES { get; set; }
 
 
     }

@@ -45,6 +45,8 @@ namespace RSLERP.DataManager
 
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<CompanyModule> CompanyModules { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

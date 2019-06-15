@@ -101,6 +101,7 @@
     <Compile Include="Entity\Settings\ApplicationState.cs" />
     <Compile Include="Entity\Settings\AutoComplete.cs" />
     <Compile Include="Entity\DynamicClass.cs" />
+    <Compile Include="Entity\Settings\CompanyModule.cs" />
     <Compile Include="Entity\Settings\Module.cs" />
     <Compile Include="Entity\Settings\PriorityLevel.cs" />
     <Compile Include="Entity\Settings\Resource.cs" />

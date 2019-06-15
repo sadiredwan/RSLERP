@@ -224,6 +224,7 @@
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\DepartmentController.cs" />
+    <Compile Include="Controllers\Settings\Mapping\CompanyModuleController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolesController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
@@ -8998,7 +8999,10 @@
     <Content Include="Views\Users\LoadPassowrdChange.cshtml" />
     <Content Include="Views\UserRole\Index.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
-    <Content Include="Views\Department\load.cshtml" />  </ItemGroup>
+    <Content Include="Views\Department\load.cshtml" />
+    <Content Include="Views\CompanyModule\Index.cshtml" />
+    <Content Include="Views\CompanyModule\PartialCompanyModule.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CRM\" />

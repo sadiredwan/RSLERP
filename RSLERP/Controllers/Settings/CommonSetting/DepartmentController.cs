@@ -93,6 +93,7 @@ namespace RSLERP.Controllers.Settings {
                 //check if already exist then update
                 if (new DBContext().Departments.ToList().FindAll(x => x.id == vmdl.VM_DEPARTMENT.id).Count > 0)
                 {
+                   
                     //Update department
                     //updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
