@@ -56,6 +56,10 @@ namespace RSLERP.Models
 
         public Financialyear VM_FINANCIALYEAR { get; set; }
 
+        public List<Country> VM_COUNTRIES { get; set; }
+
+        public Country VM_COUNTRY { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }

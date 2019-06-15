@@ -11,15 +11,15 @@ using static RSLERP.DataManager.Utility;
 
 namespace RSLERP.Controllers.Settings
 {
-    public class FinancialyearController : Controller
+    public class CountryController : Controller
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
         /// Index page 
-        /// for show all Financialyear list
+        /// for show all Country list
         /// </summary>
         /// <returns></returns>
-        // GET: Financialyear
+        // GET: Country
         public ActionResult Index()
         {
 
@@ -27,13 +27,13 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
-            vmdl.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
+            vmdl.VM_COUNTRIES = new DBContext().Countries.ToList();
 
             return View(vmdl);
         }
 
         /// <summary>
-        /// Create Page for Financialyear 
+        /// Create Page for Country 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -48,20 +48,20 @@ namespace RSLERP.Controllers.Settings
             String message = "";
 
 
-            int fID = Convert.ToInt32(id);
+            int cnID = Convert.ToInt32(id);
 
 
             //pass model to view
-            Financialyear mdlFinancialyear = new Financialyear();
+            Country mdlCountry = new Country();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Financialyear already exist
-                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == fID).Count > 0)
+                //check if Country already exist
+                if (new DBContext().Countries.ToList().FindAll(x => x.id == cnID).Count > 0)
                 {
                     //pass model to view with Financialyear info
-                    mdlFinancialyear = new DBContext().Financialyears.Find(fID);
+                    mdlCountry = new DBContext().Countries.Find(cnID);
                 }
             }
 
@@ -72,14 +72,14 @@ namespace RSLERP.Controllers.Settings
             }
             else
             {
-                vmdl.VM_FINANCIALYEAR = mdlFinancialyear;
+                vmdl.VM_COUNTRY = mdlCountry;
             }
 
             return View(vmdl);
         }
 
         /// <summary>
-        /// Store Financialyear 
+        /// Store Country 
         /// Create or Update
         /// </summary>
         /// <param name="vmdl"></param>
@@ -91,14 +91,14 @@ namespace RSLERP.Controllers.Settings
             {
 
                 //check if already exist then update
-                if (new DBContext().Financialyears.ToList().FindAll(x => x.id == vmdl.VM_FINANCIALYEAR.id).Count > 0)
+                if (new DBContext().Countries.ToList().FindAll(x => x.id == vmdl.VM_COUNTRY.id).Count > 0)
                 {
-                    //Update Financialyear
-                    //VM_FINANCIALYEAR.updated_at = DateTime.Now;
+                    //Update Country
+                    //VM_COUNTRY.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Financialyears.Attach(vmdl.VM_FINANCIALYEAR);
-                        contxt.Entry(vmdl.VM_FINANCIALYEAR).State = EntityState.Modified;
+                        contxt.Countries.Attach(vmdl.VM_COUNTRY);
+                        contxt.Entry(vmdl.VM_COUNTRY).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
@@ -106,11 +106,11 @@ namespace RSLERP.Controllers.Settings
                 }
                 else
                 {
-                    //Add new Financialyear
+                    //Add new Country
                     using (var contxt = new DBContext())
                     {
 
-                        contxt.Financialyears.Add(vmdl.VM_FINANCIALYEAR);
+                        contxt.Countries.Add(vmdl.VM_COUNTRY);
                         contxt.SaveChanges();
 
                     }

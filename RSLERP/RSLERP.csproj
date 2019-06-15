@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\CountryController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\DepartmentController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\FinancialyearController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
@@ -9002,6 +9003,8 @@
     <Content Include="Views\Department\load.cshtml" />
     <Content Include="Views\Financialyear\Index.cshtml" />
     <Content Include="Views\Financialyear\load.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
