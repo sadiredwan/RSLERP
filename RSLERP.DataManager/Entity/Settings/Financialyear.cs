@@ -12,10 +12,10 @@ namespace RSLERP.DataManager.Entity
     [Table("s_Financialyears")]
     public class Financialyear : IBaseModel
     {
+        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int id { get; set; }
-
         [Required]
         [FinancialYearNameValidation(ErrorMessage = "Company already exists")]
         public String name { get; set; }
