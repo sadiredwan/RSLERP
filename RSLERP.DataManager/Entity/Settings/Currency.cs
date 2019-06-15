@@ -18,10 +18,10 @@ namespace RSLERP.DataManager.Entity
         [Key]
         public int id { get; set; }
         [Required]
-        [CurrencyNameValidation(ErrorMessage = "Country already exists")]
+        [CurrencyNameValidation(ErrorMessage = "Currency already exists")]
         public String name { get; set; }
         [Required]
-        [CurrencyShortNameValidation(ErrorMessage = "Country already exists")]
+        [CurrencyShortNameValidation(ErrorMessage = "Short name already exists")]
         public String short_name { get; set; }
         public bool status { get; set; }
         public String symbol { get; set; }
