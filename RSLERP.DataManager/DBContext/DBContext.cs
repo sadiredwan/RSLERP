@@ -31,6 +31,10 @@ namespace RSLERP.DataManager
 
         public DbSet<Currency> Currencies { get; set; }
 
+        public DbSet<ProjectSegment> ProjectSegments { get; set; }
+
+        public DbSet<BusinessSector> BusinessSectors { get; set; }
+
         public DbSet<Department> Departments { get; set; }
 
         public DbSet<Financialyear> Financialyears { get; set; }
@@ -48,6 +52,8 @@ namespace RSLERP.DataManager
         public DbSet<CompanyUser> CompanyUsers { get; set; }
 
         public DbSet<UserRole> UserRoles { get; set; }
+
+        public DbSet<CompanyModule> CompanyModules { get; set; }
 
         private void OnBeforeSaving()
         {

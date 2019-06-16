@@ -9,59 +9,58 @@ using System.Web;
 using System.Web.Mvc;
 using static RSLERP.DataManager.Utility;
 
-namespace RSLERP.Controllers.Settings {
-    public class DepartmentController : Controller
+namespace RSLERP.Controllers.Settings
+{
+    public class ProjectSegmentController : Controller
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
         /// Index page 
-        /// for show all Depart list
+        /// for show all Project Segment list
         /// </summary>
         /// <returns></returns>
-        // GET: Department
+        // GET: ProjectSegment
         public ActionResult Index()
         {
+
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
-
             }
-            vmdl.VM_DEPARTMENTS = new DBContext().Departments.ToList();
+            vmdl.VM_PROJECT_SEGMENTS = new DBContext().ProjectSegments.ToList();
+            vmdl.VM_BUSINESS_SECTORS = new DBContext().BusinessSectors.ToList();
 
             return View(vmdl);
         }
 
-
         /// <summary>
-        /// Create Page for Department 
+        /// Create Page for Project Segment 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult load(String id)
         {
             //Get Current UserName
-            // int user_id = Convert.ToInt32(User.Identity.Name);
+            //int user_id = Convert.ToInt32(User.Identity.Name);
             //Current Compamy
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
             //Set  Message
             String message = "";
 
-
-            int dID = Convert.ToInt32(id);
-
+            int psID = Convert.ToInt32(id);
 
             //pass model to view
-            Department mdlDepartment = new Department();
+            ProjectSegment mdlProjectSegment = new ProjectSegment();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Department already exist
-                if (new DBContext().Departments.ToList().FindAll(x => x.id == dID).Count > 0)
+                //check if Project Segment already exist
+                if (new DBContext().ProjectSegments.ToList().FindAll(x => x.id == psID).Count > 0)
                 {
-                    //pass model to view with Department info
-                    mdlDepartment = new DBContext().Departments.Find(dID);
+                    //pass model to view with Project Segment info
+                    mdlProjectSegment = new DBContext().ProjectSegments.Find(psID);
                 }
             }
 
@@ -72,44 +71,45 @@ namespace RSLERP.Controllers.Settings {
             }
             else
             {
-                vmdl.VM_DEPARTMENT = mdlDepartment;
+                vmdl.VM_PROJECT_SEGMENT = mdlProjectSegment;
             }
-
+            vmdl.VM_BUSINESS_SECTORS = new DBContext().BusinessSectors.ToList();
             return View(vmdl);
         }
 
         /// <summary>
-        /// Store Department 
+        /// Store Project Segment 
         /// Create or Update
         /// </summary>
         /// <param name="vmdl"></param>
         /// <returns></returns>
         public ActionResult store(ViewModel vmdl)
         {
-
             //Check Model state is valid or not
             if (ModelState.IsValid)
             {
+
                 //check if already exist then update
-                if (new DBContext().Departments.ToList().FindAll(x => x.id == vmdl.VM_DEPARTMENT.id).Count > 0)
+                if (new DBContext().ProjectSegments.ToList().FindAll(x => x.id == vmdl.VM_PROJECT_SEGMENT.id).Count > 0)
                 {
-                   
-                    //Update department
-                    //updated_at = DateTime.Now;
+                    //Update Project Segment
+                    //VM_PROJECT_SEGMENT.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Departments.Attach(vmdl.VM_DEPARTMENT);
-                        contxt.Entry(vmdl.VM_DEPARTMENT).State = EntityState.Modified;
+                        contxt.ProjectSegments.Attach(vmdl.VM_PROJECT_SEGMENT);
+                        contxt.Entry(vmdl.VM_PROJECT_SEGMENT).State = EntityState.Modified;
                         contxt.SaveChanges();
+
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
                 else
                 {
-                    //Add new Department
+                    //Add new Project Segment
                     using (var contxt = new DBContext())
                     {
-                        contxt.Departments.Add(vmdl.VM_DEPARTMENT);
+
+                        contxt.ProjectSegments.Add(vmdl.VM_PROJECT_SEGMENT);
                         contxt.SaveChanges();
 
                     }
@@ -129,5 +129,8 @@ namespace RSLERP.Controllers.Settings {
             }
 
         }
+
+
+
     }
 }

@@ -251,6 +251,8 @@ D:\Project\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.
 D:\Project\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 D:\Project\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 D:\Project\RSLERP\RSLERP\bin\stdole.dll
+D:\Project\RSLERP\RSLERP\bin\EntityFramework.xml
+D:\Project\RSLERP\RSLERP\bin\EntityFramework.SqlServer.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AI.DependencyCollector.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AI.Web.xml
@@ -267,8 +269,6 @@ D:\Project\RSLERP\RSLERP\bin\System.Web.WebPages.Deployment.xml
 D:\Project\RSLERP\RSLERP\bin\System.Web.WebPages.Razor.xml
 D:\Project\RSLERP\RSLERP\bin\Antlr3.Runtime.pdb
 D:\Project\RSLERP\RSLERP\bin\Newtonsoft.Json.xml
-D:\Project\RSLERP\RSLERP\bin\EntityFramework.xml
-D:\Project\RSLERP\RSLERP\bin\EntityFramework.SqlServer.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AspNet.Identity.Core.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AspNet.Identity.Owin.xml
 D:\Project\RSLERP\RSLERP\bin\Microsoft.AspNet.Identity.EntityFramework.xml
