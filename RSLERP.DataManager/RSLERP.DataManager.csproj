@@ -101,6 +101,7 @@
     <Compile Include="Entity\Settings\ApplicationState.cs" />
     <Compile Include="Entity\Settings\AutoComplete.cs" />
     <Compile Include="Entity\DynamicClass.cs" />
+    <Compile Include="Entity\Settings\BusinessSector.cs" />
     <Compile Include="Entity\Settings\CompanyModule.cs" />
     <Compile Include="Entity\Settings\Currency.cs" />
     <Compile Include="Entity\Settings\Financialyear.cs" />

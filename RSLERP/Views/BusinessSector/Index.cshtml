@@ -1,0 +1,84 @@
+﻿@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>Business Sector</h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Business Sector</h3>
+                        <a class="btn btn-primary pull-right" href="@Url.Action("load",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <table id="example2" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Remarks</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            @foreach (BusinessSector secrl in Model.VM_BUSINESS_SECTORS)
+                            {
+                                String status = secrl.status == true ? "Active" : "Inactive";
+                                <tr>
+                                    <td>@secrl.id</td>
+                                    <td>@secrl.code</td>
+                                    <td>@secrl.name</td>
+                                    <td>@secrl.remarks</td>
+                                    <td>@status</td>
+                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.id"><span class="fa fa-pencil"></span></a></td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+@section masterJs
+{
+    <script>
+
+        $(function () {
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+        })
+
+
+    </script>
+}
