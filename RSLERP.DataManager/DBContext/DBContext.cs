@@ -31,6 +31,8 @@ namespace RSLERP.DataManager
 
         public DbSet<Currency> Currencies { get; set; }
 
+        public DbSet<ProjectSegment> ProjectSegments { get; set; }
+
         public DbSet<BusinessSector> BusinessSectors { get; set; }
 
         public DbSet<Department> Departments { get; set; }

@@ -68,6 +68,10 @@ namespace RSLERP.Models
 
         public BusinessSector VM_BUSINESS_SECTOR { get; set; }
 
+        public List<ProjectSegment> VM_PROJECT_SEGMENTS { get; set; }
+
+        public ProjectSegment VM_PROJECT_SEGMENT { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }

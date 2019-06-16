@@ -108,6 +108,7 @@
     <Compile Include="Entity\Settings\Country.cs" />
     <Compile Include="Entity\Settings\Module.cs" />
     <Compile Include="Entity\Settings\PriorityLevel.cs" />
+    <Compile Include="Entity\Settings\ProjectSegment.cs" />
     <Compile Include="Entity\Settings\Resource.cs" />
     <Compile Include="Entity\Settings\Role.cs" />
     <Compile Include="Entity\Settings\RolePermission.cs" />

@@ -229,6 +229,7 @@
     <Compile Include="Controllers\Settings\CommonSetting\CurrencyController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\DepartmentController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\FinancialyearController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\ProjectSegmentController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\ResourceEntryController.cs" />
     <Compile Include="Controllers\Settings\Mapping\CompanyModuleController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
@@ -9014,6 +9015,8 @@
     <Content Include="Views\Currency\load.cshtml" />
     <Content Include="Views\BusinessSector\Index.cshtml" />
     <Content Include="Views\BusinessSector\load.cshtml" />
+    <Content Include="Views\ProjectSegment\Index.cshtml" />
+    <Content Include="Views\ProjectSegment\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
