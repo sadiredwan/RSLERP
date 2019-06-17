@@ -35,6 +35,10 @@ namespace RSLERP.DataManager
 
         public DbSet<BusinessSector> BusinessSectors { get; set; }
 
+        public DbSet<BankInfo> BankInfos { get; set; }
+
+        public DbSet<BankInfoType> BankInfoTypes { get; set; }
+
         public DbSet<Department> Departments { get; set; }
 
         public DbSet<Financialyear> Financialyears { get; set; }
