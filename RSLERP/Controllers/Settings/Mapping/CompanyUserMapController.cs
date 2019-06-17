@@ -15,16 +15,12 @@ using System.Web.UI.WebControls;
 
 namespace RSLERP.Controllers.Settings.Mapping
 {
-    public class CompanyModuleController : Controller
+    public class CompanyUserMapController : Controller
     {
         ViewModel vmdl = new ViewModel();
-        ModuleBLL mdBll = new ModuleBLL();
-        RoleBLL rlBll = new RoleBLL();
 
         public ActionResult Index()
         {
-            vmdl.VM_ROLEPERMISSIONS = new List<RolePermission>();
-
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
@@ -32,14 +28,14 @@ namespace RSLERP.Controllers.Settings.Mapping
             }
             else
             {
-                vmdl.VM_MDULE = new Module();
-                vmdl.VM_MDULES = new List<Module>();
-                vmdl.VM_ROLE = new Role();                
+                vmdl.VM_COMPANY_USER = new CompanyUser();
+                vmdl.VM_COMPANY_USERS = new List<CompanyUser>();
                 vmdl.VM_COMPANE = new Company();
-                vmdl.VM_MODULE_RESOURCES = new List<Resource>();
-                vmdl.VM_COMPANY_MODULES = new List<CompanyModule>();
+                vmdl.VM_COMPANIES = new List<Company>();
+                vmdl.VM_COMPANY_USER_MAP = new CompanyUserMap();
+                vmdl.VM_COMPANY_USER_MAPS = new List<CompanyUserMap>();
             }
-            
+
             vmdl.VM_COMPANIES = new DBContext().Companies.ToList();
             return View(vmdl);
         }
@@ -49,32 +45,31 @@ namespace RSLERP.Controllers.Settings.Mapping
         public ActionResult Store(ViewModel vmdl)
         {
             String msg = GLobalMessage.Global_Success_Message;
-            vmdl.VM_MDULES = new DBContext().Modules.ToList();
-            vmdl.VM_COMPANY_MODULES = new List<CompanyModule>();
-            foreach (Module resource in vmdl.VM_MDULES)
+            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+            vmdl.VM_COMPANY_USER_MAPS = new List<CompanyUserMap>();
+            foreach (CompanyUser user in vmdl.VM_COMPANY_USERS)
             {
-                string chkName = "chk_" + resource.m_ID;
-               
+                string chkName = "chk_" + user.u_ID;
+
                 if (Request.Form[chkName] != null && Request.Form[chkName].ToString() == "on")
                 {
-                    CompanyModule rpMdl = new CompanyModule();
-                    rpMdl.com_ID = vmdl.VM_COMPANE.c_ID;
-                    rpMdl.Status = true;
-                    rpMdl.module_ID = resource.m_ID;
-                    vmdl.VM_COMPANY_MODULES.Add(rpMdl);
-                }                
+                    CompanyUserMap cmapMdl = new CompanyUserMap();
+                    cmapMdl.company_id = vmdl.VM_COMPANE.c_ID;
+                    cmapMdl.user_id = user.u_ID;
+                    vmdl.VM_COMPANY_USER_MAPS.Add(cmapMdl);
+                }
             }
             using (var contxt = new DBContext())
             {
-                contxt.CompanyModules.RemoveRange(contxt.CompanyModules.Where(x => x.CompanyId == vmdl.VM_COMPANE.c_ID));
+                contxt.CompanyUserMaps.RemoveRange(contxt.CompanyUserMaps.Where(x => x.company_id == vmdl.VM_COMPANE.c_ID));
                 contxt.SaveChanges();
             }
             using (var contxt = new DBContext())
             {
-                contxt.CompanyModules.AddRange(vmdl.VM_COMPANY_MODULES);
+                contxt.CompanyUserMaps.AddRange(vmdl.VM_COMPANY_USER_MAPS);
                 contxt.SaveChanges();
             }
-            vmdl.VM_COMPANY_MODULES = new DBContext().CompanyModules.Where(x => x.com_ID == vmdl.VM_COMPANE.c_ID).ToList();
+            vmdl.VM_COMPANY_USER_MAPS = new DBContext().CompanyUserMaps.Where(x => x.company_id == vmdl.VM_COMPANE.c_ID).ToList();
             if (msg == GLobalMessage.Global_Success_Message)
             {
                 GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
@@ -92,25 +87,25 @@ namespace RSLERP.Controllers.Settings.Mapping
         [HttpPost]
         public ActionResult PostBack(ViewModel vmdl)
         {
-            String r_mid = "" + vmdl.VM_MDULE.m_ID.ToString().PadLeft(2, '0');
-            vmdl.VM_ROLEPERMISSIONS = new DBContext().RolePermissions.Where(x => x.rp_rl_ID == vmdl.VM_ROLE.Id).Where(x => x.rp_m_ID == vmdl.VM_MDULE.m_ID).ToList();
+            String r_mid = "" + vmdl.VM_COMPANY_USER.u_ID.ToString().PadLeft(2, '0');
+            //vmdl.VM_ROLEPERMISSIONS = new DBContext().RolePermissions.Where(x => x.rp_rl_ID == vmdl.VM_ROLE.Id).Where(x => x.rp_m_ID == vmdl.VM_MDULE.m_ID).ToList();
             //vmdl.VM_ROLEPERMISSIONS = rlBll.GetRolePermission(""+vmdl.VM_SECROLE.Id, vmdl.VM_MODULE.m_ID);
-            vmdl.VM_MODULE_RESOURCES = new DBContext().Resources.Where(x => x.R_M_ID == r_mid).Where(x => x.Parent_R_ID > 0).Where(x => x.Is_Menu == true).ToList();
-            vmdl.VM_MDULES = new DBContext().Modules.ToList();
-            vmdl.VM_ROLES = new DBContext().Roles.ToList();
+            //vmdl.VM_MODULE_RESOURCES = new DBContext().Resources.Where(x => x.R_M_ID == r_mid).Where(x => x.Parent_R_ID > 0).Where(x => x.Is_Menu == true).ToList();
+            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+            //vmdl.VM_ROLES = new DBContext().Roles.ToList();
             //return Content(r_mid);
             return View("Index", vmdl);
         }
 
-        public PartialViewResult PartialCompanyModule(String companyID)
+        public PartialViewResult PartialCompanyUserMap(String company_id)
         {
-            String r_mid = "" + companyID;
-            int comID = Convert.ToInt32(companyID);
-            vmdl.VM_COMPANY_MODULES = new DBContext().CompanyModules.Where(x => x.CompanyId == comID).ToList();
+            String r_mid = "" + company_id;
+            int comID = Convert.ToInt32(company_id);
+            vmdl.VM_COMPANY_USER_MAPS = new DBContext().CompanyUserMaps.Where(x => x.company_id == comID).ToList();
             vmdl.VM_COMPANE = new DBContext().Companies.Find(comID);
-                ////vmdl.VM_ROLEPERMISSIONS = rlBll.GetRolePermission(""+vmdl.VM_SECROLE.Id, vmdl.VM_MODULE.m_ID);
+            ////vmdl.VM_ROLEPERMISSIONS = rlBll.GetRolePermission(""+vmdl.VM_SECROLE.Id, vmdl.VM_MODULE.m_ID);
             //vmdl.VM_MODULE_RESOURCES = new DBContext().Resources.Where(x => x.R_M_ID == r_mid).Where(x => x.Parent_R_ID > 0).Where(x => x.Is_Menu == true).ToList();
-            vmdl.VM_MDULES = new DBContext().Modules.ToList();
+            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
             //vmdl.VM_ROLES = new DBContext().Roles.ToList();
             //vmdl.VM_MDULE = new DBContext().Modules.Find(moduleID);
             //vmdl.VM_ROLE = new DBContext().Roles.Find(rlID);
