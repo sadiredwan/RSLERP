@@ -17,7 +17,7 @@ namespace RSLERP.DataManager.Entity
         [Key]
         public int id { get; set; }
         [Required]
-        [BankNameValidation(ErrorMessage = "Bank already exists.")]
+        [BankInfoNameValidation(ErrorMessage = "Bank already exists.")]
         public String name { get; set; }
         [Required]
         public String short_name { get; set; }
@@ -37,7 +37,7 @@ namespace RSLERP.DataManager.Entity
 
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-        public class BankNameValidation : ValidationAttribute
+        public class BankInfoNameValidation : ValidationAttribute
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {
