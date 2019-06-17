@@ -9017,6 +9017,7 @@
     <Content Include="Views\BusinessSector\load.cshtml" />
     <Content Include="Views\ProjectSegment\Index.cshtml" />
     <Content Include="Views\ProjectSegment\load.cshtml" />
+    <Content Include="Views\Bank\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
