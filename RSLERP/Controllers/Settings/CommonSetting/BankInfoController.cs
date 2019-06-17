@@ -124,7 +124,7 @@ namespace RSLERP.Controllers.Settings
             {
                 string errors = errorstate.errors(ModelState);
                 //GLobalStatus.Global_Status<ViewModel>(ref vmdl, false, errorstate.errors(ModelState), ModelState);
-                GLobalStatus.Global_Status<ViewModel>(ref vmdl, false, errors, ModelState);
+                GLobalStatus.Global_Status<ViewModel>(ref vmdl, false, "", ModelState);
                 TempData["ViewModel"] = vmdl;
                 //redirect back to Registration page 
                 return RedirectToAction("load");
