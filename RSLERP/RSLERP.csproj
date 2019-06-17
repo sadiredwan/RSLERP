@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\BankInfoController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\BusinessSectorController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CountryController.cs" />
@@ -8972,7 +8973,6 @@
     <Content Include="Views\Productions\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Production\Index.cshtml" />
-    <Content Include="Views\Bank\Index.cshtml" />
     <Content Include="Views\FixedAsset\Index.cshtml" />
     <Content Include="Views\Fleet\Index.cshtml" />
     <Content Include="Views\Home\Home\index.cshtml" />
