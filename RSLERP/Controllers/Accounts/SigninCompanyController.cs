@@ -23,6 +23,7 @@ namespace RSLERP.Controllers.Accounts
         public ActionResult Index()
         {
             vm.VM_COMPANYS = cmpBll.getCompany();
+            vm.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
             vm.VM_APPLICATION = new s_ApplicationState();
             return View(vm);
         }
@@ -37,6 +38,7 @@ namespace RSLERP.Controllers.Accounts
         public ActionResult Store(ViewModel vmdl)
         {
             vmdl.VM_COMPANYS = cmpBll.getCompany();
+            vmdl.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
             if (ModelState.IsValid)
             {
                 s_User usrLoggedIn = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];
@@ -48,6 +50,7 @@ namespace RSLERP.Controllers.Accounts
                 app.group_id = cmp.c_g_ID;
                 app.user_id = Convert.ToInt32(HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID]);
                 app.financial_year = (cTyr != null) ? ""+cTyr.Id : "0";
+                app.financial_year_id = vmdl.VM_APPLICATION.financial_year_id;
                 app.status = true;
                 app.role_id = usrLoggedIn.RoleID;
                 app.role_level = usrLoggedIn.Role_Level;

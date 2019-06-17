@@ -64,6 +64,14 @@ namespace RSLERP.Models
 
         public Currency VM_CURRENCY { get; set; }
 
+        public List<BusinessSector> VM_BUSINESS_SECTORS { get; set; }
+
+        public BusinessSector VM_BUSINESS_SECTOR { get; set; }
+
+        public List<ProjectSegment> VM_PROJECT_SEGMENTS { get; set; }
+
+        public ProjectSegment VM_PROJECT_SEGMENT { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }

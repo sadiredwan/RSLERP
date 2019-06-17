@@ -23,6 +23,7 @@ namespace RSLERP.DataManager.DLL
             , String financial_year
             , String role_id
             , String role_level
+            , String financial_year_id
             )
         {
             List<SqlParameter> parametrs = new List<SqlParameter>();
@@ -36,6 +37,7 @@ namespace RSLERP.DataManager.DLL
             parametrs.Add(new SqlParameter { ParameterName = "@financial_year", Value = financial_year, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@role_id", Value = role_id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@role_level", Value = role_level, SqlDbType = SqlDbType.VarChar });
+            parametrs.Add(new SqlParameter { ParameterName = "@financial_year_id", Value = financial_year_id, SqlDbType = SqlDbType.VarChar });
             return new SqlHelper().GetRecords<s_ApplicationState>(GlobalSp_Application.spSS_Insert_Application, parametrs).FirstOrDefault();
 
         }

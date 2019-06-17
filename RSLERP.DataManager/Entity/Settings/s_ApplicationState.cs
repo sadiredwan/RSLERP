@@ -20,6 +20,8 @@ namespace RSLERP.DataManager.Entity
         public bool status { get; set; }
         public String financial_year { get; set; }
 
+        [Required]
+        public String financial_year_id { get; set; }
         public DateTime? TimeStamp { get; set; }
         public int role_id { get; set; }
         public int role_level { get; set; }

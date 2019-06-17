@@ -1,73 +1,65 @@
-﻿using RSLERP.Authorization;
-using RSLERP.DataManager;
+﻿using RSLERP.DataManager;
 using RSLERP.DataManager.Entity;
 using RSLERP.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using static RSLERP.DataManager.Utility;
-namespace RSLERP.Controllers.Settings.Security
+
+namespace RSLERP.Controllers.Settings.CommonSetting
 {
-    public class UserRoleController : Controller
+    public class BusinessSectorController : Controller
     {
         ViewModel vmdl = new ViewModel();
-        Utility util = new Utility();
         /// <summary>
         /// Index page 
-        /// for show all Companys list
+        /// for show all Business Sector list
         /// </summary>
         /// <returns></returns>
-        // GET: Company
-        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] {AccessLevel.View})]
+        // GET: BusinessSector
         public ActionResult Index()
         {
 
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
-
             }
-            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
-
+            vmdl.VM_BUSINESS_SECTORS = new DBContext().BusinessSectors.ToList();
 
             return View(vmdl);
         }
 
         /// <summary>
-        /// Create Page for Company 
+        /// Create Page for Business Sector 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult load(String id)
         {
             //Get Current UserName
-            // int user_id = Convert.ToInt32(User.Identity.Name);
+            //int user_id = Convert.ToInt32(User.Identity.Name);
             //Current Compamy
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
             //Set  Message
             String message = "";
 
-
-            int dID = Convert.ToInt32(id);
-
+            int bsID = Convert.ToInt32(id);
 
             //pass model to view
-            UserRole mdl = new UserRole();
+            BusinessSector mdlBusinessSector = new BusinessSector();
 
             //Check if id doesnot null
             if (id != null)
             {
-                //check if Company already exist
-                if (new DBContext().UserRoles.ToList().FindAll(x => x.ur_u_ID == dID).Count > 0)
+                //check if Business Sector already exist
+                if (new DBContext().BusinessSectors.ToList().FindAll(x => x.id == bsID).Count > 0)
                 {
-                    //pass model to view with Company info
-                    mdl = new DBContext().UserRoles.Where(x=>x.ur_u_ID==dID).FirstOrDefault();
-                    vmdl.VM_ROLE = new DBContext().Roles.Find(mdl.ur_rl_ID);
+                    //pass model to view with Business Sector info
+                    mdlBusinessSector = new DBContext().BusinessSectors.Find(bsID);
                 }
             }
 
@@ -75,60 +67,54 @@ namespace RSLERP.Controllers.Settings.Security
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
-                vmdl.VM_ROLE = new Role();
             }
             else
             {
-                vmdl.VM_USER_ROLE = mdl;
+                vmdl.VM_BUSINESS_SECTOR = mdlBusinessSector;
             }
 
-            ApplicationState app = RSLERPApplication.CurrentState();
-
-            vmdl.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(dID);
-           // vmdl.VM_ROLES = new DBContext().Roles.Where(x => x.CompanyId == app.company_id).ToList();
-            vmdl.VM_ROLES = new DBContext().Roles.ToList();
             return View(vmdl);
         }
 
+
         /// <summary>
-        /// Store Company 
+        /// Store Business Sector 
         /// Create or Update
         /// </summary>
-        /// <param name="CompanyMdl"></param>
+        /// <param name="vmdl"></param>
         /// <returns></returns>
         public ActionResult store(ViewModel vmdl)
         {
-            //Get Current UserName
-
-
-
             //Check Model state is valid or not
             if (ModelState.IsValid)
             {
 
-                //check if already exist then delete
-                if (new DBContext().UserRoles.Where(x => x.ur_u_ID == vmdl.VM_USER_ROLE.ur_u_ID).Count() > 0)
+                //check if already exist then update
+                if (new DBContext().BusinessSectors.ToList().FindAll(x => x.id == vmdl.VM_BUSINESS_SECTOR.id).Count > 0)
                 {
-                    UserRole findUserROle = new DBContext().UserRoles.Where(x => x.ur_u_ID == vmdl.VM_USER_ROLE.ur_u_ID).FirstOrDefault();
-                    //Delete The Designation
+                    //Update Business Sector
+                    //VM_BUSINESS_SECTOR.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.Entry(findUserROle).State = EntityState.Deleted;
-                        contxt.SaveChanges();
-                    }
-                }
-                   
-                  
-                    //Add new Company
-                    using (var contxt = new DBContext())
-                    {
-                        contxt.UserRoles.Add(vmdl.VM_USER_ROLE);
+                        contxt.BusinessSectors.Attach(vmdl.VM_BUSINESS_SECTOR);
+                        contxt.Entry(vmdl.VM_BUSINESS_SECTOR).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
-
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
-                
+                }
+                else
+                {
+                    //Add new Business Sector
+                    using (var contxt = new DBContext())
+                    {
+
+                        contxt.BusinessSectors.Add(vmdl.VM_BUSINESS_SECTOR);
+                        contxt.SaveChanges();
+
+                    }
+                    GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
+                }
                 TempData["ViewModel"] = vmdl;
                 return RedirectToAction("index", vmdl);
             }
@@ -143,11 +129,6 @@ namespace RSLERP.Controllers.Settings.Security
             }
 
         }
-
-     
-
-
-
 
 
     }

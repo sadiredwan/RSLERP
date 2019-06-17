@@ -21,6 +21,8 @@ namespace RSLERP.DataManager.Entity
         public int role_id { get; set; }
         public int role_level { get; set; }
         public String financial_year { get; set; }
+
+        public int financial_year_id { get; set; }
         public DateTime TimeStamp { get; set; }
         public DateTime? created_at { get; set; }
         public int? created_by { get; set; }
