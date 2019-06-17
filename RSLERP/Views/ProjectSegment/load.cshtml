@@ -101,7 +101,6 @@
                                     </div>
                                     <input readonly="readonly" type="text" class="form-control datepicker pull-right" id="datepicker4" name="VM_PROJECT_SEGMENT.end_date" value="@((Model.VM_PROJECT_SEGMENT.end_date == null || Convert.ToDateTime(Model.VM_PROJECT_SEGMENT.end_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_PROJECT_SEGMENT.end_date).ToString("dd MMMM yyyy"))">
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_PROJECT_SEGMENT.end_date")
-
                                 </div>
                                 <!-- /.input group -->
                             </div>

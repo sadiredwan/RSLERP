@@ -72,6 +72,14 @@ namespace RSLERP.Models
 
         public ProjectSegment VM_PROJECT_SEGMENT { get; set; }
 
+        public List<BankInfo> VM_BANK_INFOS { get; set; }
+
+        public BankInfo VM_BANK_INFO { get; set; }
+
+        public List<BankInfoType> VM_BANK_INFO_TYPES { get; set; }
+
+        public BankInfoType VM_BANK_INFO_TYPE { get; set; }
+
         public Role VM_ROLE { get; set; }
 
         public List<Role> VM_ROLES { get; set; }
@@ -95,7 +103,6 @@ namespace RSLERP.Models
         public UserRole VM_USER_ROLE { get; set; }
 
         public List<UserRole> VM_USER_ROLES { get; set; }
-
 
         public CompanyModule VM_COMPANY_MODULE { get; set; }
 

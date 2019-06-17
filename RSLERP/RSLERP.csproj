@@ -92,10 +92,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="RSLERP.DataManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\RSLERP.DataManager\bin\Debug\RSLERP.DataManager.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -223,6 +219,7 @@
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
+    <Compile Include="Controllers\Settings\CommonSetting\BankInfoController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\BusinessSectorController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CompanyController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\CountryController.cs" />
@@ -8972,7 +8969,6 @@
     <Content Include="Views\Productions\Index.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Production\Index.cshtml" />
-    <Content Include="Views\Bank\Index.cshtml" />
     <Content Include="Views\FixedAsset\Index.cshtml" />
     <Content Include="Views\Fleet\Index.cshtml" />
     <Content Include="Views\Home\Home\index.cshtml" />
@@ -9017,6 +9013,9 @@
     <Content Include="Views\BusinessSector\load.cshtml" />
     <Content Include="Views\ProjectSegment\Index.cshtml" />
     <Content Include="Views\ProjectSegment\load.cshtml" />
+    <Content Include="Views\Bank\Index.cshtml" />
+    <Content Include="Views\BankInfo\Index.cshtml" />
+    <Content Include="Views\BankInfo\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -9243,6 +9242,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>User1.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RSLERP.DataManager\RSLERP.DataManager.csproj">
+      <Project>{10668ed2-f353-4fc2-891a-8f448de6d50f}</Project>
+      <Name>RSLERP.DataManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
