@@ -105,6 +105,7 @@
     <Compile Include="Entity\Settings\BankInfoType.cs" />
     <Compile Include="Entity\Settings\BusinessSector.cs" />
     <Compile Include="Entity\Settings\CompanyModule.cs" />
+    <Compile Include="Entity\Settings\CompanyUserMap.cs" />
     <Compile Include="Entity\Settings\Currency.cs" />
     <Compile Include="Entity\Settings\Financialyear.cs" />
     <Compile Include="Entity\Settings\Country.cs" />
