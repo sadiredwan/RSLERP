@@ -57,8 +57,8 @@ C:\Workspace\rslerp\RSLERP.DataManager\bin\Debug\EntityFramework.dll
 C:\Workspace\rslerp\RSLERP.DataManager\bin\Debug\EntityFramework.SqlServer.dll
 C:\Workspace\rslerp\RSLERP.DataManager\bin\Debug\EntityFramework.xml
 C:\Workspace\rslerp\RSLERP.DataManager\bin\Debug\EntityFramework.SqlServer.xml
+C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache
 C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CoreCompileInputs.cache
 C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CopyComplete
 C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
-C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache

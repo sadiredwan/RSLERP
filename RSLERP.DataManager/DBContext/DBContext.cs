@@ -24,6 +24,8 @@ namespace RSLERP.DataManager
           
         }
 
+        public DbSet<InvUnitMeasurement> InvUnitMeasurements { get; set; }
+
         public DbSet<InvManufacturer> InvManufacturers { get; set; }
 
         public DbSet<Company> Companies { get; set; }
