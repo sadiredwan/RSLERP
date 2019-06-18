@@ -1,0 +1,125 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+@using RSLERP.DataManager
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PartialLayout.cshtml";
+}
+
+@if (Model.VM_COMPANY_USERS.Count > 0)
+{
+    <table id="datatable2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th><br /> <input type="checkbox" class="all" value="ALL" id="view-all" name="Status"></th>
+                <th>User Name </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CompanyUser src in Model.VM_COMPANY_USERS)
+            {
+                List<CompanyUserMap> cmapMdls = new DBContext().CompanyUserMaps.Where(x => x.company_id == Model.VM_COMPANE.c_ID).Where(x => x.user_id == src.u_ID).ToList();
+
+                <tr>
+                    <td><input type="checkbox" class="view" name="chk_@src.u_ID" @(cmapMdls.Count > 0 ? "checked" : "")></td>
+                    <td>@src.u_LoginName</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary pull-right" value="tab_2">Submit</button>
+    </div>
+}
+
+
+@section partialjs {
+
+    <script type="text/javascript">
+
+    $("[type=checkbox]").click(function (e) {
+
+        var checkBoxClass = e.target.className;
+        if (checkBoxClass == 'all')
+        {
+            var allcheckBoxID = e.target.id;
+            var childNodeClassName = allcheckBoxID.split('-')[0];
+            $('input:checkbox.' + childNodeClassName).not(this).prop('checked', this.checked);
+            $('input[type=checkbox].' + childNodeClassName).each(function () {
+                var hiddenFieldID = "hdn_"+$(this).attr("id");
+                var valueChk = (this.checked ? 'true' : 'false');
+                $("#" + hiddenFieldID).val(valueChk);
+
+            });
+        }
+        else {
+            var currentAllCheckBoxid = checkBoxClass + "-" + "all";
+            $('input:checkbox#' + currentAllCheckBoxid).prop('checked', false);
+
+        }
+
+
+
+
+        //$("#extratb tr").remove();
+        //var checkBoxID = e.target.id;
+        //var uid = $("#dropdownCompany").val();
+        //if (checkBoxID == "checkAll") {
+        //    $('input:checkbox.checkboxStatus').not(this).prop('checked', this.checked);
+
+        //}
+        //else if (checkBoxID == "checksingle") {
+        //    $('input:checkbox.checkAll').prop('checked', false);
+
+        //}
+    });
+    // Notice that e is not used or needed.
+   function onchangerolemdule(obj) {
+        $("#partialLoad").html("Loading...");
+        if ($("#ddlCompany").val() != 0) {
+            var company_id = $("#ddlCompany").val();
+            $.ajax({
+                url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/PartialCompanyUserMap?company_id=' + company_id,
+                type: 'GET',
+                success: function (data) {
+                    $("#partialLoad").html(data);
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+
+
+        // alert(id);
+    }
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+                });
+
+    function myFunction() {
+        var x = document.getElementById("fname");
+        x.value = x.value.toUpperCase();
+    }
+
+    function onchangeevent(obj)
+    {
+        if ($("#ddlRole").val() != 0 && $("#ddlModule").val() != 0) {
+            $('#form').attr('action', '@Url.Action("PostBack", @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())');
+            $("#chnageName").val("neat");
+            obj.form.submit();
+        }
+
+        // location.reload();
+    }
+    </script>
+
+}
+
+

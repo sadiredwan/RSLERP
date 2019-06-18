@@ -59,8 +59,9 @@ namespace RSLERP.DataManager
 
         public DbSet<CompanyModule> CompanyModules { get; set; }
 
-        public DbSet<AnFCOA> AnFCOAs { get; set; }
+        public DbSet<CompanyUserMap> CompanyUserMaps { get; set; }
 
+        public DbSet<AnFCOA> AnFCOAs { get; set; }
         private void OnBeforeSaving()
         {
             int user_id = 0;

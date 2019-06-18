@@ -230,6 +230,7 @@
     <Compile Include="Controllers\Settings\CommonSetting\ProjectSegmentController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\ResourceEntryController.cs" />
     <Compile Include="Controllers\Settings\Mapping\CompanyModuleController.cs" />
+    <Compile Include="Controllers\Settings\Mapping\CompanyUserMapController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolePermissionController.cs" />
     <Compile Include="Controllers\Settings\Role Management\RolesController.cs" />
     <Compile Include="Controllers\Settings\Security\UserRoleController.cs" />
@@ -9017,7 +9018,8 @@
     <Content Include="Views\Bank\Index.cshtml" />
     <Content Include="Views\BankInfo\Index.cshtml" />
     <Content Include="Views\BankInfo\load.cshtml" />
-    <Content Include="Views\ChartAccount\Index.cshtml" />
+    <Content Include="Views\CompanyUserMap\PartialCompanyUserMap.cshtml" />
+	<Content Include="Views\ChartAccount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
