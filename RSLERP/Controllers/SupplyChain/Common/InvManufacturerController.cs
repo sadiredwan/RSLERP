@@ -22,14 +22,15 @@ namespace RSLERP.Controllers.Settings
         // GET: InvManufacturer
         public ActionResult Index()
         {
+            //Current Company
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
 
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
 
             }
-            vmdl.VM_INVMANUFACTURERS = new DBContext().InvManufacturers.ToList();
-
+            vmdl.VM_INVMANUFACTURERS = new DBContext().InvManufacturers.Where(x => x.CompanyId == COMPANY_ID).ToList();
 
             return View(vmdl);
         }
@@ -44,7 +45,7 @@ namespace RSLERP.Controllers.Settings
             //Get Current UserName
             // int user_id = Convert.ToInt32(User.Identity.Name);
             //Current Company
-            //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
 
             //Set  Message
             String message = "";
@@ -58,7 +59,7 @@ namespace RSLERP.Controllers.Settings
             if (id != null)
             {
                 //check if InvManufacturer already exist
-                if (new DBContext().InvManufacturers.ToList().FindAll(x => x.id == mID).Count > 0)
+                if (new DBContext().InvManufacturers.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.id == mID).Count > 0)
                 {
                     //pass model to view with InvManufacturer info
                     mdlInvManufacturer = new DBContext().InvManufacturers.Find(mID);
@@ -74,7 +75,7 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl.VM_INVMANUFACTURER = mdlInvManufacturer;
             }
-            vmdl.VM_COUNTRIES = new DBContext().Countries.ToList();
+            vmdl.VM_COUNTRIES = new DBContext().Countries.Where(x => x.CompanyId == COMPANY_ID).ToList();
 
             return View(vmdl);
         }
@@ -87,12 +88,16 @@ namespace RSLERP.Controllers.Settings
         /// <returns></returns>
         public ActionResult store(ViewModel vmdl)
         {
+
+            //Current Company
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
+
             //Check Model state is valid or not
             if (ModelState.IsValid)
             {
 
                 //check if already exist then update
-                if (new DBContext().InvManufacturers.ToList().FindAll(x => x.id == vmdl.VM_INVMANUFACTURER.id).Count > 0)
+                if (new DBContext().InvManufacturers.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.id == vmdl.VM_INVMANUFACTURER.id).Count > 0)
                 {
                     //Update InvManufacturer
                     //VM_INVMANUFACTURER.updated_at = DateTime.Now;

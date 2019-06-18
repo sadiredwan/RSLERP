@@ -36,6 +36,7 @@ namespace RSLERP.DataManager.Entity
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {
+                int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
                 if (!(value is string)) return new ValidationResult("DataType Error");
                 var val = (string)value;
                 try
