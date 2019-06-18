@@ -75,7 +75,7 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl.VM_INVMANUFACTURER = mdlInvManufacturer;
             }
-            vmdl.VM_COUNTRIES = new DBContext().Countries.Where(x => x.CompanyId == COMPANY_ID).ToList();
+            vmdl.VM_COUNTRIES = new DBContext().Countries.ToList();
 
             return View(vmdl);
         }

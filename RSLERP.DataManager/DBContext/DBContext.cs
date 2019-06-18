@@ -89,7 +89,7 @@ namespace RSLERP.DataManager
                     ((IBaseModel)entity.Entity).created_by = user_id;
                 }
                 ((IBaseModel)entity.Entity).CompanyId = company_id;
-                ((IBaseModel)entity.Entity).CompanyId = app_id;
+                ((IBaseModel)entity.Entity).app_id = app_id;
                 ((IBaseModel)entity.Entity).modified_at = DateTime.Now;
                 ((IBaseModel)entity.Entity).modified_by = user_id;
             }
