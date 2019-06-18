@@ -110,6 +110,8 @@ namespace RSLERP.Models
 
         public CompanyUserMap VM_COMPANY_USER_MAP { get; set; }
 
+        public List<CompanyUserMap> VM_COMPANY_USER_MAPS { get; set; }
+
         public List<TreeMenu> VM_TREE_MENUS { get; set; }
 
         
