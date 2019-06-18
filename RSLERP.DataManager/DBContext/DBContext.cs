@@ -23,7 +23,8 @@ namespace RSLERP.DataManager
                 return base.SaveChanges();
           
         }
-       
+
+        public DbSet<InvManufacturer> InvManufacturers { get; set; }
 
         public DbSet<Company> Companies { get; set; }
 

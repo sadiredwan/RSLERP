@@ -236,6 +236,7 @@
     <Compile Include="Controllers\Settings\Security\UserRoleController.cs" />
     <Compile Include="Controllers\Settings\SettingsController.cs" />
     <Compile Include="Controllers\Settings\Security\UsersController.cs" />
+    <Compile Include="Controllers\SupplyChain\Common\InvManufacturerController.cs" />
     <Compile Include="Controllers\SupplyChain\SupplyChainController.cs" />
     <Compile Include="Controllers\Tender\TenderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -9019,7 +9020,9 @@
     <Content Include="Views\BankInfo\Index.cshtml" />
     <Content Include="Views\BankInfo\load.cshtml" />
     <Content Include="Views\CompanyUserMap\PartialCompanyUserMap.cshtml" />
-	<Content Include="Views\ChartAccount\Index.cshtml" />
+    <Content Include="Views\ChartAccount\Index.cshtml" />
+    <Content Include="Views\InvManufacturer\Index.cshtml" />
+    <Content Include="Views\InvManufacturer\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
