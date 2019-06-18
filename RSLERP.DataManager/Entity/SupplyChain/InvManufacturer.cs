@@ -47,7 +47,7 @@ namespace RSLERP.DataManager.Entity
                     {
                         return ValidationResult.Success;
                     }
-                    var findInvManuName = new DBContext().InvManufacturers.ToList().FindAll(x => x.name == val);
+                    var findInvManuName = new DBContext().InvManufacturers.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.name == val);
                     if (findInvManuName.Count > 0)
                     {
                         return new ValidationResult(FormatErrorMessage(validationContext.MemberName));
