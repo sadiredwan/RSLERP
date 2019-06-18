@@ -205,6 +205,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorization\SecurityAuthAuthorize.cs" />
     <Compile Include="Controllers\AccountFinance\AccountFinanceController.cs" />
+    <Compile Include="Controllers\AccountFinance\Settings\ChartAccountController.cs" />
     <Compile Include="Controllers\Accounts\AccountController.cs" />
     <Compile Include="Controllers\Accounts\SigninCompanyController.cs" />
     <Compile Include="Controllers\Bank\BankController.cs" />
@@ -9016,6 +9017,7 @@
     <Content Include="Views\Bank\Index.cshtml" />
     <Content Include="Views\BankInfo\Index.cshtml" />
     <Content Include="Views\BankInfo\load.cshtml" />
+    <Content Include="Views\ChartAccount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

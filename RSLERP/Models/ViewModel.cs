@@ -108,6 +108,8 @@ namespace RSLERP.Models
 
         public List<CompanyModule> VM_COMPANY_MODULES { get; set; }
 
+        public List<TreeMenu> VM_TREE_MENUS { get; set; }
+
 
     }
 
