@@ -2,8 +2,10 @@
 @using RSLERP.DataManager.Entity
 @model RSLERP.Models.ViewModel
 @{
-    ViewBag.Title = "load";
-    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+                /**/
+
+                ViewBag.Title = "load";
+                Layout = "~/Views/Shared/_LayoutSettings.cshtml";
 }
 
 <div class="content-wrapper">
@@ -36,34 +38,34 @@
                     @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
-                    <div class="box-body">
-                        <input type="hidden" name="VM_CURRENCY.id" value="@Model.VM_CURRENCY.id" />
+                        <div class="box-body">
+                            <input type="hidden" name="VM_CURRENCY.id" value="@Model.VM_CURRENCY.id" />
 
-                        <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input type="text" class="form-control" name="VM_CURRENCY.name" id="crc_inputname" placeholder="Name" value="@Model.VM_CURRENCY.name">
-                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.name")
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="VM_CURRENCY.name" id="crc_inputname" placeholder="Name" value="@Model.VM_CURRENCY.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.name")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Short Name</label>
+                                <input type="text" class="form-control" name="VM_CURRENCY.short_name" id="crc_inputshortname" placeholder="Short Name" value="@Model.VM_CURRENCY.short_name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.short_name")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Symbol</label>
+                                <input type="text" class="form-control" name="VM_CURRENCY.symbol" id="crc_inputsymbol" placeholder="Short Name" value="@Model.VM_CURRENCY.symbol">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.symbol")
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    @UserHelper.CheckBox("view", Model.VM_CURRENCY.status, "crcstatusID", "VM_CURRENCY.status", "crcstatusID") Active
+                                </label>
+                            </div>
+
                         </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Short Name</label>
-                            <input type="text" class="form-control" name="VM_CURRENCY.short_name" id="crc_inputshortname" placeholder="Short Name" value="@Model.VM_CURRENCY.short_name">
-                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.short_name")
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Symbol</label>
-                            <input type="text" class="form-control" name="VM_CURRENCY.symbol" id="crc_inputsymbol" placeholder="Short Name" value="@Model.VM_CURRENCY.symbol">
-                            @UserHelper.ModelStateMsg(Model.Model_State, "VM_CURRENCY.symbol")
-                        </div>
-
-                        <div class="checkbox">
-                            <label>
-                                @UserHelper.CheckBox("view", Model.VM_CURRENCY.status, "crcstatusID", "VM_CURRENCY.status", "crcstatusID") Active
-                            </label>
-                        </div>
-
-                    </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">@(Model.VM_CURRENCY.id == 0 ? "Save" : "Update")</button>

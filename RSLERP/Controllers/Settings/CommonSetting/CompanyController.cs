@@ -43,15 +43,13 @@ namespace RSLERP.Controllers.Settings
         {
             //Get Current UserName
            // int user_id = Convert.ToInt32(User.Identity.Name);
-            //Current Compamy
+            //Current Company
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
             //Set  Message
             String message = "";
 
-
             int dID = Convert.ToInt32(id);
-
 
             //pass model to view
             Company mdlCompany = new Company();

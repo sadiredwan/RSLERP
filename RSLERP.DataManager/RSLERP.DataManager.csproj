@@ -129,6 +129,8 @@
     <Compile Include="Entity\CRM\Tasks.cs" />
     <Compile Include="Entity\Settings\CompanyUser.cs" />
     <Compile Include="Entity\Settings\UserRole.cs" />
+    <Compile Include="Entity\SupplyChain\InvManufacturer.cs" />
+    <Compile Include="Entity\SupplyChain\InvUnitMeasurement.cs" />
     <Compile Include="GlobalVariables\GlobalAttributes.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_CmnTransactionalYears.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_Menu.cs" />

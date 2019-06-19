@@ -114,7 +114,14 @@ namespace RSLERP.Models
 
         public List<TreeMenu> VM_TREE_MENUS { get; set; }
 
-        
+        public InvManufacturer VM_INVMANUFACTURER { get; set; }
+
+        public List<InvManufacturer> VM_INVMANUFACTURERS { get; set; }
+
+        public InvUnitMeasurement VM_INVUNIT_MEASUREMENT { get; set; }
+
+        public List<InvUnitMeasurement> VM_INVUNIT_MEASUREMENTS { get; set; }
+
 
     }
 
