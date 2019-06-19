@@ -118,6 +118,9 @@ namespace RSLERP.Models
 
         public List<InvManufacturer> VM_INVMANUFACTURERS { get; set; }
 
+        public InvUnitMeasurement VM_INVUNIT_MEASUREMENT { get; set; }
+
+        public List<InvUnitMeasurement> VM_INVUNIT_MEASUREMENTS { get; set; }
 
 
     }

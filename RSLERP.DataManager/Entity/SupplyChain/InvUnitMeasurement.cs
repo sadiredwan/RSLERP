@@ -18,17 +18,18 @@ namespace RSLERP.DataManager.Entity
         [Required]
         public int parent_unit_id { get; set; }
         [Required]
+        [InvUnitMeasurementNameValidation(ErrorMessage = "Unit already exists.")]
         public String name { get; set; }
         [Required]
         public String short_name { get; set; }
-        [Required]
         public Double conversion_value { get; set; }
+        public bool status { get; set; }
         public int? created_by { get; set; }
         public DateTime? created_at { get; set; }
         public int? modified_by { get; set; }
         public DateTime? modified_at { get; set; }
         public int? CompanyId { get; set; }
-        public int? app_id { get; set; }        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+        public int? app_id { get; set; }        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
         public class InvUnitMeasurementNameValidation : ValidationAttribute
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)

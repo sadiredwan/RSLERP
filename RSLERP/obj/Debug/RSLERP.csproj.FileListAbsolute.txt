@@ -371,16 +371,3 @@ C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.csproj.CoreCompileInputs.cache
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.csproj.CopyComplete
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.dll
 C:\Workspace\rslerp\RSLERP\obj\Debug\RSLERP.pdb
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.Controllers.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.Prompting.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
-C:\Workspace\RSLERP\RSLERP\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
-C:\Workspace\RSLERP\RSLERP\bin\stdole.dll
