@@ -65,6 +65,4 @@ namespace RSLERP.DataManager.Entity
             }
         }
     }
-
-
 }

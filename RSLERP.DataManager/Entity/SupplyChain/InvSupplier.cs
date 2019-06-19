@@ -19,7 +19,7 @@ namespace RSLERP.DataManager.Entity
         [InvSupplierNameValidation(ErrorMessage = "Supplier already exists")]
         public String name { get; set; }
         [Required]
-        public String type { get; set; }
+        public int type { get; set; }
         [Required]
         public String address { get; set; }
         public int country_id { get; set; }
@@ -31,6 +31,7 @@ namespace RSLERP.DataManager.Entity
         public String website { get; set; }
         [Required]
         public String contact_person { get; set; }
+        [Required]
         public String contact_person_phone { get; set; }
         public String remarks { get; set; }
         public bool status { get; set; }
@@ -79,6 +80,4 @@ namespace RSLERP.DataManager.Entity
         }
 
     }
-
-
 }

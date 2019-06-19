@@ -32,8 +32,6 @@ namespace RSLERP.Controllers.Settings
             }
             vmdl.VM_INVSUPPLIERS = new DBContext().InvSuppliers.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_ANFCOAS = new DBContext().AnFCOAs.Where(x => x.CompanyId == COMPANY_ID).ToList();
-            vmdl.VM_INVSUPPLIER_TYPES = new DBContext().InvSupplierTypes.ToList();
-            vmdl.VM_COUNTRIES = new DBContext().Countries.Where(x => x.CompanyId == COMPANY_ID).ToList();
 
             return View(vmdl);
         }
@@ -81,7 +79,7 @@ namespace RSLERP.Controllers.Settings
             vmdl.VM_INVSUPPLIERS = new DBContext().InvSuppliers.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_ANFCOAS = new DBContext().AnFCOAs.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_INVSUPPLIER_TYPES = new DBContext().InvSupplierTypes.ToList();
-            vmdl.VM_COUNTRIES = new DBContext().Countries.Where(x => x.CompanyId == COMPANY_ID).ToList();
+            vmdl.VM_COUNTRIES = new DBContext().Countries.ToList();
 
             return View(vmdl);
         }
