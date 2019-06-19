@@ -108,10 +108,8 @@ namespace RSLERP.Controllers.Settings.CommonSetting
                     //Add new Business Sector
                     using (var contxt = new DBContext())
                     {
-
                         contxt.BusinessSectors.Add(vmdl.VM_BUSINESS_SECTOR);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -129,7 +127,6 @@ namespace RSLERP.Controllers.Settings.CommonSetting
             }
 
         }
-
 
     }
 }

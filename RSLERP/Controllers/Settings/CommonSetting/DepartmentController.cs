@@ -111,7 +111,6 @@ namespace RSLERP.Controllers.Settings {
                     {
                         contxt.Departments.Add(vmdl.VM_DEPARTMENT);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -129,5 +128,6 @@ namespace RSLERP.Controllers.Settings {
             }
 
         }
+
     }
 }

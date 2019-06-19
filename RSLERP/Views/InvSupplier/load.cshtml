@@ -1,0 +1,163 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Supplier
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/InvSupplier">Supplier</a></li>
+            <li class="active">Supplier Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/InvSupplier" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_INVSUPPLIER.id" value="@Model.VM_INVSUPPLIER.id" />
+
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.name" id="input_supname" placeholder="Name" value="@Model.VM_INVSUPPLIER.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.name")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select name="VM_INVSUPPLIER.type" class="form-control">
+                                    @foreach (InvSupplierType src in Model.VM_INVSUPPLIER_TYPES)
+                                    {
+                                        <option value="@src.id">@src.name</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Address</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.address" id="input_supaddress" placeholder="Address" value="@Model.VM_INVSUPPLIER.address">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.address")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select name="VM_INVSUPPLIER.country_id" class="form-control">
+                                    @foreach (Country src in Model.VM_COUNTRIES)
+                                    {
+                                        <option value="@src.id">@src.name</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.email" id="input_supemail" placeholder="Email" value="@Model.VM_INVSUPPLIER.email">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.email")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Phone</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.phone" id="input_supphone" placeholder="Email" value="@Model.VM_INVSUPPLIER.phone">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.phone")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Fax</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.fax" id="input_supfax" placeholder="Fax" value="@Model.VM_INVSUPPLIER.fax">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.fax")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Website</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.website" id="input_supweb" placeholder="Website" value="@Model.VM_INVSUPPLIER.website">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.website")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Contact Person</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.contact_person" id="input_supcontact_person" placeholder="Contact Person" value="@Model.VM_INVSUPPLIER.contact_person">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.contact_person")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Contact Person Phone</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.contact_person_phone" id="input_supcontact_person_phone" placeholder="Contact Person Phone" value="@Model.VM_INVSUPPLIER.contact_person_phone">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.contact_person_phone")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Remarks</label>
+                                <input type="text" class="form-control" name="VM_INVSUPPLIER.remarks" id="input_supremarks" placeholder="Remarks" value="@Model.VM_INVSUPPLIER.remarks">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.remarks")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Account COA</label>
+                                <select name="VM_INVSUPPLIER.AnFCOA_id" class="form-control">
+                                    @foreach (AnFCOA src in Model.VM_ANFCOAS)
+                                    {
+                                        <option value="@src.Id">@src.Particular</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    @UserHelper.CheckBox("view", Model.VM_INVSUPPLIER.status, "invsupstatusID", "VM_INVSUPPLIER.status", "invsupstatusID") Active
+                                </label>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_INVSUPPLIER.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
+

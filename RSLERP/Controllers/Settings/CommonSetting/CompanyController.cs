@@ -109,10 +109,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new Company
                     using (var contxt = new DBContext())
                     {
-                      
                         contxt.Companies.Add(vmdl.VM_COMPANE);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -130,8 +128,6 @@ namespace RSLERP.Controllers.Settings
             }
            
         }
-
-
        
     }
 }

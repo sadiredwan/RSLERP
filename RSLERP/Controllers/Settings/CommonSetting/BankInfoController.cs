@@ -110,10 +110,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new BankInfo
                     using (var contxt = new DBContext())
                     {
-
                         contxt.BankInfos.Add(vmdl.VM_BANK_INFO);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -131,8 +129,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }

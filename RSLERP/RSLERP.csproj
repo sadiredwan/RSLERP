@@ -237,6 +237,7 @@
     <Compile Include="Controllers\Settings\SettingsController.cs" />
     <Compile Include="Controllers\Settings\Security\UsersController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvManufacturerController.cs" />
+    <Compile Include="Controllers\SupplyChain\Common\InvSupplierController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvUnitMeasurementController.cs" />
     <Compile Include="Controllers\SupplyChain\SupplyChainController.cs" />
     <Compile Include="Controllers\Tender\TenderController.cs" />
@@ -9026,6 +9027,8 @@
     <Content Include="Views\InvManufacturer\load.cshtml" />
     <Content Include="Views\InvUnitMeasurement\Index.cshtml" />
     <Content Include="Views\InvUnitMeasurement\load.cshtml" />
+    <Content Include="Views\InvSupplier\Index.cshtml" />
+    <Content Include="Views\InvSupplier\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

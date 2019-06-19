@@ -107,10 +107,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new Country
                     using (var contxt = new DBContext())
                     {
-
                         contxt.Countries.Add(vmdl.VM_COUNTRY);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -128,8 +126,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }
