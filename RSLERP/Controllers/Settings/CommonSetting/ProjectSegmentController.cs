@@ -108,10 +108,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new Project Segment
                     using (var contxt = new DBContext())
                     {
-
                         contxt.ProjectSegments.Add(vmdl.VM_PROJECT_SEGMENT);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -129,8 +127,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }

@@ -24,6 +24,10 @@ namespace RSLERP.DataManager
           
         }
 
+        public DbSet<InvSupplier> InvSuppliers { get; set; }
+
+        public DbSet<InvSupplierType> InvSupplierTypes { get; set; }
+
         public DbSet<InvUnitMeasurement> InvUnitMeasurements { get; set; }
 
         public DbSet<InvManufacturer> InvManufacturers { get; set; }
@@ -65,6 +69,7 @@ namespace RSLERP.DataManager
         public DbSet<CompanyUserMap> CompanyUserMaps { get; set; }
 
         public DbSet<AnFCOA> AnFCOAs { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

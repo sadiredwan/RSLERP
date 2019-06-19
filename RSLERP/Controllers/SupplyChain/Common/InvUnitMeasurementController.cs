@@ -115,10 +115,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new InvUnitMeasurement
                     using (var contxt = new DBContext())
                     {
-
                         contxt.InvUnitMeasurements.Add(vmdl.VM_INVUNIT_MEASUREMENT);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -136,8 +134,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }

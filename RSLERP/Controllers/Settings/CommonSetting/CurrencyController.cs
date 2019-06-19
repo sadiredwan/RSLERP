@@ -107,10 +107,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new Currency
                     using (var contxt = new DBContext())
                     {
-
                         contxt.Currencies.Add(vmdl.VM_CURRENCY);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -128,8 +126,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }

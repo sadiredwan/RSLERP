@@ -115,10 +115,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new InvManufacturer
                     using (var contxt = new DBContext())
                     {
-
                         contxt.InvManufacturers.Add(vmdl.VM_INVMANUFACTURER);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -136,8 +134,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }

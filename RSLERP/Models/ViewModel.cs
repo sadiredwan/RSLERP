@@ -122,6 +122,17 @@ namespace RSLERP.Models
 
         public List<InvUnitMeasurement> VM_INVUNIT_MEASUREMENTS { get; set; }
 
+        public InvSupplier VM_INVSUPPLIER { get; set; }
+
+        public List<InvSupplier> VM_INVSUPPLIERS { get; set; }
+
+        public InvSupplierType VM_INVSUPPLIER_TYPE { get; set; }
+
+        public List<InvSupplierType> VM_INVSUPPLIER_TYPES { get; set; }
+
+        public AnFCOA VM_ANFCOA { get; set; }
+
+        public List<AnFCOA> VM_ANFCOAS { get; set; }
 
     }
 

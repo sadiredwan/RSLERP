@@ -107,10 +107,8 @@ namespace RSLERP.Controllers.Settings
                     //Add new Financialyear
                     using (var contxt = new DBContext())
                     {
-
                         contxt.Financialyears.Add(vmdl.VM_FINANCIALYEAR);
                         contxt.SaveChanges();
-
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);
                 }
@@ -128,8 +126,6 @@ namespace RSLERP.Controllers.Settings
             }
 
         }
-
-
 
     }
 }
