@@ -74,6 +74,8 @@ namespace RSLERP.DataManager
 
         public DbSet<InvWarehouse> InvWarehouses { get; set; }
 
+        public DbSet<InvRackType> InvRackTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

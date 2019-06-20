@@ -142,6 +142,10 @@ namespace RSLERP.Models
 
         public List<InvWarehouse> VM_INVWAREHOUSES { get; set; }
 
+        public InvRackType VM_INVRACK_TYPE { get; set; }
+
+        public List<InvRackType> VM_INVRACK_TYPES { get; set; }
+
     }
 
 
