@@ -239,6 +239,8 @@
     <Compile Include="Controllers\SupplyChain\Common\InvManufacturerController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvSupplierController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvUnitMeasurementController.cs" />
+    <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseController.cs" />
+    <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseTypeController.cs" />
     <Compile Include="Controllers\SupplyChain\SupplyChainController.cs" />
     <Compile Include="Controllers\Tender\TenderController.cs" />
     <Compile Include="Global.asax.cs">
@@ -9029,6 +9031,10 @@
     <Content Include="Views\InvUnitMeasurement\load.cshtml" />
     <Content Include="Views\InvSupplier\Index.cshtml" />
     <Content Include="Views\InvSupplier\load.cshtml" />
+    <Content Include="Views\InvWarehouseType\Index.cshtml" />
+    <Content Include="Views\InvWarehouseType\load.cshtml" />
+    <Content Include="Views\InvWarehouse\Index.cshtml" />
+    <Content Include="Views\InvWarehouse\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

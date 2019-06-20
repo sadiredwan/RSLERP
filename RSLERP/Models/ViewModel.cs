@@ -134,6 +134,14 @@ namespace RSLERP.Models
 
         public List<AnFCOA> VM_ANFCOAS { get; set; }
 
+        public InvWarehouseType VM_INVWAREHOUSE_TYPE { get; set; }
+
+        public List<InvWarehouseType> VM_INVWAREHOUSE_TYPES { get; set; }
+
+        public InvWarehouse VM_INVWAREHOUSE { get; set; }
+
+        public List<InvWarehouse> VM_INVWAREHOUSES { get; set; }
+
     }
 
 

@@ -70,6 +70,10 @@ namespace RSLERP.DataManager
 
         public DbSet<AnFCOA> AnFCOAs { get; set; }
 
+        public DbSet<InvWarehouseType> InvWarehouseTypes { get; set; }
+
+        public DbSet<InvWarehouse> InvWarehouses { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

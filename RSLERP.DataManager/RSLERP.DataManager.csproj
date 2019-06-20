@@ -133,6 +133,8 @@
     <Compile Include="Entity\SupplyChain\InvSupplier.cs" />
     <Compile Include="Entity\SupplyChain\InvSupplierType.cs" />
     <Compile Include="Entity\SupplyChain\InvUnitMeasurement.cs" />
+    <Compile Include="Entity\SupplyChain\InvWarehouse.cs" />
+    <Compile Include="Entity\SupplyChain\InvWarehouseType.cs" />
     <Compile Include="GlobalVariables\GlobalAttributes.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_CmnTransactionalYears.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_Menu.cs" />
