@@ -239,6 +239,7 @@
     <Compile Include="Controllers\SupplyChain\Common\InvManufacturerController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvSupplierController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvUnitMeasurementController.cs" />
+    <Compile Include="Controllers\SupplyChain\Inventory\InvRackController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvRackTypeController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseTypeController.cs" />
@@ -9042,6 +9043,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CRM\" />
+    <Folder Include="Views\InvRack\" />
     <Folder Include="Views\Partials\OnChange\" />
   </ItemGroup>
   <ItemGroup>
