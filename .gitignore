@@ -130,3 +130,9 @@ RSLERP/bin/RSLERP.DataManager.pdb
 RSLERP/obj/Debug/RSLERP.dll
 
 RSLERP/obj/Debug/RSLERP.pdb
+
+.vs/RSLERP/v15/.suo
+
+.vs/RSLERP/v15/Server/sqlite3/storage.ide-shm
+
+.vs/RSLERP/v15/Server/sqlite3/storage.ide-wal
