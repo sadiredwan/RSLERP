@@ -58,13 +58,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Select Country</label>
-                                <select name="VM_INVMANUFACTURER.country_id" class="form-control">
+                                <label>Country</label>
+                                <select name="VM_INVMANUFACTURER.country_id" class="form-control select2">
+                                    <option value="all">-- Select Country --</option>
                                     @foreach (Country src in Model.VM_COUNTRIES)
                                     {
                                         <option value="@src.id">@src.name</option>
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVMANUFACTURER.country_id")
                             </div>
 
                             <div class="checkbox">

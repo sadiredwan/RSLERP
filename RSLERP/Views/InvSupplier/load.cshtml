@@ -47,12 +47,14 @@
 
                             <div class="form-group">
                                 <label>Type</label>
-                                <select name="VM_INVSUPPLIER.type" class="form-control">
+                                <select name="VM_INVSUPPLIER.type" class="form-control select2">
+                                    <option value="all">-- Select Supplier Type --</option>
                                     @foreach (InvSupplierType src in Model.VM_INVSUPPLIER_TYPES)
                                     {
                                         <option value="@src.id">@src.name</option>
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.type")
                             </div>
 
                             <div class="form-group">
@@ -63,12 +65,14 @@
 
                             <div class="form-group">
                                 <label>Country</label>
-                                <select name="VM_INVSUPPLIER.country_id" class="form-control">
+                                <select name="VM_INVSUPPLIER.country_id" class="form-control select2">
+                                    <option value="all">-- Select Country --</option>
                                     @foreach (Country src in Model.VM_COUNTRIES)
                                     {
                                         <option value="@src.id">@src.name</option>
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.country_id")
                             </div>
 
                             <div class="form-group">
@@ -115,12 +119,14 @@
 
                             <div class="form-group">
                                 <label>Account COA</label>
-                                <select name="VM_INVSUPPLIER.AnFCOA_id" class="form-control">
+                                <select name="VM_INVSUPPLIER.AnFCOA_id" class="form-control select2">
+                                    <option value="all">-- Select Account COA --</option>
                                     @foreach (AnFCOA src in Model.VM_ANFCOAS)
                                     {
                                         <option value="@src.Id">@src.Particular</option>
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVSUPPLIER.AnFCOA_id")
                             </div>
 
                             <div class="checkbox">

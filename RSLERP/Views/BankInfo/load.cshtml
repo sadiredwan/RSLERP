@@ -60,7 +60,8 @@
 
                             <div class="form-group">
                                 <label>Type</label>
-                                <select name="VM_BANK_INFO.type" class="form-control">
+                                <select name="VM_BANK_INFO.type" class="form-control select2">
+                                    <option value="all">-- Select Type --</option>
                                     @foreach (BankInfoType srcbit in Model.VM_BANK_INFO_TYPES)
                                     {
                                         <option value="@srcbit.id">@srcbit.name</option>
@@ -71,7 +72,8 @@
 
                             <div class="form-group">
                                 <label>Country</label>
-                                <select name="VM_BANK_INFO.country_id" class="form-control">
+                                <select name="VM_BANK_INFO.country_id" class="form-control select2">
+                                    <option value="all">-- Select Country --</option>
                                     @foreach (Country srcnt in Model.VM_COUNTRIES)
                                     {
                                         <option value="@srcnt.id">@srcnt.name</option>

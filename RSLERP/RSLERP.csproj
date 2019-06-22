@@ -9039,11 +9039,12 @@
     <Content Include="Views\InvWarehouse\load.cshtml" />
     <Content Include="Views\InvRackType\Index.cshtml" />
     <Content Include="Views\InvRackType\load.cshtml" />
+    <Content Include="Views\InvRack\Index.cshtml" />
+    <Content Include="Views\InvRack\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\CRM\" />
-    <Folder Include="Views\InvRack\" />
     <Folder Include="Views\Partials\OnChange\" />
   </ItemGroup>
   <ItemGroup>

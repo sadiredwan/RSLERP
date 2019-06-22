@@ -41,13 +41,15 @@
                             <input type="hidden" name="VM_PROJECT_SEGMENT.id" value="@Model.VM_PROJECT_SEGMENT.id" />
 
                             <div class="form-group">
-                                <label>Select Business Sector</label>
-                                <select name="VM_PROJECT_SEGMENT.business_sector_id" class="form-control">
+                                <label>Business Sector</label>
+                                <select name="VM_PROJECT_SEGMENT.business_sector_id" class="form-control select2">
+                                    <option value="all">-- Select Business Sector --</option>
                                     @foreach (BusinessSector srcbs in Model.VM_BUSINESS_SECTORS)
                                     {
                                         <option value="@srcbs.id">@srcbs.name</option>
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_PROJECT_SEGMENT.business_sector_id")
                             </div>
 
                             <div class="form-group">
