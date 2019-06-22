@@ -158,6 +158,10 @@ namespace RSLERP.Models
 
         public List<InvReturnType> VM_INVRETURN_TYPES { get; set; }
 
+        public SlsSDPType VM_SLSDPT_TYPE { get; set; }
+
+        public List<SlsSDPType> VM_SLSDPT_TYPES { get; set; }
+
     }
 
 

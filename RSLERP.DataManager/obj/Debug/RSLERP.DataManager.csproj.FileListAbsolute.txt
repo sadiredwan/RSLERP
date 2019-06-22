@@ -61,3 +61,4 @@ C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CoreC
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CopyComplete
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
+C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache

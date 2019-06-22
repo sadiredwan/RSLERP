@@ -82,6 +82,8 @@ namespace RSLERP.DataManager
 
         public DbSet<InvReturnType> InvReturnTypes { get; set; }
 
+        public DbSet<SlsSDPType> SlsSDPTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
