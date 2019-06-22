@@ -150,6 +150,14 @@ namespace RSLERP.Models
 
         public List<InvRack> VM_INVRACKS { get; set; }
 
+        public InvDamageType VM_INVDAMAGE_TYPE { get; set; }
+
+        public List<InvDamageType> VM_INVDAMAGE_TYPES { get; set; }
+
+        public InvReturnType VM_INVRETURN_TYPE { get; set; }
+
+        public List<InvReturnType> VM_INVRETURN_TYPES { get; set; }
+
     }
 
 

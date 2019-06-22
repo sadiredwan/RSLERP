@@ -78,6 +78,10 @@ namespace RSLERP.DataManager
 
         public DbSet<InvRack> InvRacks { get; set; }
 
+        public DbSet<InvDamageType> InvDamageTypes { get; set; }
+
+        public DbSet<InvReturnType> InvReturnTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

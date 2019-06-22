@@ -239,8 +239,10 @@
     <Compile Include="Controllers\SupplyChain\Common\InvManufacturerController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvSupplierController.cs" />
     <Compile Include="Controllers\SupplyChain\Common\InvUnitMeasurementController.cs" />
+    <Compile Include="Controllers\SupplyChain\Inventory\InvDamageTypeController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvRackController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvRackTypeController.cs" />
+    <Compile Include="Controllers\SupplyChain\Inventory\InvReturnTypeController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseController.cs" />
     <Compile Include="Controllers\SupplyChain\Inventory\InvWarehouseTypeController.cs" />
     <Compile Include="Controllers\SupplyChain\SupplyChainController.cs" />
@@ -9041,6 +9043,10 @@
     <Content Include="Views\InvRackType\load.cshtml" />
     <Content Include="Views\InvRack\Index.cshtml" />
     <Content Include="Views\InvRack\load.cshtml" />
+    <Content Include="Views\InvDamageType\Index.cshtml" />
+    <Content Include="Views\InvDamageType\load.cshtml" />
+    <Content Include="Views\InvReturnType\Index.cshtml" />
+    <Content Include="Views\InvReturnType\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
