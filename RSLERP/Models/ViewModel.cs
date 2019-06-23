@@ -134,6 +134,38 @@ namespace RSLERP.Models
 
         public List<AnFCOA> VM_ANFCOAS { get; set; }
 
+        public InvWarehouseType VM_INVWAREHOUSE_TYPE { get; set; }
+
+        public List<InvWarehouseType> VM_INVWAREHOUSE_TYPES { get; set; }
+
+        public InvWarehouse VM_INVWAREHOUSE { get; set; }
+
+        public List<InvWarehouse> VM_INVWAREHOUSES { get; set; }
+
+        public InvRackType VM_INVRACK_TYPE { get; set; }
+
+        public List<InvRackType> VM_INVRACK_TYPES { get; set; }
+
+        public InvRack VM_INVRACK { get; set; }
+
+        public List<InvRack> VM_INVRACKS { get; set; }
+
+        public InvDamageType VM_INVDAMAGE_TYPE { get; set; }
+
+        public List<InvDamageType> VM_INVDAMAGE_TYPES { get; set; }
+
+        public InvReturnType VM_INVRETURN_TYPE { get; set; }
+
+        public List<InvReturnType> VM_INVRETURN_TYPES { get; set; }
+
+        public SlsSDPType VM_SLSSDP_TYPE { get; set; }
+
+        public List<SlsSDPType> VM_SLSSDP_TYPES { get; set; }
+
+        public SlsSDP VM_SLSSDP { get; set; }
+
+        public List<SlsSDP> VM_SLSSDPS { get; set; }
+
     }
 
 

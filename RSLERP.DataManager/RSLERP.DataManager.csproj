@@ -99,6 +99,8 @@
     <Compile Include="Entity\CRM\TasksSummarys.cs" />
     <Compile Include="Entity\CRM\Task_Comments.cs" />
     <Compile Include="Entity\CRM\Users.cs" />
+    <Compile Include="Entity\Sales\SlsSDP.cs" />
+    <Compile Include="Entity\Sales\SlsSDPType.cs" />
     <Compile Include="Entity\Settings\ApplicationState.cs" />
     <Compile Include="Entity\Settings\AutoComplete.cs" />
     <Compile Include="Entity\DynamicClass.cs" />
@@ -129,10 +131,16 @@
     <Compile Include="Entity\CRM\Tasks.cs" />
     <Compile Include="Entity\Settings\CompanyUser.cs" />
     <Compile Include="Entity\Settings\UserRole.cs" />
+    <Compile Include="Entity\SupplyChain\InvDamageType.cs" />
     <Compile Include="Entity\SupplyChain\InvManufacturer.cs" />
+    <Compile Include="Entity\SupplyChain\InvRack.cs" />
+    <Compile Include="Entity\SupplyChain\InvRackType.cs" />
+    <Compile Include="Entity\SupplyChain\InvReturnType.cs" />
     <Compile Include="Entity\SupplyChain\InvSupplier.cs" />
     <Compile Include="Entity\SupplyChain\InvSupplierType.cs" />
     <Compile Include="Entity\SupplyChain\InvUnitMeasurement.cs" />
+    <Compile Include="Entity\SupplyChain\InvWarehouse.cs" />
+    <Compile Include="Entity\SupplyChain\InvWarehouseType.cs" />
     <Compile Include="GlobalVariables\GlobalAttributes.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_CmnTransactionalYears.cs" />
     <Compile Include="GlobalVariables\GlobalSpNames\Common\GlobalSp_Menu.cs" />

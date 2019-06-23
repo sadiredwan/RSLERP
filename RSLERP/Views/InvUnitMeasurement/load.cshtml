@@ -3,7 +3,7 @@
 @model RSLERP.Models.ViewModel
 @{
     ViewBag.Title = "load";
-    Layout = "~/Views/Shared/_LayoutSettings.cshtml";
+    Layout = "~/Views/Shared/_LayoutSupply.cshtml";
     String defaultParentName = "Root";
     int defaultParentId = 0;
 }
@@ -42,11 +42,10 @@
                             <input type="hidden" name="VM_INVUNIT_MEASUREMENT.id" value="@Model.VM_INVUNIT_MEASUREMENT.id" />
 
                             <div class="form-group">
-                                <label>Select Parent Unit</label>
-                                <select name="VM_INVUNIT_MEASUREMENT.parent_unit_id" class="form-control">
-
+                                <label>Parent Unit</label>
+                                <select name="VM_INVUNIT_MEASUREMENT.parent_unit_id" class="form-control select2">
+                                    <option value="all">-- Select Parent Unit --</option>
                                     <option value="@defaultParentId">@defaultParentName</option>
-
                                     @foreach (InvUnitMeasurement src in Model.VM_INVUNIT_MEASUREMENTS)
                                     {
                                         if (src.id != Model.VM_INVUNIT_MEASUREMENT.id)
@@ -55,6 +54,7 @@
                                         }
                                     }
                                 </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVUNIT_MEASUREMENT.parent_unit_id")
                             </div>
 
                             <div class="form-group">

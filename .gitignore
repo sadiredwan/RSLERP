@@ -142,3 +142,15 @@ RSLERP/obj/Debug/RSLERP.pdb
 .vs/RSLERP/v15/Server/sqlite3/storage.ide-wal
 
 .vs/config/applicationhost.config
+
+.vs/RSLERP/v15/.suo
+
+RSLERP/obj/Debug/RSLERP.dll
+
+RSLERP.DataManager/obj/Debug/RSLERP.DataManager.csprojAssemblyReference.cache
+
+RSLERP.DataManager/obj/Debug/RSLERP.DataManager.dll
+
+RSLERP.DataManager/bin/Debug/RSLERP.DataManager.dll
+
+RSLERP/bin/RSLERP.dll
