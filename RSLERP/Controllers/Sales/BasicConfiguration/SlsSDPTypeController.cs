@@ -30,7 +30,7 @@ namespace RSLERP.Controllers.Settings
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
 
-            vmdl.VM_SLSDPT_TYPES = new DBContext().SlsSDPTypes.Where(x => x.CompanyId == COMPANY_ID).ToList();
+            vmdl.VM_SLSSDP_TYPES = new DBContext().SlsSDPTypes.Where(x => x.CompanyId == COMPANY_ID).ToList();
 
             return View(vmdl);
         }
@@ -73,7 +73,7 @@ namespace RSLERP.Controllers.Settings
             }
             else
             {
-                vmdl.VM_SLSDPT_TYPE = mdlSlsSDPType;
+                vmdl.VM_SLSSDP_TYPE = mdlSlsSDPType;
             }
 
             return View(vmdl);
@@ -96,14 +96,14 @@ namespace RSLERP.Controllers.Settings
             {
 
                 //check if already exist then update
-                if (new DBContext().SlsSDPTypes.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.id == vmdl.VM_SLSDPT_TYPE.id).Count > 0)
+                if (new DBContext().SlsSDPTypes.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.id == vmdl.VM_SLSSDP_TYPE.id).Count > 0)
                 {
                     //Update SlsSDPType
-                    //VM_SLSDPT_TYPE.updated_at = DateTime.Now;
+                    //VM_SLSSDP_TYPE.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
-                        contxt.SlsSDPTypes.Attach(vmdl.VM_SLSDPT_TYPE);
-                        contxt.Entry(vmdl.VM_SLSDPT_TYPE).State = EntityState.Modified;
+                        contxt.SlsSDPTypes.Attach(vmdl.VM_SLSSDP_TYPE);
+                        contxt.Entry(vmdl.VM_SLSSDP_TYPE).State = EntityState.Modified;
                         contxt.SaveChanges();
 
                     }
@@ -114,7 +114,7 @@ namespace RSLERP.Controllers.Settings
                     //Add new SlsSDPType
                     using (var contxt = new DBContext())
                     {
-                        contxt.SlsSDPTypes.Add(vmdl.VM_SLSDPT_TYPE);
+                        contxt.SlsSDPTypes.Add(vmdl.VM_SLSSDP_TYPE);
                         contxt.SaveChanges();
                     }
                     GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);

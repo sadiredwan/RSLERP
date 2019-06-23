@@ -84,6 +84,8 @@ namespace RSLERP.DataManager
 
         public DbSet<SlsSDPType> SlsSDPTypes { get; set; }
 
+        public DbSet<SlsSDP> SlsSDPs { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

@@ -219,6 +219,7 @@
     <Compile Include="Controllers\Common\MenuController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
+    <Compile Include="Controllers\Sales\BasicConfiguration\SlsSDPController.cs" />
     <Compile Include="Controllers\Sales\BasicConfiguration\SlsSDPTypeController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
     <Compile Include="Controllers\Settings\CommonSetting\BankInfoController.cs" />
@@ -9050,6 +9051,8 @@
     <Content Include="Views\InvReturnType\load.cshtml" />
     <Content Include="Views\SlsSDPType\Index.cshtml" />
     <Content Include="Views\SlsSDPType\load.cshtml" />
+    <Content Include="Views\SlsSDP\Index.cshtml" />
+    <Content Include="Views\SlsSDP\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

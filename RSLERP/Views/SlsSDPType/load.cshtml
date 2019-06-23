@@ -37,30 +37,30 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="box-body">
-                            <input type="hidden" name="VM_SLSDPT_TYPE.id" value="@Model.VM_SLSDPT_TYPE.id" />
+                            <input type="hidden" name="VM_SLSSDP_TYPE.id" value="@Model.VM_SLSSDP_TYPE.id" />
 
                             <div class="form-group">
                                 <label class="control-label">Name</label>
-                                <input type="text" class="form-control" name="VM_SLSDPT_TYPE.name" id="input_slssdptypname" placeholder="Name" value="@Model.VM_SLSDPT_TYPE.name">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSDPT_TYPE.name")
+                                <input type="text" class="form-control" name="VM_SLSSDP_TYPE.name" id="input_slssdptypname" placeholder="Name" value="@Model.VM_SLSSDP_TYPE.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSSDP_TYPE.name")
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">Remarks</label>
-                                <input type="text" class="form-control" name="VM_SLSDPT_TYPE.remarks" id="input_slssdptyprem" placeholder="Remarks" value="@Model.VM_SLSDPT_TYPE.remarks">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSDPT_TYPE.remarks")
+                                <input type="text" class="form-control" name="VM_SLSSDP_TYPE.remarks" id="input_slssdptyprem" placeholder="Remarks" value="@Model.VM_SLSSDP_TYPE.remarks">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSSDP_TYPE.remarks")
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">Max Payment Days</label>
-                                <input type="text" class="form-control" name="VM_SLSDPT_TYPE.max_payment_days" id="input_slssdptypmpd" placeholder="Max Payment Days" value="@Model.VM_SLSDPT_TYPE.max_payment_days">
-                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSDPT_TYPE.max_payment_days")
+                                <input type="text" class="form-control" name="VM_SLSSDP_TYPE.max_payment_days" id="input_slssdptypmpd" placeholder="Max Payment Days" value="@Model.VM_SLSSDP_TYPE.max_payment_days">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSSDP_TYPE.max_payment_days")
                             </div>
 
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">@(Model.VM_SLSDPT_TYPE.id == 0 ? "Save" : "Update")</button>
+                            <button type="submit" class="btn btn-primary">@(Model.VM_SLSSDP_TYPE.id == 0 ? "Save" : "Update")</button>
                         </div>
                     }
                 </div>
