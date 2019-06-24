@@ -166,6 +166,10 @@ namespace RSLERP.Models
 
         public List<SlsSDP> VM_SLSSDPS { get; set; }
 
+        public BnkBranch VM_BNK_BRANCH { get; set; }
+
+        public List<BnkBranch> VM_BNK_BRANCHES { get; set; }
+
     }
 
 

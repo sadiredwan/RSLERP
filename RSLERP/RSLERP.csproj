@@ -209,6 +209,7 @@
     <Compile Include="Controllers\Accounts\AccountController.cs" />
     <Compile Include="Controllers\Accounts\SigninCompanyController.cs" />
     <Compile Include="Controllers\Bank\BankController.cs" />
+    <Compile Include="Controllers\Bank\Settings\BnkBranchController.cs" />
     <Compile Include="Controllers\Common\CommonController.cs" />
     <Compile Include="Controllers\Common\CommonLayoutController.cs" />
     <Compile Include="Controllers\Common\ReportController.cs" />
@@ -9053,6 +9054,8 @@
     <Content Include="Views\SlsSDPType\load.cshtml" />
     <Content Include="Views\SlsSDP\Index.cshtml" />
     <Content Include="Views\SlsSDP\load.cshtml" />
+    <Content Include="Views\BnkBranch\Index.cshtml" />
+    <Content Include="Views\BnkBranch\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -86,6 +86,8 @@ namespace RSLERP.DataManager
 
         public DbSet<SlsSDP> SlsSDPs { get; set; }
 
+        public DbSet<BnkBranch> BnkBranches { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
