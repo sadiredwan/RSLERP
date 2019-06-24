@@ -89,6 +89,7 @@
     <Compile Include="DLL\Security\SecurityAccessDLL.cs" />
     <Compile Include="DLL\CRM\SupportTypeDLL.cs" />
     <Compile Include="Entity\AccountFinance\AnFCOA.cs" />
+    <Compile Include="Entity\Bank\BnkAccountType.cs" />
     <Compile Include="Entity\Bank\BnkBranch.cs" />
     <Compile Include="Entity\BaseModel\IBaseModel.cs" />
     <Compile Include="Entity\Common\CmnTransactionalYears.cs" />

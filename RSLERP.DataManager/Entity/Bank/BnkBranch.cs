@@ -47,11 +47,13 @@ namespace RSLERP.DataManager.Entity
                 {
                     var idProperty = validationContext.ObjectInstance.GetType().GetProperty("id");
                     var idPropertyValue = idProperty.GetValue(validationContext.ObjectInstance, null);
+                    var bankInfo_id = validationContext.ObjectType.GetProperty("s_BankInfo_id");
+                    var bankInfo_idValue = bankInfo_id.GetValue(validationContext.ObjectInstance, null);
                     if (idPropertyValue.ToString() != "0")
                     {
                         return ValidationResult.Success;
                     }
-                    var findBnkBranch = new DBContext().BnkBranches.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.name == val);
+                    var findBnkBranch = new DBContext().BnkBranches.Where(x => x.CompanyId == COMPANY_ID).Where(x => x.s_BankInfo_id == (int)bankInfo_idValue).ToList().FindAll(x => x.name == val);
                     if (findBnkBranch.Count > 0)
                     {
                         return new ValidationResult(FormatErrorMessage(validationContext.MemberName));

@@ -170,6 +170,10 @@ namespace RSLERP.Models
 
         public List<BnkBranch> VM_BNK_BRANCHES { get; set; }
 
+        public BnkAccountType VM_BNK_ACCOUNT_TYPE { get; set; }
+
+        public List<BnkAccountType> VM_BNK_ACCOUNT_TYPES { get; set; }
+
     }
 
 

@@ -88,6 +88,8 @@ namespace RSLERP.DataManager
 
         public DbSet<BnkBranch> BnkBranches { get; set; }
 
+        public DbSet<BnkAccountType> BnkAccountTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
