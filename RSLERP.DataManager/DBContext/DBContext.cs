@@ -92,6 +92,8 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmDesignation> HrmDesignations { get; set; }
 
+        public DbSet<HrmSection> HrmSections { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

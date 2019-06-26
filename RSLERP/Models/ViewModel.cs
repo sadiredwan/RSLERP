@@ -178,6 +178,10 @@ namespace RSLERP.Models
 
         public List<HrmDesignation> VM_HRM_DESIGNATIONS { get; set; }
 
+        public HrmSection VM_HRM_SECTION { get; set; }
+
+        public List<HrmSection> VM_HRM_SECTIONS { get; set; }
+
     }
 
 

@@ -61,4 +61,3 @@ D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\Microsoft.Web.Infrastructure.xml
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
-C:\Workspace\rslerp\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache
