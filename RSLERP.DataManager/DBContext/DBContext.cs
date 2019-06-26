@@ -90,6 +90,8 @@ namespace RSLERP.DataManager
 
         public DbSet<BnkAccountType> BnkAccountTypes { get; set; }
 
+        public DbSet<HrmDesignation> HrmDesignations { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

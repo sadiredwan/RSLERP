@@ -219,6 +219,7 @@
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Home\StartController.cs" />
     <Compile Include="Controllers\Common\MenuController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmDesignationController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\BasicConfiguration\SlsSDPController.cs" />
@@ -9059,6 +9060,8 @@
     <Content Include="Views\BnkBranch\load.cshtml" />
     <Content Include="Views\BnkAccountType\Index.cshtml" />
     <Content Include="Views\BnkAccountType\load.cshtml" />
+    <Content Include="Views\HrmDesignation\Index.cshtml" />
+    <Content Include="Views\HrmDesignation\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -174,6 +174,10 @@ namespace RSLERP.Models
 
         public List<BnkAccountType> VM_BNK_ACCOUNT_TYPES { get; set; }
 
+        public HrmDesignation VM_HRM_DESIGNATION { get; set; }
+
+        public List<HrmDesignation> VM_HRM_DESIGNATIONS { get; set; }
+
     }
 
 
