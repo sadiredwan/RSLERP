@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Home\StartController.cs" />
     <Compile Include="Controllers\Common\MenuController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmDesignationController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmEmployeeTypeController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSectionController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
@@ -9068,6 +9069,8 @@
     <Content Include="Views\HrmSection\load.cshtml" />
     <Content Include="Views\HrmSubSection\Index.cshtml" />
     <Content Include="Views\HrmSubSection\load.cshtml" />
+    <Content Include="Views\HrmEmployeeType\Index.cshtml" />
+    <Content Include="Views\HrmEmployeeType\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

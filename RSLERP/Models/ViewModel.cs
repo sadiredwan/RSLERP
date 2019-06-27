@@ -186,6 +186,10 @@ namespace RSLERP.Models
 
         public List<HrmSubSection> VM_HRM_SUB_SECTIONS { get; set; }
 
+        public HrmEmployeeType VM_HRM_EMPLOYEE_TYPE { get; set; }
+
+        public List<HrmEmployeeType> VM_HRM_EMPLOYEE_TYPES { get; set; }
+
     }
 
 
