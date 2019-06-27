@@ -103,6 +103,7 @@
     <Compile Include="Entity\CRM\Users.cs" />
     <Compile Include="Entity\HRM\HrmDesignation.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />
+    <Compile Include="Entity\HRM\HrmSubSection.cs" />
     <Compile Include="Entity\Sales\SlsSDP.cs" />
     <Compile Include="Entity\Sales\SlsSDPType.cs" />
     <Compile Include="Entity\Settings\ApplicationState.cs" />

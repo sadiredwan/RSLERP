@@ -9,7 +9,7 @@ namespace RSLERP.Models
 {
     public class ViewModel : BaseModel
     {
-        
+
         public List<TreeMenu> VM_Tree { get; set; }
 
         public s_User VM_USER { get; set; }
@@ -181,6 +181,10 @@ namespace RSLERP.Models
         public HrmSection VM_HRM_SECTION { get; set; }
 
         public List<HrmSection> VM_HRM_SECTIONS { get; set; }
+
+        public HrmSubSection VM_HRM_SUB_SECTION { get; set; }
+
+        public List<HrmSubSection> VM_HRM_SUB_SECTIONS { get; set; }
 
     }
 
