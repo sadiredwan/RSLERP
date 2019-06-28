@@ -30,7 +30,6 @@ namespace RSLERP.DataManager.Entity
         public int? CompanyId { get; set; }
         public int? app_id { get; set; }
 
-
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
         public class HrmEmployeeTypeNameValidation : ValidationAttribute
         {
@@ -63,7 +62,9 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+        }
+
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
         public class HrmEmployeeTypeShortNameValidation : ValidationAttribute
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -95,6 +96,7 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }
+        }
+
     }
 }

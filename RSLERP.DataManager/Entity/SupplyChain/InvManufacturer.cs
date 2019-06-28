@@ -63,6 +63,7 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }
+        }
+
     }
 }

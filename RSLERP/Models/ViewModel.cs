@@ -190,6 +190,10 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeType> VM_HRM_EMPLOYEE_TYPES { get; set; }
 
+        public HrmEmploymentType VM_HRM_EMPLOYMENT_TYPE { get; set; }
+
+        public List<HrmEmploymentType> VM_HRM_EMPLOYMENT_TYPES { get; set; }
+
     }
 
 

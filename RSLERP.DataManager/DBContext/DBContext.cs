@@ -98,6 +98,8 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmEmployeeType> HrmEmployeeTypes { get; set; }
 
+        public DbSet<HrmEmploymentType> HrmEmploymentTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

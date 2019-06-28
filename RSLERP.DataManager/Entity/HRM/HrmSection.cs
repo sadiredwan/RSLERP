@@ -68,7 +68,9 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+        }
+
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
         public class HrmSectionShortNameValidation : ValidationAttribute
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -100,6 +102,7 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }
+        }
+
     }
 }

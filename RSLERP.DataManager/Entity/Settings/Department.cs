@@ -19,11 +19,13 @@ namespace RSLERP.DataManager.Entity
         [Required]
         [DepartmentNameValidation(ErrorMessage = "Department already exists")]
         public string name { get; set; }
-        public string description { get; set; }        public int? created_by { get; set; }
+        public string description { get; set; }
+        public int? created_by { get; set; }
         public int? CompanyId { get; set; }
         public DateTime? created_at { get; set; }
         public int? modified_by { get; set; }
-        public DateTime? modified_at { get; set; }        public int? app_id { get; set; }
+        public DateTime? modified_at { get; set; }
+        public int? app_id { get; set; }
         
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
         public class DepartmentNameValidation : ValidationAttribute
@@ -56,6 +58,7 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }
+        }
+
     }
 }
