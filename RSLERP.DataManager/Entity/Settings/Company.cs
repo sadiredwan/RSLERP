@@ -32,7 +32,9 @@ namespace RSLERP.DataManager.Entity
         public int? CompanyId { get; set; }
         public DateTime? created_at { get; set; }
         public int? modified_by { get; set; }
-        public DateTime? modified_at { get; set; }        public int? app_id { get; set; }
+        public DateTime? modified_at { get; set; }
+
+        public int? app_id { get; set; }
 
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
@@ -66,7 +68,8 @@ namespace RSLERP.DataManager.Entity
             {
                 return base.FormatErrorMessage(name);
             }
-        }
+        }
+
     }
 
 

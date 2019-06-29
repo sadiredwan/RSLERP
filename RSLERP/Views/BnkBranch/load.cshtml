@@ -1,0 +1,121 @@
+﻿
+@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutBank.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Bank
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/BnkBranch/">Bank Branch</a></li>
+            <li class="active">Bank Branch Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/BnkBranch" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_BNK_BRANCH.id" value="@Model.VM_BNK_BRANCH.id" />
+
+                            <div class="form-group">
+                                <label>Bank</label>
+                                <select name="VM_BNK_BRANCH.s_BankInfo_id" class="form-control select2">
+                                    <option value="all">-- Select Bank --</option>
+                                    @foreach (BankInfo src in Model.VM_BANK_INFOS)
+                                    {
+                                        <option value="@src.id">@src.name</option>
+                                    }
+                                </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.s_BankInfo_id")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Branch Name</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.name" id="bb_inputname" placeholder="Branch Name" value="@Model.VM_BNK_BRANCH.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.name")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Location</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.location" id="bb_inputlocation" placeholder="Location" value="@Model.VM_BNK_BRANCH.location">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.location")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Phone</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.phone" id="bb_inputphone" placeholder="Phone" value="@Model.VM_BNK_BRANCH.phone">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.phone")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Fax</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.fax" id="bb_inputfax" placeholder="Phone" value="@Model.VM_BNK_BRANCH.fax">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.fax")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.email" id="bb_inputemail" placeholder="Email" value="@Model.VM_BNK_BRANCH.email">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.email")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Remarks</label>
+                                <input type="text" class="form-control" name="VM_BNK_BRANCH.remarks" id="bb_inputremarks" placeholder="Email" value="@Model.VM_BNK_BRANCH.remarks">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.remarks")
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_BNK_BRANCH.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
