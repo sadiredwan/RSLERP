@@ -34,7 +34,8 @@ namespace RSLERP.DataManager.Entity
         public int? modified_by { get; set; }
         public DateTime? modified_at { get; set; }
         public int? CompanyId { get; set; }
-        public int? app_id { get; set; }
+        public int? app_id { get; set; }
+
 
 
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]

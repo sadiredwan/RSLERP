@@ -1,0 +1,91 @@
+﻿
+@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutBank.cshtml";
+    string type1 = "Payable";
+    String type2 = "Receivable";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Bank
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/BnkAccountType/">Bank Account Type</a></li>
+            <li class="active">Bank Account Type Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/BnkAccountType" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_BNK_ACCOUNT_TYPE.id" value="@Model.VM_BNK_ACCOUNT_TYPE.id" />
+
+                            <div class="form-group">
+                                <label class="control-label">Account Type Name</label>
+                                <input type="text" class="form-control" name="VM_BNK_ACCOUNT_TYPE.name" id="bat_inputname" placeholder="Account Type Name" value="@Model.VM_BNK_ACCOUNT_TYPE.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_ACCOUNT_TYPE.name")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Payable/Receivable</label>
+                                <select name="VM_BNK_ACCOUNT_TYPE.pay_or_receive" class="form-control select2">
+                                    <option value="all">-- Select Payable/Receivable --</option>
+                                    <option value=1>@type1</option>
+                                    <option value=2>@type2</option>
+                                </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_ACCOUNT_TYPE.pay_or_receive")
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_BNK_ACCOUNT_TYPE.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}

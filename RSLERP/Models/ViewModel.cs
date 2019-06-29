@@ -9,7 +9,7 @@ namespace RSLERP.Models
 {
     public class ViewModel : BaseModel
     {
-        
+
         public List<TreeMenu> VM_Tree { get; set; }
 
         public s_User VM_USER { get; set; }
@@ -165,6 +165,34 @@ namespace RSLERP.Models
         public SlsSDP VM_SLSSDP { get; set; }
 
         public List<SlsSDP> VM_SLSSDPS { get; set; }
+
+        public BnkBranch VM_BNK_BRANCH { get; set; }
+
+        public List<BnkBranch> VM_BNK_BRANCHES { get; set; }
+
+        public BnkAccountType VM_BNK_ACCOUNT_TYPE { get; set; }
+
+        public List<BnkAccountType> VM_BNK_ACCOUNT_TYPES { get; set; }
+
+        public HrmDesignation VM_HRM_DESIGNATION { get; set; }
+
+        public List<HrmDesignation> VM_HRM_DESIGNATIONS { get; set; }
+
+        public HrmSection VM_HRM_SECTION { get; set; }
+
+        public List<HrmSection> VM_HRM_SECTIONS { get; set; }
+
+        public HrmSubSection VM_HRM_SUB_SECTION { get; set; }
+
+        public List<HrmSubSection> VM_HRM_SUB_SECTIONS { get; set; }
+
+        public HrmEmployeeType VM_HRM_EMPLOYEE_TYPE { get; set; }
+
+        public List<HrmEmployeeType> VM_HRM_EMPLOYEE_TYPES { get; set; }
+
+        public HrmEmploymentType VM_HRM_EMPLOYMENT_TYPE { get; set; }
+
+        public List<HrmEmploymentType> VM_HRM_EMPLOYMENT_TYPES { get; set; }
 
     }
 

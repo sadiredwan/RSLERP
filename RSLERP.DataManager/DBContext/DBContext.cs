@@ -86,6 +86,20 @@ namespace RSLERP.DataManager
 
         public DbSet<SlsSDP> SlsSDPs { get; set; }
 
+        public DbSet<BnkBranch> BnkBranches { get; set; }
+
+        public DbSet<BnkAccountType> BnkAccountTypes { get; set; }
+
+        public DbSet<HrmDesignation> HrmDesignations { get; set; }
+
+        public DbSet<HrmSection> HrmSections { get; set; }
+
+        public DbSet<HrmSubSection> HrmSubSections { get; set; }
+
+        public DbSet<HrmEmployeeType> HrmEmployeeTypes { get; set; }
+
+        public DbSet<HrmEmploymentType> HrmEmploymentTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

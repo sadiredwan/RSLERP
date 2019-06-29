@@ -209,6 +209,8 @@
     <Compile Include="Controllers\Accounts\AccountController.cs" />
     <Compile Include="Controllers\Accounts\SigninCompanyController.cs" />
     <Compile Include="Controllers\Bank\BankController.cs" />
+    <Compile Include="Controllers\Bank\Settings\BnkAccountTypeController.cs" />
+    <Compile Include="Controllers\Bank\Settings\BnkBranchController.cs" />
     <Compile Include="Controllers\Common\CommonController.cs" />
     <Compile Include="Controllers\Common\CommonLayoutController.cs" />
     <Compile Include="Controllers\Common\ReportController.cs" />
@@ -217,6 +219,11 @@
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Home\StartController.cs" />
     <Compile Include="Controllers\Common\MenuController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmDesignationController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmEmployeeTypeController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmEmploymentTypeController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmSectionController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\BasicConfiguration\SlsSDPController.cs" />
@@ -9053,6 +9060,20 @@
     <Content Include="Views\SlsSDPType\load.cshtml" />
     <Content Include="Views\SlsSDP\Index.cshtml" />
     <Content Include="Views\SlsSDP\load.cshtml" />
+    <Content Include="Views\BnkBranch\Index.cshtml" />
+    <Content Include="Views\BnkBranch\load.cshtml" />
+    <Content Include="Views\BnkAccountType\Index.cshtml" />
+    <Content Include="Views\BnkAccountType\load.cshtml" />
+    <Content Include="Views\HrmDesignation\Index.cshtml" />
+    <Content Include="Views\HrmDesignation\load.cshtml" />
+    <Content Include="Views\HrmSection\Index.cshtml" />
+    <Content Include="Views\HrmSection\load.cshtml" />
+    <Content Include="Views\HrmSubSection\Index.cshtml" />
+    <Content Include="Views\HrmSubSection\load.cshtml" />
+    <Content Include="Views\HrmEmployeeType\Index.cshtml" />
+    <Content Include="Views\HrmEmployeeType\load.cshtml" />
+    <Content Include="Views\HrmEmploymentType\Index.cshtml" />
+    <Content Include="Views\HrmEmploymentType\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

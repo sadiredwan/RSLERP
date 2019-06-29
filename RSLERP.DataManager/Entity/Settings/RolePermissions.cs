@@ -21,9 +21,12 @@ namespace RSLERP.DataManager.Entity
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public int ModifiedBy { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
+
 
         //Extra
-        public String R_DisplayName { get; set; }
+        public String R_DisplayName { get; set; }
+
+
     }
 }
