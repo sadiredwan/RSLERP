@@ -194,6 +194,10 @@ namespace RSLERP.Models
 
         public List<HrmEmploymentType> VM_HRM_EMPLOYMENT_TYPES { get; set; }
 
+        public HrmShift VM_HRM_SHIFT { get; set; }
+
+        public List<HrmShift> VM_HRM_SHIFTS { get; set; }
+
     }
 
 
