@@ -144,7 +144,15 @@ namespace RSLERP.DataManager
             }
             return sb.ToString();
         }
-        
+
+        public static string GetBaseUrl()
+        {
+            var request = HttpContext.Current.Request;
+            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
+            if (appUrl != "/") { appUrl = "/" + appUrl; }
+            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+            return baseUrl;
+        }
 
         public static class errorstate
         {
@@ -175,11 +183,8 @@ namespace RSLERP.DataManager
                 return sb.ToString();
             }
 
-
-
         }
 
-      
     }
 
     public static class RSLERPApplication
@@ -190,6 +195,5 @@ namespace RSLERP.DataManager
             return new DBContext().ApplicationStates.Find(app_id);
         }
     }
-
     
 }

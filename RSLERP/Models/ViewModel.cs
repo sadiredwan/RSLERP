@@ -198,6 +198,10 @@ namespace RSLERP.Models
 
         public List<HrmShift> VM_HRM_SHIFTS { get; set; }
 
+        public HrmEmployeeOfficial VM_HRM_EMPLOYEE_OFFICIAL { get; set; }
+
+        public List<HrmEmployeeOfficial> VM_HRM_EMPLOYEE_OFFICIALS { get; set; }
+
     }
 
 

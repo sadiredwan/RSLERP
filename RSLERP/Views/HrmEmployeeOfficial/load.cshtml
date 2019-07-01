@@ -1,0 +1,306 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@*@using RSLERP.DataManager*@
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+    String defaultParentName = "Top Most Employee";
+    int defaultParentId = 0;
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Official Employee
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/HrmEmployeeOfficial">Official Employee Information</a></li>
+            <li class="active">Employee Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    @*<h3 class="box-title">User</h3>*@
+                    <a href="~/HrmEmployeeOfficial" class="btn btn-primary">« Back</a>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="box-body">
+                        <input type="hidden" name="VM_HRM_EMPLOYEE_OFFICIAL.id" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.id" />
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.name" id="input_hrmeoname" placeholder="Name" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.name">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.name")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">ID</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.employee_id" id="input_hrmeoid" placeholder="Employee ID" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.employee_id">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.employee_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Designation</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.designation_id" class="form-control select2">
+                                        <option value="all">-- Select Designation --</option>
+                                        @foreach (HrmDesignation src in Model.VM_HRM_DESIGNATIONS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.designation_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.department_id" class="form-control select2">
+                                        <option value="all">-- Select Department --</option>
+                                        @foreach (Department src in Model.VM_DEPARTMENTS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.department_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Section</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.section_id" class="form-control select2">
+                                        <option value="all">-- Select Section --</option>
+                                        @foreach (HrmSection src in Model.VM_HRM_SECTIONS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.section_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Sub-Section</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.subsection_id" class="form-control select2">
+                                        <option value="all">-- Select Sub-Section --</option>
+                                        @foreach (HrmSubSection src in Model.VM_HRM_SUB_SECTIONS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.subsection_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Reporting Officer</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id" class="form-control select2">
+                                        <option value="all">-- Select Reporting Officer --</option>
+                                        <option value="@defaultParentId">@defaultParentName</option>
+                                        @foreach (HrmEmployeeOfficial src in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                                        {
+                                            if (src.id != Model.VM_HRM_EMPLOYEE_OFFICIAL.id)
+                                            {
+                                                <option value="@src.id">@src.name</option>
+                                            }
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Business</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.business_id" class="form-control select2">
+                                        <option value="all">-- Select Business Sector --</option>
+                                        @foreach (BusinessSector src in Model.VM_BUSINESS_SECTORS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.subsection_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Project</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.project_segment_id" class="form-control select2">
+                                        <option value="all">-- Select Project Segment --</option>
+                                        @foreach (ProjectSegment src in Model.VM_PROJECT_SEGMENTS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.project_segment_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Joining Date</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input readonly="readonly" type="text" class="form-control pull-right datepicker" id="datepicker1" name="VM_HRM_EMPLOYEE_OFFICIAL.joining_date" value="@((Model.VM_HRM_EMPLOYEE_OFFICIAL.joining_date == null || Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_OFFICIAL.joining_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_OFFICIAL.joining_date).ToString("dd MMMM yyyy"))">
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.joining_date")
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Confirmation Date</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input readonly="readonly" type="text" class="form-control pull-right datepicker" id="datepicker2" name="VM_HRM_EMPLOYEE_OFFICIAL.confirmation_date" value="@((Model.VM_HRM_EMPLOYEE_OFFICIAL.confirmation_date == null || Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_OFFICIAL.joining_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_OFFICIAL.confirmation_date).ToString("dd MMMM yyyy"))">
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.confirmation_date")
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Shift</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.shift_id" class="form-control select2">
+                                        <option value="all">-- Select Shift --</option>
+                                        @foreach (HrmShift src in Model.VM_HRM_SHIFTS)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.shift_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Employee Type</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.employee_type_id" class="form-control select2">
+                                        <option value="all">-- Select Employee Type --</option>
+                                        @foreach (HrmEmployeeType src in Model.VM_HRM_EMPLOYEE_TYPES)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.employee_type_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Employment Type</label>
+                                    <select name="VM_HRM_EMPLOYEE_OFFICIAL.employment_type_id" class="form-control select2">
+                                        <option value="all">-- Select Employment Type --</option>
+                                        @foreach (HrmEmploymentType src in Model.VM_HRM_EMPLOYMENT_TYPES)
+                                        {
+                                            <option value="@src.id">@src.name</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.employment_type_id")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Basic</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.basic" id="input_hrmeobasic" placeholder="Basic" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.basic">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.basic")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Bank Account No.</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.bank_account_no" id="input_hrmeoban" placeholder="Bank Account No." value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.bank_account_no">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.bank_account_no")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">PABX No.</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.pabx_no" id="input_hrmeoban" placeholder="PABX No." value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.pabx_no">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.pabx_no")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Official Email</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.official_email" id="input_hrmeoemail" placeholder="Official Email" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.official_email">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.official_email")
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Official Contact No.</label>
+                                    <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_OFFICIAL.official_contact_no" id="input_hrmeocontact" placeholder="Official Contact No." value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.official_contact_no">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.official_contact_no")
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="form-group-lg">
+                                        @*<label class="control-label">Photo</label>*@
+                                        @if (Model.VM_HRM_EMPLOYEE_OFFICIAL.picture != "")
+                                        {
+                                            <img height="250" width="300" id="image" src="@RSLERP.DataManager.Utility.GetBaseUrl()@Model.VM_HRM_EMPLOYEE_OFFICIAL.picture" alt=" " />
+                                        }
+                                        else
+                                        {
+                                            <img style="display:none" height="250" width="300" id="image" src="" alt="" />
+                                        }
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="photoUpload">Upload Photo</label>
+                                        <input type="file" name="file1" id="imageFile" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_HRM_EMPLOYEE_OFFICIAL.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                        }
+                    </div>
+                }
+            </div>
+            <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+        $("#imageFile").change(function () {
+            readURL(this);
+        });
+        function readURL(input) {
+
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#image').css("display", "block");
+                    $('#image').attr('src', e.target.result);
+                    $('#photoUpload').val("true");
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
+
