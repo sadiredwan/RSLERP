@@ -194,6 +194,10 @@ namespace RSLERP.Models
 
         public List<HrmEmploymentType> VM_HRM_EMPLOYMENT_TYPES { get; set; }
 
+        public TimeSpan FromTime { get; set; }
+
+       
+
     }
 
 

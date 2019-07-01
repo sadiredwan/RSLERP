@@ -44,17 +44,14 @@
                                 <input type="text" class="form-control" name="VM_COMPANE.c_Name" id="input_companyname" placeholder="Name" value="@Model.VM_COMPANE.c_Name">
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
                             </div>
-                            <div class="form-group">
-                                <label>Time picker:</label>
-
-                                <div class="input-group">
-                                    <input type="text" class="form-control timepicker">
-
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
+	                <div class="form-group">
+                                <label for="dtp_input3" class="col-md-2 control-label">Time Picking</label>
+                                <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                    <input class="form-control" size="16" name="FromTime" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                                 </div>
-                                <!-- /.input group -->
+				                <input type="hidden" id="dtp_input3" value="" /><br/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email</label>
@@ -94,9 +91,20 @@
         $(function () {
 
             $('.select2').select2();
+            $('.timepicker').timepicker();
 
         });
-        $('.timepicker').timepicker();
+        $('.form_time').datetimepicker({
+            language: 'en',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
 
         $('.datepicker').datepicker({
             format: 'dd MM yyyy',
