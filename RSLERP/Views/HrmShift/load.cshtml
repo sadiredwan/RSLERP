@@ -1,0 +1,154 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Shift
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/HrmShift">Shift</a></li>
+            <li class="active">Shift Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/HrmShift" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_HRM_SHIFT.id" value="@Model.VM_HRM_SHIFT.id" />
+
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" name="VM_HRM_SHIFT.name" id="input_shftname" placeholder="Name" value="@Model.VM_HRM_SHIFT.name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.name")
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>From (Hour)</label>
+                                        <select name="VM_HRM_SHIFT.from_hour" class="form-control select2">
+                                            <option value="all">-- Select Hour --</option>
+                                            @for (int i = 1; i <= 24; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.from_hour")
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>(Minute)</label>
+                                        <select name="VM_HRM_SHIFT.from_minute" class="form-control select2">
+                                            <option value="all">-- Select Minute --</option>
+                                            @for (int i = 1; i <= 60; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.from_minute")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>To (Hour)</label>
+                                        <select name="VM_HRM_SHIFT.to_hour" class="form-control select2">
+                                            <option value="all">-- Select Hour --</option>
+                                            @for (int i = 1; i <= 24; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.to_hour")
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>(Minute)</label>
+                                        <select name="VM_HRM_SHIFT.to_minute" class="form-control select2">
+                                            <option value="all">-- Select Minute --</option>
+                                            @for (int i = 1; i <= 60; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                        @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.to_minute")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Effective Date:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input readonly="readonly" type="text" class="form-control pull-right datepicker" id="datepicker2" name="VM_HRM_SHIFT.effective_date" value="@((Model.VM_HRM_SHIFT.effective_date == null || Convert.ToDateTime(Model.VM_HRM_SHIFT.effective_date).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_HRM_SHIFT.effective_date).ToString("dd MMMM yyyy"))">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.effective_date")
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                <label class="control-label">Working Hours</label>
+                                <input type="text" class="form-control" name="VM_HRM_SHIFT.working_hours" id="input_shftwh" placeholder="Name" value="@Model.VM_HRM_SHIFT.working_hours">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.working_hours")
+                            </div>*@
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_HRM_SHIFT.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
+

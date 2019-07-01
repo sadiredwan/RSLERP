@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmEmployeeTypeController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmEmploymentTypeController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSectionController.cs" />
+    <Compile Include="Controllers\HRM\BasicSetup\HrmShiftController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
@@ -9074,6 +9075,8 @@
     <Content Include="Views\HrmEmployeeType\load.cshtml" />
     <Content Include="Views\HrmEmploymentType\Index.cshtml" />
     <Content Include="Views\HrmEmploymentType\load.cshtml" />
+    <Content Include="Views\HrmShift\Index.cshtml" />
+    <Content Include="Views\HrmShift\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

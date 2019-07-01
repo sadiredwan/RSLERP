@@ -105,6 +105,7 @@
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />
+    <Compile Include="Entity\HRM\HrmShift.cs" />
     <Compile Include="Entity\HRM\HrmSubSection.cs" />
     <Compile Include="Entity\Sales\SlsSDP.cs" />
     <Compile Include="Entity\Sales\SlsSDPType.cs" />
