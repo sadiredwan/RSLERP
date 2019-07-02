@@ -59,6 +59,10 @@
                             }
                             else
                             {
+                                Model.VM_HRM_EMPLOYEE_OFFICIAL = Model.VM_HRM_EMPLOYEE_OFFICIALS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id);
+                                Model.VM_DEPARTMENT = Model.VM_DEPARTMENTS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
+                                Model.VM_HRM_SECTION = Model.VM_HRM_SECTIONS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.section_id);
+                                Model.VM_HRM_SUB_SECTION = Model.VM_HRM_SUB_SECTIONS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.subsection_id);
                                 <div>
                                     <table id="employeeOfficialTable" class="table table-hover">
                                         <tr>
