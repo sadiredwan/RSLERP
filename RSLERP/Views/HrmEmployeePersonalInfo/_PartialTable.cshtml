@@ -1,0 +1,24 @@
+﻿@using RSLERP.DataManager.Entity
+@using RSLERP.Models
+@using RSLERP.DataManager
+@model  RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_PartialLayout.cshtml";
+}
+<div>
+    <table id="employeeOfficialPartialTable" class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Section</th>
+            <th>Sub-Section</th>
+        </tr>
+        <tr>
+            <td>@Model.VM_HRM_EMPLOYEE_OFFICIAL.name</td>
+            <td>@Model.VM_DEPARTMENT.name</td>
+            <td>@Model.VM_HRM_SECTION.name</td>
+            <td>@Model.VM_HRM_SUB_SECTION.name</td>
+        </tr>
+    </table>
+</div>

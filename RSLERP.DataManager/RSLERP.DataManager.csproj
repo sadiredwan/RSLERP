@@ -103,6 +103,8 @@
     <Compile Include="Entity\CRM\Users.cs" />
     <Compile Include="Entity\HRM\HrmDesignation.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeOfficial.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeePersonalInfo.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeRelation.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />
