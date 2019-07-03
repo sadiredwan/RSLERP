@@ -198,6 +198,19 @@ namespace RSLERP.Models
 
         public List<HrmShift> VM_HRM_SHIFTS { get; set; }
 
+        public HrmEmployeeOfficial VM_HRM_EMPLOYEE_OFFICIAL { get; set; }
+
+        public List<HrmEmployeeOfficial> VM_HRM_EMPLOYEE_OFFICIALS { get; set; }
+
+        public List<HrmEmployeeAcademicInfo> VM_HRM_EMPLOYEE_ACADEMIC_INFOS { get; set; }
+        public HrmEmployeeAcademicInfo VM_HRM_EMPLOYEE_ACADEMIC_INFO { get; set; }
+
+
+        public List<HrmEducationLevel> VM_HRM_EDUCATIONS_LEVELS { get; set; }
+        public HrmEducationLevel VM_HRM_EDUCATIONS_LEVEL { get; set; }
+
+        public IQueryable VM_IQUERY { get; set; }
+
     }
 
    

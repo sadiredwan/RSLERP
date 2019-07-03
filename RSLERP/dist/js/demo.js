@@ -5,6 +5,8 @@
  * This file is for demo purposes only.
  */
 $(function () {
+	
+	  alertify.set('notifier', 'position', 'top-right');
   'use strict'
 
   /**

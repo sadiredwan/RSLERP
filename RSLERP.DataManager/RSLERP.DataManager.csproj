@@ -102,6 +102,9 @@
     <Compile Include="Entity\CRM\Task_Comments.cs" />
     <Compile Include="Entity\CRM\Users.cs" />
     <Compile Include="Entity\HRM\HrmDesignation.cs" />
+    <Compile Include="Entity\HRM\HrmEducationLevel.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeAcademicInfo.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeOfficial.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />

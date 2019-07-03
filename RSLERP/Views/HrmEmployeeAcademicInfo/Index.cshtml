@@ -1,0 +1,368 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@*@using RSLERP.DataManager*@
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+    String defaultParentName = "Top Most Employee";
+    int defaultParentId = 0;
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Employee Academic Info
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Employee Academic Infos</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- left column -->
+        <div class="box box-primary">
+            <!-- /.box-header -->
+            <!-- form start -->
+            @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+            @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="box-body">
+                    <input type="hidden" name="VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" value="@Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" />
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Employee</label>
+                                    <select id="ddlEmployee" name="VM_HRM_EMPLOYEE_OFFICIAL.id" class="form-control select2" onchange="onchangeemployee()">
+                                        <option value="0">-- Select Employee --</option>
+                                        @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                                        {
+                                            <option value="@emp.id" @(emp.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.id ? "selected" : "")>@emp.employee_id</option>
+                                        }
+                                    </select>
+                                </div>
+                                <level id="lblLoadingMsg"></level>
+
+
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="box box-primary partialLoad">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle" height="250" width="300" id="image" src="@RSLERP.DataManager.Utility.GetBaseUrl()/content/images/uploads/0ef1de128b914bd0955d54d0db241742.jpg" alt="User profile picture" />
+
+                                        <h3 class="profile-username text-center" id="employee_name">Nina Mcintire</h3>
+
+                                        <p class="text-muted text-center" id="desig_name">Software Engineer</p>
+
+                                        <ul class="list-group list-group-unbordered">
+                                            <li class="list-group-item">
+                                                <b>Department</b> <p id="dep_name" class="pull-right">1,322</p>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="choseLvl" class="box box-group partialLoad">
+
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Add Education Level</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <select id="education_level_id" class="form-control select2">
+                                            <option value="">-- Select Exam --</option>
+                                            @foreach (HrmEducationLevel edulvl in Model.VM_HRM_EDUCATIONS_LEVELS)
+                                            {
+                                                <option value="@edulvl.id">@edulvl.level_name</option>
+                                            }
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control input-sm" id="institute_name" placeholder="Institute Name" name="ins_name">
+
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control input-sm" id="edu_board" placeholder="Education Board" name="edu_board">
+
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control input-sm" id="passingyear" placeholder="Institute Name" name="pass_year">
+
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control input-sm" id="major_group" placeholder="Major / Group Name" name="major_group">
+                                    </div>
+
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control input-sm" id="result" placeholder="Result" name="result">
+
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <button type="button" id="addEduLvl" class="btn btn-primary">Add</button>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <table class="table table-condensed" id="tblEduLvls">
+                                            <thead>
+                                                <tr>
+                                                    <th>Education Level</th>
+                                                    <th>Institute</th>
+                                                    <th>Board</th>
+                                                    <th>Passing Year</th>
+                                                    <th>Group</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer partialLoad">
+                        <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
+                    </div>
+
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            Init();
+
+            var htmlTblItems = [];
+            //Add Button Click
+            $("#addEduLvl").click(function () {
+
+
+                var education_level_id = $("#education_level_id").val();
+                var education_level_name = $("#education_level_id :selected").text();
+                var institute_name = $("#institute_name").val();
+                var edu_board = $("#edu_board").val();
+                var passingyear = $("#passingyear").val();
+                var major_group = $("#major_group").val();
+                var result = $("#result").val();
+                var allSuccess = true;
+
+                
+
+                //Check Same Academic Exam
+                $("table#tblEduLvls > tbody > tr").each(function (row, tr) {
+                    var t = $(this).find("td:nth-child(1)").find(".childTd").val();
+                    if(t==education_level_id)
+                    {
+                        allSuccess = false;
+                        alertify.notify('Same Exam', 'warning', 5, function () { console.log('dismissed'); });
+                    }
+                });
+
+
+                if (!education_level_id)
+                {
+                    allSuccess = false;
+                    alertify.notify('Please Select Exam', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!institute_name) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Institute Name', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!edu_board) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Board', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!passingyear) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Passing Year', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!major_group) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Group', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!result) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Result', 'warning', 5, function () { console.log('dismissed'); });
+                }
+
+                else if (allSuccess) {
+
+                    htmlTblItems.push({
+                        "education_level_id": education_level_id,
+                        "education_level_name": education_level_name,
+                        "institute_name": institute_name,
+                        "edu_board": edu_board,
+                        "passingyear": passingyear,
+                        "major_group": major_group,
+                        "result": result
+                    });
+
+                    GenerateTable(htmlTblItems, "tblEduLvls");
+
+                }
+            });
+
+
+        
+        });
+   
+
+        // Delete Remove Row
+        $(document).on('click', '.deleteEduLvls', function () {
+            if (confirm('Are you Sure want to delete?')) {
+                $(this).parent().parent().remove();
+              
+            }
+
+        });
+
+        // Change When Select Employee
+        function onchangeemployee() {
+
+            $("#tblEduLvls > tbody").html("");
+            var htmlTblItems = [];
+            //where found Partial Load Class make it hidden
+            $(".partialLoad").addClass("hiddenPnl");
+
+            //Show Loading Message
+            $("#lblLoadingMsg").html("Loading...");
+
+        
+                var empID = $("#ddlEmployee").val();
+                $.ajax({
+                    url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonEmployeeLoad?empID=' + empID,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.CommitStatus) {
+                            $("#lblLoadingMsg").html("");
+                            $(".partialLoad").removeClass("hiddenPnl");
+
+                            $(".partialLoad #employee_name").text(data.VM_HRM_EMPLOYEE_OFFICIAL.name);
+                            $(".partialLoad #desig_name").text(data.VM_HRM_DESIGNATION.name);
+                            $(".partialLoad #dep_name").text(data.VM_DEPARTMENT.name);
+
+                            $.each(data.VM_HRM_EMPLOYEE_ACADEMIC_INFOS, function (i, item) {
+                                htmlTblItems.push({
+                                    "education_level_id": item.education_level_id,
+                                    "education_level_name": item.EducationlevelName,
+                                    "institute_name": item.institute_name,
+                                    "edu_board": item.edu_board,
+                                    "passingyear": item.passingyear,
+                                    "major_group": item.major_group,
+                                    "result": item.result
+                                });
+                            });
+                            GenerateTable(htmlTblItems, "tblEduLvls");
+                        }
+                        else
+                        {
+                            $("#lblLoadingMsg").html("No Employee Found");
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            
+
+
+            // alert(id);
+        }
+
+        //Generate HTML Table for Education Level
+        function GenerateTable(htmlTableObjs,tableName)
+        {
+            var tablehtml = "";
+            $.each(htmlTableObjs, function (i, item) {
+                tablehtml += "<tr>";
+                tablehtml += "<td>" + item.education_level_name + "<input type=\"hidden\" class=\"childTd\" propname=\"education_level_id\" name=\"education_level_id[]\" value=\"" + item.education_level_id + "\"  /></td>";
+                tablehtml += "<td>" + item.institute_name + "<input type=\"hidden\" class=\"childTd\" propname=\"institute_name\" class=\"loop\"  name=\"institute_name[]\" value=" + item.institute_name + "  /></td></td>";
+                tablehtml += "<td>" + item.edu_board + "<input type=\"hidden\" class=\"childTd\" propname=\"edu_board\" name=\"edu_board[]\" value=" + item.edu_board + "  /></td></td>";
+                tablehtml += "<td>" + item.passingyear + "<input type=\"hidden\" class=\"childTd\" propname=\"passingyear\" name=\"passingyear[]\" value=" + item.passingyear + "  /></td></td>";
+                tablehtml += "<td>" + item.major_group + "<input type=\"hidden\" class=\"childTd\" propname=\"major_group\" name=\"major_group[]\" value=" + item.major_group + "  /></td></td>";
+                tablehtml += "<td>" + item.result + "<input type=\"hidden\" class=\"childTd\" propname=\"result\" name=\"result[]\" value=" + item.result + "  /></td></td>";
+                tablehtml += "<td> <div   class=\"btn btn-primary deleteEduLvls\">Delete</div></td>";
+                tablehtml += "</tr>";
+            });
+
+
+            $("#"+tableName).append(tablehtml);
+        }
+
+
+        function Init()
+        {
+            if($("#ddlEmployee").val()>0)
+            {
+                onchangeemployee();
+            }
+            else
+            {
+                $(".partialLoad").addClass("hiddenPnl");
+            }
+
+        }
+
+
+        //function reArrangeDomIDs() {
+        //    var i = 1;
+        //    var countTr = $("table#tblEduLvls > tbody > tr").length;
+        //    $("table#tblEduLvls > tbody > tr").each(function (row, tr) {
+        //        var t = $(this).find("td:nth-child(1)").find(".childTd").val();
+        //        $(this).find("td").each(function (column, index) {
+        //            var getName = $(this).find(".childTd").attr("propname");
+        //            var newName = getName + "_" + i;
+        //            $(this).find(".childTd").attr("name", newName);
+        //        });
+        //        i++;
+        //    });
+        //}
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+                });
+
+    </script>
+}

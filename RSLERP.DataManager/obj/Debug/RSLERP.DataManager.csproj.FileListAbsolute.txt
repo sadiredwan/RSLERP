@@ -59,6 +59,6 @@ D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.xml
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\Microsoft.Web.Infrastructure.xml
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.Deployment.xml
-D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojResolveAssemblyReference.cache
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
+D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojResolveAssemblyReference.cache

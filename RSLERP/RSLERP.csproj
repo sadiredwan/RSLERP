@@ -225,6 +225,8 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmSectionController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmShiftController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeAcademicInfoController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
     <Compile Include="Controllers\Sales\BasicConfiguration\SlsSDPController.cs" />
@@ -7512,6 +7514,7 @@
     <Content Include="dist\css\alt\AdminLTE-without-plugins.css" />
     <Content Include="dist\css\alt\AdminLTE-without-plugins.min.css" />
     <Content Include="dist\css\bootcomplete.css" />
+    <Content Include="dist\css\custom.css" />
     <Content Include="dist\css\skins\skin-black-light.css" />
     <Content Include="dist\css\skins\skin-black-light.min.css" />
     <Content Include="dist\css\skins\skin-black.css" />
@@ -9081,9 +9084,15 @@
     <Content Include="Views\HrmEmploymentType\load.cshtml" />
     <Content Include="Views\HrmShift\Index.cshtml" />
     <Content Include="Views\HrmShift\load.cshtml" />
+    <Content Include="Views\HrmEmployeeOfficial\Index.cshtml" />
+    <Content Include="Views\HrmEmployeeOfficial\load.cshtml" />
+    <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
+    <Content Include="Views\HrmEmployeeAcademicInfo\load.cshtml" />
+    <Content Include="Views\HrmEmployeeAcademicInfo\partialAcademicInfoLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\uploads\" />
     <Folder Include="Controllers\CRM\" />
     <Folder Include="Views\Partials\OnChange\" />
   </ItemGroup>

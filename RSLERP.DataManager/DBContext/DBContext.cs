@@ -102,6 +102,13 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmShift> HrmShifts { get; set; }
 
+
+        public DbSet<HrmEmployeeAcademicInfo> HrmEmployeeAcademicInfos { get; set; }
+
+        public DbSet<HrmEducationLevel> HrmEducationLevels { get; set; }
+
+        public DbSet<HrmEmployeeOfficial> HrmEmployeeOfficials { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

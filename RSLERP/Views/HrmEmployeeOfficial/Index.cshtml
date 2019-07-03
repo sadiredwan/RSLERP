@@ -1,0 +1,92 @@
+﻿@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+}
+
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <h1>Human Resource Management</h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                        <h3 class="box-title">Official Employee Information</h3>
+                        <a class="btn btn-primary pull-right" href="@Url.Action("load",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())"><span class="fa fa-plus"></span> Add</a>
+                        <div class="box-tools">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Department</th>
+                                    <th>Section</th>
+                                    <th>Sub-Section</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            @foreach (HrmEmployeeOfficial src in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                            {
+                                String photo_path = "";
+                                if (src.picture != null && src.picture != "")
+                                {
+                                    var request = HttpContext.Current.Request;
+                                    var appUrl = HttpRuntime.AppDomainAppVirtualPath;
+                                    if (appUrl != "/") { appUrl = "/" + appUrl; }
+                                    var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
+                                    photo_path = baseUrl + src.picture;
+                                }
+                                <tr>
+                                    <td><img height="80" width="80" src="@photo_path"/></td>
+                                    <td>@src.employee_id</td>
+                                    <td>@src.name</td>
+                                    <td>@Model.VM_HRM_DESIGNATIONS.Find(x => x.id == src.designation_id).name</td>
+                                    <td>@Model.VM_DEPARTMENTS.Find(x => x.id == src.department_id).name</td>
+                                    <td>@Model.VM_HRM_SECTIONS.Find(x => x.id == src.section_id).name</td>
+                                    <td>@Model.VM_HRM_SUB_SECTIONS.Find(x => x.id == src.subsection_id).name</td>
+
+                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@src.id"><span class="fa fa-pencil"></span></a></td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix page">
+                        <p class="demo demo4_top pull-right"></p>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+
+</div>
+
+@section masterJs
+{
+    <script>
+        $(function () {
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+        })
+    </script>
+}
