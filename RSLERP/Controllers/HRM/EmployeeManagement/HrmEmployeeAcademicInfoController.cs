@@ -44,48 +44,6 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
 
 
         /// <summary>
-        /// Create Page for HrmEmployeeAcademic Info
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult load(String id)
-        {
-            //Get Current UserName
-            // int user_id = Convert.ToInt32(User.Identity.Name);
-            //Current Company
-            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
-
-            //Set  Message
-            String message = "";
-
-            int eoID = Convert.ToInt32(id);
-            
-            //Check if id doesnot null
-            if (id != null)
-            {
-                //check if HrmEmployeeOfficial already exist
-                if (new DBContext().HrmEmployeeAcademicInfos.Where(x => x.id == eoID).Count() > 0)
-                {
-                    //pass model to view with HrmEmployeeOfficial info
-                    vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFO = new DBContext().HrmEmployeeAcademicInfos.Find(eoID);
-                }
-            }
-
-            //Check Temp error or successmessage 
-            if (TempData["ViewModel"] != null)
-            {
-                vmdl = (ViewModel)TempData["ViewModel"];
-            }
-
-            //pass model to view
-            vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFO = new HrmEmployeeAcademicInfo();
-            vmdl.VM_HRM_EDUCATIONS_LEVELS = new DBContext().HrmEducationLevels.ToList();
-            vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
-
-            return View(vmdl);
-        }
-
-        /// <summary>
         /// Store  
         /// Create or Update
         /// </summary>
@@ -147,6 +105,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
             if (new DBContext().HrmEmployeeOfficials.Where(x => x.id == eID).Count() > 0)
             {
                 vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new DBContext().HrmEmployeeOfficials.Find(eID);
+                vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture = Utility.GetBaseUrl() + "/" + vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture;
                 vmdl.VM_HRM_DESIGNATION = new DBContext().HrmDesignations.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.designation_id);
                 vmdl.VM_DEPARTMENT = new DBContext().Departments.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
                 vmdl.VM_IQUERY = null;

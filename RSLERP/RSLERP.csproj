@@ -9087,8 +9087,6 @@
     <Content Include="Views\HrmEmployeeOfficial\Index.cshtml" />
     <Content Include="Views\HrmEmployeeOfficial\load.cshtml" />
     <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
-    <Content Include="Views\HrmEmployeeAcademicInfo\load.cshtml" />
-    <Content Include="Views\HrmEmployeeAcademicInfo\partialAcademicInfoLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

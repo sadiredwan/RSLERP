@@ -26,140 +26,149 @@
     <section class="content">
 
         <!-- left column -->
-        <div class="box box-primary">
-            <!-- /.box-header -->
-            <!-- form start -->
-            @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
-            @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+   
+    <!-- /.box-header -->
+    <!-- form start -->
+    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
             {
-                @Html.AntiForgeryToken()
-                <div class="box-body">
-                    <input type="hidden" name="VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" value="@Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" />
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-8">
+              <div class="box box-primary">
 
-                    <div class="row">
-                        <div class="col-md-4">
+        <div class="box-body">
+            <input type="hidden" name="VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" value="@Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id" />
+
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Employee</label>
+                        <select id="ddlEmployee" name="VM_HRM_EMPLOYEE_OFFICIAL.id" class="form-control select2" onchange="onchangeemployee()">
+                            <option value="0">-- Select Employee --</option>
+                            @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                            {
+                                <option value="@emp.id" @(emp.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.id ? "selected" : "")>@emp.employee_id</option>
+                            }
+                        </select>
+                    </div>
+                    <level id="lblLoadingMsg"></level>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+        </div>
+          <div class="col-md-4 partialLoad">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" height="250" width="300" id="empImage" src="" alt="User profile picture" />
+
+                        <h3 class="profile-username text-center" id="employee_name">Nina Mcintire</h3>
+
+                        <p class="text-muted text-center" id="desig_name">Software Engineer</p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Department</b> <p id="dep_name" class="pull-right">1,322</p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+        </div>
+        </div>
+           
+
+  
+
+                <div class="row partialLoad">
+                    <div class="col-md-12">
+                        <div id="choseLvl" class="box box-primary">
+
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Add Education Level</h3>
                             </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label>Employee</label>
-                                    <select id="ddlEmployee" name="VM_HRM_EMPLOYEE_OFFICIAL.id" class="form-control select2" onchange="onchangeemployee()">
-                                        <option value="0">-- Select Employee --</option>
-                                        @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <select id="education_level_id" class="form-control select2">
+                                        <option value="">-- Select Exam --</option>
+                                        @foreach (HrmEducationLevel edulvl in Model.VM_HRM_EDUCATIONS_LEVELS)
                                         {
-                                            <option value="@emp.id" @(emp.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.id ? "selected" : "")>@emp.employee_id</option>
+                                            <option value="@edulvl.id">@edulvl.level_name</option>
                                         }
                                     </select>
+
                                 </div>
-                                <level id="lblLoadingMsg"></level>
 
+                                <div class="col-lg-2">
+                                    <input type="text" class="form-control input-sm" id="institute_name" placeholder="Institute Name" name="ins_name">
 
+                                </div>
 
+                                <div class="col-lg-2">
+                                    <input type="text" class="form-control input-sm" id="edu_board" placeholder="Education Board" name="edu_board">
+
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <input type="text" class="form-control input-sm" id="passingyear" placeholder="Institute Name" name="pass_year">
+
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <input type="text" class="form-control input-sm" id="major_group" placeholder="Major / Group Name" name="major_group">
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <input type="text" class="form-control input-sm" id="result" placeholder="Result" name="result">
+
+                                </div>
+                                <div class="col-lg-1">
+                                    <button type="button" id="addEduLvl" class="btn btn-primary">Add</button>
+
+                                </div>
                             </div>
 
-                            <div class="col-md-3">
-                                <div class="box box-primary partialLoad">
-                                    <div class="box-body box-profile">
-                                        <img class="profile-user-img img-responsive img-circle" height="250" width="300" id="image" src="@RSLERP.DataManager.Utility.GetBaseUrl()/content/images/uploads/0ef1de128b914bd0955d54d0db241742.jpg" alt="User profile picture" />
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table table-condensed" id="tblEduLvls">
+                                        <thead>
+                                            <tr>
+                                                <th>Education Level</th>
+                                                <th>Institute</th>
+                                                <th>Board</th>
+                                                <th>Passing Year</th>
+                                                <th>Group</th>
+                                                <th>Result</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
 
-                                        <h3 class="profile-username text-center" id="employee_name">Nina Mcintire</h3>
-
-                                        <p class="text-muted text-center" id="desig_name">Software Engineer</p>
-
-                                        <ul class="list-group list-group-unbordered">
-                                            <li class="list-group-item">
-                                                <b>Department</b> <p id="dep_name" class="pull-right">1,322</p>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                    <!-- /.box-body -->
                                 </div>
+
                             </div>
-
-
-
 
                         </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="choseLvl" class="box box-group partialLoad">
-
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Add Education Level</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <select id="education_level_id" class="form-control select2">
-                                            <option value="">-- Select Exam --</option>
-                                            @foreach (HrmEducationLevel edulvl in Model.VM_HRM_EDUCATIONS_LEVELS)
-                                            {
-                                                <option value="@edulvl.id">@edulvl.level_name</option>
-                                            }
-                                        </select>
-
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <input type="text" class="form-control input-sm" id="institute_name" placeholder="Institute Name" name="ins_name">
-
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <input type="text" class="form-control input-sm" id="edu_board" placeholder="Education Board" name="edu_board">
-
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <input type="text" class="form-control input-sm" id="passingyear" placeholder="Institute Name" name="pass_year">
-
-                                    </div>
-
-                                    <div class="col-lg-2">
-                                        <input type="text" class="form-control input-sm" id="major_group" placeholder="Major / Group Name" name="major_group">
-                                    </div>
-
-                                    <div class="col-lg-1">
-                                        <input type="text" class="form-control input-sm" id="result" placeholder="Result" name="result">
-
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <button type="button" id="addEduLvl" class="btn btn-primary">Add</button>
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <table class="table table-condensed" id="tblEduLvls">
-                                            <thead>
-                                                <tr>
-                                                    <th>Education Level</th>
-                                                    <th>Institute</th>
-                                                    <th>Board</th>
-                                                    <th>Passing Year</th>
-                                                    <th>Group</th>
-                                                    <th>Result</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer partialLoad">
-                        <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
                     </div>
 
                 </div>
-            }
+           
+                <!-- /.box-body -->
+        <div class="box-footer partialLoad">
+            <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
         </div>
+
+
+    }
+      
         <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -281,7 +290,8 @@
                             $(".partialLoad #employee_name").text(data.VM_HRM_EMPLOYEE_OFFICIAL.name);
                             $(".partialLoad #desig_name").text(data.VM_HRM_DESIGNATION.name);
                             $(".partialLoad #dep_name").text(data.VM_DEPARTMENT.name);
-
+                            $(".partialLoad #empImage").attr("src", data.VM_HRM_EMPLOYEE_OFFICIAL.picture);
+                            
                             $.each(data.VM_HRM_EMPLOYEE_ACADEMIC_INFOS, function (i, item) {
                                 htmlTblItems.push({
                                     "education_level_id": item.education_level_id,
