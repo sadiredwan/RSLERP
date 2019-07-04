@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <label>Employee</label>
                                         <select id="ddlEmployee" name="VM_HRM_EMPLOYEE_OFFICIAL.id" class="form-control select2" onchange="onchangeemployee()">
-                                            <option value="0">-- Select Employee --</option>
+                                            <option value="0">-- Select Employee ID --</option>
                                             @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
                                             {
                                                 <option value="@emp.id" @(emp.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.id ? "selected" : "")>@emp.employee_id</option>
@@ -75,9 +75,11 @@
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Department</b> <p id="dep_name" class="pull-right">1,322</p>
+                                    <b>Department</b> <p id="dep_name" class="pull-right"></p>
                                 </li>
-
+                                <li class="list-group-item">
+                                    <b>Employee ID</b> <p id="emp_id" class="pull-right"></p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -307,6 +309,7 @@
                             $(".partialLoad #desig_name").text(data.VM_HRM_DESIGNATION.name);
                             $(".partialLoad #dep_name").text(data.VM_DEPARTMENT.name);
                             $(".partialLoad #empImage").attr("src", data.VM_HRM_EMPLOYEE_OFFICIAL.picture);
+                            $(".partialLoad #emp_id").text(data.VM_HRM_EMPLOYEE_OFFICIAL.employee_id);
 
                             $.each(data.VM_HRM_EMPLOYEE_ACADEMIC_INFOS, function (i, item) {
                                 htmlTblItems.push({
