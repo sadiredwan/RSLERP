@@ -44,15 +44,6 @@
                                 <input type="text" class="form-control" name="VM_COMPANE.c_Name" id="input_companyname" placeholder="Name" value="@Model.VM_COMPANE.c_Name">
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
                             </div>
-	                <div class="form-group">
-                                <label for="dtp_input3" class="col-md-2 control-label">Time Picking</label>
-                                <div class="input-group date form_time col-md-5" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                    <input class="form-control" size="16" name="FromTime" type="text" value="" readonly>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-					                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                                </div>
-				                <input type="hidden" id="dtp_input3" value="" /><br/>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <input type="text" class="form-control" name="VM_COMPANE.c_Email" id="input_companyemail" placeholder="Email" value="@Model.VM_COMPANE.c_Email">

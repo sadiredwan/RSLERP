@@ -28,7 +28,7 @@
         <!-- left column -->
         <!-- /.box-header -->
         <!-- form start -->
-        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+       @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); } 
         @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
             {
             @Html.AntiForgeryToken()
@@ -199,7 +199,7 @@
         $(document).ready(function () {
 
             Init();
-
+          
             var htmlTblItems = [];
             //Add Button Click
             $("#addEduLvl").click(function () {
