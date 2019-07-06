@@ -1,0 +1,252 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Designation
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="~/HrmEmployeePersonalInfo">Personal Info.</a></li>
+            <li class="active">Personal Info. Add/Edit</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        @*<h3 class="box-title">User</h3>*@
+                        <a href="~/HrmEmployeePersonalInfo" class="btn btn-primary">« Back</a>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+                    @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="box-body">
+                            <input type="hidden" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.id" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.id" />
+
+                            @if (Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.id.ToString() == "0")
+                            {
+                                Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id = 0;
+
+                                <div class="form-group">
+                                    <label>Employee</label>
+                                    <select id="employeeOfficial" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id" class="form-control select2" onchange="onchangerolemdule(this)">
+                                        <option value="all">-- Select Employee --</option>
+                                        @foreach (HrmEmployeeOfficial src in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                                        {
+                                            <option value="@src.id">@src.employee_id</option>
+                                        }
+                                    </select>
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id")
+                                </div>
+
+                                <div id="partialLoad"></div>
+                            }
+                            else
+                            {
+                                Model.VM_HRM_EMPLOYEE_OFFICIAL = Model.VM_HRM_EMPLOYEE_OFFICIALS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id);
+                                Model.VM_DEPARTMENT = Model.VM_DEPARTMENTS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
+                                Model.VM_HRM_SECTION = Model.VM_HRM_SECTIONS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.section_id);
+                                Model.VM_HRM_SUB_SECTION = Model.VM_HRM_SUB_SECTIONS.Find(x => x.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.subsection_id);
+                                <div>
+                                    <table id="employeeOfficialTable" class="table table-hover">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Department</th>
+                                            <th>Section</th>
+                                            <th>Sub-Section</th>
+                                        </tr>
+                                        <tr>
+                                            <td>@Model.VM_HRM_EMPLOYEE_OFFICIAL.name</td>
+                                            <td>@Model.VM_DEPARTMENT.name</td>
+                                            <td>@Model.VM_HRM_SECTION.name</td>
+                                            <td>@Model.VM_HRM_SUB_SECTION.name</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <label class="control-label">Father's Name</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.fathers_name" id="input_epifname" placeholder="Father's Name" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.fathers_name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.fathers_name")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Mother's Name</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.mothers_name" id="input_epimname" placeholder="Mother's Name" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.mothers_name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.mothers_name")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date of Birth:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input readonly="readonly" type="text" class="form-control pull-right datepicker" id="datepicker2" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.date_of_birth" value="@((Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.date_of_birth == null || Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.date_of_birth).Year < 1900) ? "" : Convert.ToDateTime(Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.date_of_birth).ToString("dd MMMM yyyy"))">
+                                    @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.date_of_birth")
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Gender</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.gender" id="input_epigender" placeholder="Gender" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.gender">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.gender")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Religion</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.religion" id="input_epireligion" placeholder="Religion" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.religion">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.religion")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Nationality</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.nationality" id="input_epinationality" placeholder="Nationality" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.nationality">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.nationality")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">National ID</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.nid" id="input_epinid" placeholder="National ID" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.nid">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.nid")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">TIN No.</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.tin" id="input_epitin" placeholder="TIN No." value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.tin">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.tin")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Blood Group</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.blood_group" id="input_epibg" placeholder="Blood Group" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.blood_group">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.blood_group")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Marital Status</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.marital_status" id="input_epims" placeholder="Marital Status" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.marital_status">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.marital_status")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Personal Contact No.</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.personal_contact_no" id="input_epipcn" placeholder="Personal Contact No." value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.personal_contact_no">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.personal_contact_no")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.email" id="input_epiemail" placeholder="Email" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.email">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.email")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Present Address</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.present_address" id="input_epiprad" placeholder="Present Address" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.present_address">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.present_address")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Permanent Address</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.permanent_address" id="input_epipmad" placeholder="Permanent Address" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.permanent_address">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.permanent_address")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Emergency Contact Person</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_name" id="input_epiecp" placeholder="Emergency Contact Person" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_name">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_name")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Emergency Contact Address</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_address" id="input_epieca" placeholder="Emergency Contact Address" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_address">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_address")
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Emergency Contact No.</label>
+                                <input type="text" class="form-control" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_no" id="input_epiecn" placeholder="Emergency Contact No." value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_no">
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_no")
+                            </div>
+
+                            <div class="form-group">
+                                <label>Relation</label>
+                                <select name="VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id" class="form-control select2">
+                                    <option value="all">-- Select --</option>
+                                    @foreach (HrmEmployeeRelation src in Model.VM_HRM_EMPLOYEE_RELATIONS)
+                                    {
+                                        <option value="@src.id">@src.name</option>
+                                    }
+                                </select>
+                                @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id")
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">@(Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.id == 0 ? "Save" : "Update")</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        function onchangerolemdule(obj) {
+            $("#partialLoad").html("Loading...");
+            if ($("#employeeOfficial").val() != 0) {
+                var employee_official_id = $("#employeeOfficial").val();
+                $.ajax({
+                    url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/_partialTable?employee_official_id=' + employee_official_id,
+                    type: 'GET',
+                    success: function (data) {
+                        $("#partialLoad").html(data);
+
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        }
+
+        $(function () {
+
+            $('.select2').select2();
+
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+    </script>
+}
+
