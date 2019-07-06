@@ -50,7 +50,7 @@
                                     {
                                         if (src.id != Model.VM_INVUNIT_MEASUREMENT.id)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_INVUNIT_MEASUREMENT.parent_unit_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     }
                                 </select>

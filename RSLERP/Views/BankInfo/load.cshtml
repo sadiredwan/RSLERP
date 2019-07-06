@@ -64,7 +64,7 @@
                                     <option value="all">-- Select Type --</option>
                                     @foreach (BankInfoType srcbit in Model.VM_BANK_INFO_TYPES)
                                     {
-                                        <option value="@srcbit.id">@srcbit.name</option>
+                                        <option value="@srcbit.id" @(Model.VM_BANK_INFO.type == srcbit.id ? "selected" : "")>@srcbit.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_BANK_INFO.type")
@@ -76,7 +76,7 @@
                                     <option value="all">-- Select Country --</option>
                                     @foreach (Country srcnt in Model.VM_COUNTRIES)
                                     {
-                                        <option value="@srcnt.id">@srcnt.name</option>
+                                        <option value="@srcnt.id" @(Model.VM_BANK_INFO.country_id == srcnt.id ? "selected" : "")>@srcnt.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_BANK_INFO.country_id")

@@ -9087,10 +9087,8 @@
     <Content Include="Views\HrmShift\load.cshtml" />
     <Content Include="Views\HrmEmployeeOfficial\Index.cshtml" />
     <Content Include="Views\HrmEmployeeOfficial\load.cshtml" />
+    <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
     <Content Include="Views\HrmEmployeePersonalInfo\Index.cshtml" />
-    <Content Include="Views\HrmEmployeePersonalInfo\load.cshtml" />
-    <Content Include="Views\HrmEmployeePersonalInfo\_PartialTable.cshtml" />
-	<Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

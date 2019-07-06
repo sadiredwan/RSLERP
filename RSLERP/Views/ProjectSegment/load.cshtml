@@ -46,7 +46,7 @@
                                     <option value="all">-- Select Business Sector --</option>
                                     @foreach (BusinessSector srcbs in Model.VM_BUSINESS_SECTORS)
                                     {
-                                        <option value="@srcbs.id" @(Model.VM_PROJECT_SEGMENT.business_sector_id==srcbs.id?"selected":"")>@srcbs.name</option>
+                                        <option value="@srcbs.id" @(Model.VM_PROJECT_SEGMENT.business_sector_id == srcbs.id ? "selected" : "")>@srcbs.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_PROJECT_SEGMENT.business_sector_id")

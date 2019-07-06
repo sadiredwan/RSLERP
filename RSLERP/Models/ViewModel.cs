@@ -202,6 +202,14 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeOfficial> VM_HRM_EMPLOYEE_OFFICIALS { get; set; }
 
+        public List<HrmEmployeeAcademicInfo> VM_HRM_EMPLOYEE_ACADEMIC_INFOS { get; set; }
+
+        public HrmEmployeeAcademicInfo VM_HRM_EMPLOYEE_ACADEMIC_INFO { get; set; }
+
+        public List<HrmEducationLevel> VM_HRM_EDUCATIONS_LEVELS { get; set; }
+
+        public HrmEducationLevel VM_HRM_EDUCATIONS_LEVEL { get; set; }
+
         public HrmEmployeePersonalInfo VM_HRM_EMPLOYEE_PERSONAL_INFO { get; set; }
 
         public List<HrmEmployeePersonalInfo> VM_HRM_EMPLOYEE_PERSONAL_INFOS { get; set; }
@@ -209,17 +217,6 @@ namespace RSLERP.Models
         public HrmEmployeeRelation VM_HRM_EMPLOYEE_RELATION { get; set; }
 
         public List<HrmEmployeeRelation> VM_HRM_EMPLOYEE_RELATIONS { get; set; }
-
-        public List<HrmEmployeeAcademicInfo> VM_HRM_EMPLOYEE_ACADEMIC_INFOS { get; set; }
-
-        public HrmEmployeeAcademicInfo VM_HRM_EMPLOYEE_ACADEMIC_INFO { get; set; }
-
-
-    
-
-
-        public List<HrmEducationLevel> VM_HRM_EDUCATIONS_LEVELS { get; set; }
-        public HrmEducationLevel VM_HRM_EDUCATIONS_LEVEL { get; set; }
 
         public IQueryable VM_IQUERY { get; set; }
 

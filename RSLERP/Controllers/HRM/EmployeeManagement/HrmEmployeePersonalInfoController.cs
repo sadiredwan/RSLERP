@@ -15,8 +15,7 @@ namespace RSLERP.Controllers.Settings
     {
         ViewModel vmdl = new ViewModel();
         /// <summary>
-        /// Index page 
-        /// for show all HrmEmployeePersonalInfo list
+        /// Index page
         /// </summary>
         /// <returns></returns>
         // GET: HrmEmployeePersonalInfo
@@ -29,56 +28,10 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
             }
-            
+
             vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFOS = new DBContext().HrmEmployeePersonalInfos.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYEE_RELATIONS = new DBContext().HrmEmployeeRelations.ToList();
-
-            return View(vmdl);
-        }
-
-        /// <summary>
-        /// Create Page for HrmEmployeePersonalInfo
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult load(String id)
-        {
-            //Get Current UserName
-            // int user_id = Convert.ToInt32(User.Identity.Name);
-            //Current Company
-            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
-
-            //Set  Message
-            String message = "";
-
-            int ID = Convert.ToInt32(id);
-
-            //pass model to view
-            HrmEmployeePersonalInfo mdlHrmEmployeePersonalInfo = new HrmEmployeePersonalInfo();
-
-            //Check if id doesnot null
-            if (id != null)
-            {
-                //check if HrmEmployeePersonalInfo already exist
-                if (new DBContext().HrmEmployeePersonalInfos.Where(x => x.CompanyId == COMPANY_ID).ToList().FindAll(x => x.id == ID).Count > 0)
-                {
-                    //pass model to view with HrmEmployeePersonalInfo info
-                    mdlHrmEmployeePersonalInfo = new DBContext().HrmEmployeePersonalInfos.Find(ID);
-                }
-            }
-
-            //Check Temp error or successmessage 
-            if (TempData["ViewModel"] != null)
-            {
-                vmdl = (ViewModel)TempData["ViewModel"];
-            }
-            else
-            {
-                vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO = mdlHrmEmployeePersonalInfo;
-            }
-            
-            vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_DEPARTMENTS = new DBContext().Departments.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_SECTIONS = new DBContext().HrmSections.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_SUB_SECTIONS = new DBContext().HrmSubSections.Where(x => x.CompanyId == COMPANY_ID).ToList();
@@ -142,14 +95,59 @@ namespace RSLERP.Controllers.Settings
 
         }
 
-        public PartialViewResult _PartialTable(String employee_official_id)
+        public JsonResult JsonEmployeeLoad(String empID)
         {
-            ViewModel vmdl = new ViewModel();
-            vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new DBContext().HrmEmployeeOfficials.ToList().Find(x => x.id == Convert.ToInt32(employee_official_id));
-            vmdl.VM_DEPARTMENT = new DBContext().Departments.ToList().Find(x => x.id == vmdl.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
-            vmdl.VM_HRM_SECTION = new DBContext().HrmSections.ToList().Find(x => x.id == vmdl.VM_HRM_EMPLOYEE_OFFICIAL.section_id);
-            vmdl.VM_HRM_SUB_SECTION = new DBContext().HrmSubSections.ToList().Find(x => x.id == vmdl.VM_HRM_EMPLOYEE_OFFICIAL.subsection_id);
-            return PartialView(vmdl);
+            int eID = Convert.ToInt32(empID);
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
+            if (new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).Where(x => x.id == eID).Count() > 0)
+            {
+                vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new DBContext().HrmEmployeeOfficials.Find(eID);
+                vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture = Utility.GetBaseUrl() + "/" + vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture;
+                vmdl.VM_HRM_DESIGNATION = new DBContext().HrmDesignations.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.designation_id);
+                vmdl.VM_DEPARTMENT = new DBContext().Departments.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
+                vmdl.VM_IQUERY = null;
+                //vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = new DBContext().HrmEmployeeAcademicInfos.Where(x => x.HrmEmployeeOfficial_ID == eID).ToList();
+                //using (var contxt = new DBContext())
+                //{
+                //    vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = (from ac in contxt.HrmEmployeeAcademicInfos
+                //                                           join lvl in contxt.HrmEducationLevels
+                //                                           on ac.education_level_id equals lvl.id
+                //                                           where ac.HrmEmployeeOfficial_ID == eID
+                //                                           orderby ac.id
+                //                                           select new
+                //                                           {
+                //                                               id = ac.id,
+                //                                               HrmEmployeeOfficial_ID = ac.HrmEmployeeOfficial_ID,
+                //                                               education_level_id = ac.education_level_id,
+                //                                               EducationlevelName = lvl.level_name,
+                //                                               major_group = ac.major_group,
+                //                                               edu_board = ac.edu_board,
+                //                                               institute_name = ac.institute_name,
+                //                                               passingyear = ac.passingyear,
+                //                                               result = ac.result,
+
+                //                                           }).ToList().Select(x => new HrmEmployeeAcademicInfo()
+                //                                           {
+                //                                               id = x.id,
+                //                                               HrmEmployeeOfficial_ID = x.HrmEmployeeOfficial_ID,
+                //                                               education_level_id = x.education_level_id,
+                //                                               EducationlevelName = x.EducationlevelName,
+                //                                               major_group = x.major_group,
+                //                                               edu_board = x.edu_board,
+                //                                               institute_name = x.institute_name,
+                //                                               passingyear = x.passingyear,
+                //                                               result = x.result
+                //                                           }).ToList();
+
+
+                //    vmdl.CommitStatus = true;
+                //}
+            }
+            else
+            {
+                vmdl.CommitStatus = false;
+            }
+            return Json(vmdl, JsonRequestBehavior.AllowGet);
         }
 
     }

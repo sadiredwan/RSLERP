@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using RSLERP.Authorization;
+﻿using RSLERP.Authorization;
 using RSLERP.DataManager;
 using RSLERP.DataManager.Entity;
 using RSLERP.Models;
@@ -10,7 +9,6 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using static RSLERP.DataManager.Utility;
 namespace RSLERP.Controllers.Settings.Security
 {
@@ -33,7 +31,7 @@ namespace RSLERP.Controllers.Settings.Security
                 vmdl = (ViewModel)TempData["ViewModel"];
 
             }
-            //vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
 
 
             return View(vmdl);
@@ -144,59 +142,6 @@ namespace RSLERP.Controllers.Settings.Security
                 return RedirectToAction("load");
             }
 
-        }
-
-
-        public JsonResult JsonDataForDatable()
-        {
-            String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
-            int draw =Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
-            int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
-            int perPage =Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
-
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            // Sort Column Direction (asc, desc)  
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-
-
-            var returnDataArr = new object[0];
-            int recordsTotal = 0;
-            int filteredTotal = 0;
-            List<object> jsonReturnRecords = new List<object>();
-            using (var contxt = new DBContext())
-            {
-                var linQTotal = (from usrs in contxt.CompanyUsers
-                           join usrls in contxt.UserRoles  on usrs.u_ID equals usrls.ur_u_ID into sub1
-                           from t1 in sub1.DefaultIfEmpty()
-                           join rols in contxt.Roles on t1.ur_rl_ID equals rols.Id into sub2
-                           from t2 in sub2.DefaultIfEmpty(new Role { Name="Not Assign"})
-                           where usrs.u_LoginName.Contains(searchQuery)  || t2.Name.Contains(searchQuery)                       
-                           select new
-                           {
-                               UserName = ""+usrs.u_LoginName,
-                               RoleName = t2.Name
-
-                           }).ToList(); 
-
-                recordsTotal = linQTotal.Count();
-
-                var linQFiltered = linQTotal.OrderBy(x=>x.UserName).Skip(start).Take(perPage);
-                filteredTotal = linQFiltered.Count();
-                returnDataArr = new object[filteredTotal];
-                jsonReturnRecords = linQFiltered.ToList<object>();
-
-            }
-           
-            JsonResult json = Json(new
-            {
-                draw = Convert.ToInt32(draw),
-                recordsTotal = recordsTotal, // calculated field
-                recordsFiltered = recordsTotal, // calculated field
-                data = jsonReturnRecords
-            }, JsonRequestBehavior.AllowGet);
-
-
-            return json;
         }
 
      

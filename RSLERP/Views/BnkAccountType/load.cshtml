@@ -52,8 +52,8 @@
                                 <label>Payable/Receivable</label>
                                 <select name="VM_BNK_ACCOUNT_TYPE.pay_or_receive" class="form-control select2">
                                     <option value="all">-- Select Payable/Receivable --</option>
-                                    <option value=1>@type1</option>
-                                    <option value=2>@type2</option>
+                                    <option value=1 @(Model.VM_BNK_ACCOUNT_TYPE.pay_or_receive == 1 ? "selected" : "")>@type1</option>
+                                    <option value=2 @(Model.VM_BNK_ACCOUNT_TYPE.pay_or_receive == 2 ? "selected" : "")>@type2</option>
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_ACCOUNT_TYPE.pay_or_receive")
                             </div>

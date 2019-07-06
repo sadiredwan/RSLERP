@@ -46,6 +46,8 @@ namespace RSLERP.Controllers.Settings
             //company find_company = new DBContext().Companies.ToList().Find(x => x.user_id == user_id);
 
             //Set  Message
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
+
             String message = "";
 
             int psID = Convert.ToInt32(id);
@@ -73,7 +75,7 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl.VM_PROJECT_SEGMENT = mdlProjectSegment;
             }
-            vmdl.VM_BUSINESS_SECTORS = new DBContext().BusinessSectors.ToList();
+            vmdl.VM_BUSINESS_SECTORS = new DBContext().BusinessSectors.Where(x=>x.CompanyId==COMPANY_ID).ToList();
             return View(vmdl);
         }
 
