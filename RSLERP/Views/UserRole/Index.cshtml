@@ -29,26 +29,9 @@
                                 <tr>
                                     <th>User Name</th>
                                     <th>User Role</th>
-                                    <th>Edit</th>
                                 </tr>
                             </thead>
-                            @foreach (CompanyUser secrl in Model.VM_COMPANY_USERS)
-                            {
-                                String rl_name = "No Role Assign";
-                                List<UserRole> userRoles = new DBContext().UserRoles.Where(x => x.ur_u_ID == secrl.u_ID).ToList();
-                                if(userRoles.Count>0)
-                                {
-                                    rl_name = new DBContext().Roles.Find(userRoles.FirstOrDefault().ur_rl_ID).Name;
-                                }
-                                <tr>
-                                    <td>@secrl.u_LoginName</td>
-                                    <td>@rl_name</td>
-
-                                    <td>
-                                        <a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.u_ID"><span class="fa fa-pencil"></span></a>
-                                                                           </td>
-                                </tr>
-                            }
+                           
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -73,14 +56,30 @@
         var base_rel= "@Url.Action("delete","Employee")";
 
   $(function () {
-      $('#example2').DataTable({
-          'paging': true,
-          'lengthChange': true,
-          'searching': true,
-          'ordering': true,
-          'info': true,
-          'autoWidth': true
-      })
+      //$('#example2').DataTable({
+      //    'paging': true,
+      //    'lengthChange': true,
+      //    'searching': true,
+      //    'ordering': true,
+      //    'info': true,
+      //    'autoWidth': true
+      //});
+
+      var dataTable = $('#example2').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonDataForDatable', // json datasource
+              type: "post",
+              datatype: "json"  
+          },
+          "columns": [
+                { "data": "UserName", "name": "UserName", "autoWidth": true },
+                { "data": "RoleName", "name": "RoleName", "autoWidth": true }
+
+          ]
+      });
+
   })
 
   function remove(obj)

@@ -30,20 +30,9 @@
                                 <tr>
                                     <th>User ID</th>
                                     <th>User Name</th>
-                                    <th>Edit</th>
                                 </tr>
                             </thead>
-                            @foreach (CompanyUser secrl in Model.VM_COMPANY_USERS)
-                            {
-                                <tr>
-                                    <td>@secrl.u_ID</td>
-                                    <td>@secrl.u_LoginName</td>
-
-                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@secrl.u_ID"><span class="fa fa-pencil"></span></a>
-                                        &nbsp;&nbsp; <a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/LoadPassowrdChange?id=@secrl.u_ID"><span class="fa fa-key"></span></a> 
-                                    </td>
-                                </tr>
-                            }
+                        
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -68,14 +57,30 @@
         var base_rel= "@Url.Action("delete","Employee")";
 
   $(function () {
-      $('#example2').DataTable({
-          'paging': true,
-          'lengthChange': true,
-          'searching': true,
-          'ordering': true,
-          'info': true,
-          'autoWidth': true
-      })
+      //$('#example2').DataTable({
+      //    'paging': true,
+      //    'lengthChange': true,
+      //    'searching': true,
+      //    'ordering': true,
+      //    'info': true,
+      //    'autoWidth': true
+      //});
+
+      var dataTable = $('#example2').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonDataForDatable', // json datasource
+              type: "post",
+              datatype: "json"
+          },
+          "columns": [
+                { "data": "u_ID", "name": "u_ID", "autoWidth": true },
+                { "data": "u_LoginName", "name": "u_LoginName", "autoWidth": true }
+
+          ]
+      });
+
   })
 
   function remove(obj)

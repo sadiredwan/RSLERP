@@ -101,6 +101,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
 
         public JsonResult JsonEmployeeLoad(String empID)
         {
+            int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
             int eID = Convert.ToInt32(empID);
             if (new DBContext().HrmEmployeeOfficials.Where(x => x.id == eID).Count() > 0)
             {
@@ -115,7 +116,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
                     vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = (from ac in contxt.HrmEmployeeAcademicInfos
                                                            join lvl in contxt.HrmEducationLevels
                                                            on ac.education_level_id equals lvl.id
-                                                           where ac.HrmEmployeeOfficial_ID == eID
+                                                           where ac.HrmEmployeeOfficial_ID == eID 
                                                            orderby ac.id
                                                            select new
                                                            {

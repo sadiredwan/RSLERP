@@ -31,7 +31,7 @@ namespace RSLERP.Controllers.Settings
                 vmdl = (ViewModel)TempData["ViewModel"];
 
             }
-            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+           // vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
 
 
             return View(vmdl);
@@ -269,7 +269,42 @@ namespace RSLERP.Controllers.Settings
         }
 
 
+        public JsonResult JsonDataForDatable()
+        {
+            String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
+            int draw = Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+            int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+            int perPage = Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
+            var returnDataArr = new object[0];
+            int recordsTotal = 0;
+            int filteredTotal = 0;
+            List<CompanyUser> jsonReturnRecords = new List<CompanyUser>();
+            using (var contxt = new DBContext())
+            {
+                List<CompanyUser> records = (from ur in contxt.CompanyUsers
+                                 where ur.u_LoginName.Contains(searchQuery)
+                                 select ur).ToList();
 
+                recordsTotal = records.Count();
+
+                List<CompanyUser> filterRecords = records.OrderBy(x => x.u_LoginName).Skip(start).Take(perPage).ToList();
+
+                filteredTotal = filterRecords.Count();
+
+                jsonReturnRecords = filterRecords;
+            }
+           
+            JsonResult json = Json(new
+            {
+                draw = Convert.ToInt32(draw),
+                recordsTotal = recordsTotal, // calculated field
+                recordsFiltered = recordsTotal, // calculated field
+                data = jsonReturnRecords
+            }, JsonRequestBehavior.AllowGet);
+
+
+            return json;
+        }
 
 
 

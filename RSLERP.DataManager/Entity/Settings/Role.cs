@@ -29,5 +29,6 @@ namespace RSLERP.DataManager.Entity
 
         public int? app_id { get; set; }
 
+        
     }
 }
