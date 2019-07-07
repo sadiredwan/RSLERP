@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -27,6 +29,8 @@ namespace RSLERP.Controllers.Settings.Security
         [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] {AccessLevel.View})]
         public ActionResult Index()
         {
+           
+
 
             if (TempData["ViewModel"] != null)
             {
@@ -149,41 +153,62 @@ namespace RSLERP.Controllers.Settings.Security
 
         public JsonResult JsonDataForDatable()
         {
+            //Search Query value
             String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
+
+            //Draw Datatable
             int draw =Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+
+            //Start Page 
             int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+
+            //Perpage
             int perPage =Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
 
-            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-            // Sort Column Direction (asc, desc)  
-            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            //Sort Columns
+            int sortColumnId = Convert.ToInt32(Request.Form.GetValues("order[0][column]").FirstOrDefault());
+            String sortColumn = "columns["+sortColumnId+"][name]";
+            var sortColumnName = Request.Form.GetValues(sortColumn).FirstOrDefault();
+            var sortColumnDirection = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
 
 
             var returnDataArr = new object[0];
             int recordsTotal = 0;
             int filteredTotal = 0;
-            List<object> jsonReturnRecords = new List<object>();
+            List<UserRole> jsonReturnRecords = new List<UserRole>();
             using (var contxt = new DBContext())
             {
-                var linQTotal = (from usrs in contxt.CompanyUsers
-                           join usrls in contxt.UserRoles  on usrs.u_ID equals usrls.ur_u_ID into sub1
-                           from t1 in sub1.DefaultIfEmpty()
-                           join rols in contxt.Roles on t1.ur_rl_ID equals rols.Id into sub2
-                           from t2 in sub2.DefaultIfEmpty(new Role { Name="Not Assign"})
-                           where usrs.u_LoginName.Contains(searchQuery)  || t2.Name.Contains(searchQuery)                       
-                           select new
-                           {
-                               UserName = ""+usrs.u_LoginName,
-                               RoleName = t2.Name
 
-                           }).ToList(); 
+
+                var linQTotal = (from usrs in contxt.CompanyUsers
+                                 join usrls in contxt.UserRoles on usrs.u_ID equals usrls.ur_u_ID into sub1
+                                 from t1 in sub1.DefaultIfEmpty()
+                                 join rols in contxt.Roles on t1.ur_rl_ID equals rols.Id into sub2
+                                 from t2 in sub2.DefaultIfEmpty()
+                                 where usrs.u_LoginName.Contains(searchQuery) || t2.Name.Contains(searchQuery)
+                                 select new
+                                 {
+                                     UserID=usrs.u_ID,
+                                     UserName = "" + usrs.u_LoginName,
+                                     RoleName = t2.Name
+
+                                 })
+                .ToList().Select(x => new UserRole()
+                {
+                    ur_u_ID=x.UserID,
+                    UserName = x.UserName,
+                    RoleName = x.RoleName
+                }).ToList();
+
+
+          
 
                 recordsTotal = linQTotal.Count();
 
-                var linQFiltered = linQTotal.OrderBy(x=>x.UserName).Skip(start).Take(perPage);
+                var linQFiltered = OrderByDynamic<UserRole>(linQTotal, sortColumnName, sortColumnDirection).Skip(start).Take(perPage).ToList();
+
                 filteredTotal = linQFiltered.Count();
-                returnDataArr = new object[filteredTotal];
-                jsonReturnRecords = linQFiltered.ToList<object>();
+                jsonReturnRecords = linQFiltered;
 
             }
            
@@ -198,10 +223,6 @@ namespace RSLERP.Controllers.Settings.Security
 
             return json;
         }
-
-     
-
-
 
 
 

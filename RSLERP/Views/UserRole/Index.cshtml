@@ -25,12 +25,7 @@
                     <div class="box-body">
 
                         <table id="example2" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>User Role</th>
-                                </tr>
-                            </thead>
+                           
                            
                         </table>
                     </div>
@@ -55,32 +50,43 @@
 
         var base_rel= "@Url.Action("delete","Employee")";
 
-  $(function () {
-      //$('#example2').DataTable({
-      //    'paging': true,
-      //    'lengthChange': true,
-      //    'searching': true,
-      //    'ordering': true,
-      //    'info': true,
-      //    'autoWidth': true
-      //});
+        $(function () {
+            //$('#example2').DataTable({
+            //    'paging': true,
+            //    'lengthChange': true,
+            //    'searching': true,
+            //    'ordering': true,
+            //    'info': true,
+            //    'autoWidth': true
+            //});
 
-      var dataTable = $('#example2').DataTable({
-          "processing": true,
-          "serverSide": true,
-          "ajax": {
-              url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonDataForDatable', // json datasource
-              type: "post",
-              datatype: "json"  
-          },
-          "columns": [
-                { "data": "UserName", "name": "UserName", "autoWidth": true },
-                { "data": "RoleName", "name": "RoleName", "autoWidth": true }
+            var dataTable = $('#example2').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonDataForDatable', // json datasource
+                    type: "post",
+                    datatype: "json"
+                },
+                "columns": [
+                      { "data": "ur_u_ID", "name": "ur_u_ID", "title": "ur_u_ID" },
+                      { "data": "UserName", "name": "UserName", "title": "UserName" },
+                      { "data": "RoleName", "name": "RoleName", "title": "RoleName" },
+                      {
+                          "render": function (data, type, full, meta)
+                          { return '<a class="btn btn-info" href="/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=' + full.ur_u_ID + '">Edit</a>'; }
+                      },
 
-          ]
-      });
+                ],
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
 
-  })
+
+            });
+        });
 
   function remove(obj)
   {

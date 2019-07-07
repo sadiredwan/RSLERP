@@ -271,27 +271,42 @@ namespace RSLERP.Controllers.Settings
 
         public JsonResult JsonDataForDatable()
         {
+            //Search Query value
             String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
+
+            //Draw Datatable
             int draw = Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+
+            //Start Page 
             int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+
+            //Perpage
             int perPage = Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
+
+            //Sort Columns
+            int sortColumnId = Convert.ToInt32(Request.Form.GetValues("order[0][column]").FirstOrDefault());
+            String sortColumn = "columns[" + sortColumnId + "][name]";
+            var sortColumnName = Request.Form.GetValues(sortColumn).FirstOrDefault();
+            var sortColumnDirection = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+
+
             var returnDataArr = new object[0];
             int recordsTotal = 0;
             int filteredTotal = 0;
+
             List<CompanyUser> jsonReturnRecords = new List<CompanyUser>();
             using (var contxt = new DBContext())
             {
-                List<CompanyUser> records = (from ur in contxt.CompanyUsers
+                List<CompanyUser> linQTotal = (from ur in contxt.CompanyUsers
                                  where ur.u_LoginName.Contains(searchQuery)
                                  select ur).ToList();
 
-                recordsTotal = records.Count();
+                recordsTotal = linQTotal.Count();
 
-                List<CompanyUser> filterRecords = records.OrderBy(x => x.u_LoginName).Skip(start).Take(perPage).ToList();
-
-                filteredTotal = filterRecords.Count();
-
-                jsonReturnRecords = filterRecords;
+                List<CompanyUser> filterRecords = linQTotal.OrderBy(x => x.u_LoginName).Skip(start).Take(perPage).ToList();
+                var linQFiltered = OrderByDynamic<CompanyUser>(linQTotal, sortColumnName, sortColumnDirection).Skip(start).Take(perPage).ToList();                
+                filteredTotal = linQFiltered.Count();
+                jsonReturnRecords = linQFiltered;
             }
            
             JsonResult json = Json(new

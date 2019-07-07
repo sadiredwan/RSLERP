@@ -22,6 +22,7 @@ namespace RSLERP.Controllers.Accounts
         // GET: SigninCompany
         public ActionResult Index()
         {
+          
             vm.VM_COMPANYS = cmpBll.getCompany();
             vm.VM_FINANCIALYEARS = new DBContext().Financialyears.ToList();
             vm.VM_APPLICATION = new s_ApplicationState();
