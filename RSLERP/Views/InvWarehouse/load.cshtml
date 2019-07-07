@@ -57,7 +57,7 @@
                                     <option value="all">-- Select Warehouse Type --</option>
                                     @foreach (InvWarehouseType src in Model.VM_INVWAREHOUSE_TYPES)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_INVWAREHOUSE.warehouse_type_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVWAREHOUSE.warehouse_type_id")
@@ -93,7 +93,7 @@
                                     <option value="all">-- Select In-charge Employee --</option>
                                     @foreach (CompanyUser src in Model.VM_COMPANY_USERS)
                                     {
-                                        <option value="@src.u_ID">@src.u_LoginName</option>
+                                        <option value="@src.u_ID" @(Model.VM_INVWAREHOUSE.incharge_employee_id == src.u_ID ? "selected" : "")>@src.u_LoginName</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVWAREHOUSE.incharge_employee_id")

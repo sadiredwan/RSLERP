@@ -92,6 +92,7 @@ namespace RSLERP.Controllers.Settings
             vmdl.VM_HRM_EMPLOYEE_TYPES = new DBContext().HrmEmployeeTypes.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYMENT_TYPES = new DBContext().HrmEmploymentTypes.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_BANK_INFOS = new DBContext().BankInfos.Where(x => x.CompanyId == COMPANY_ID).ToList();
+            vmdl.VM_HRM_EMPLOYEE_OFFICIALS.Add(new HrmEmployeeOfficial { id = 0, name = "Top Most Employee" });
 
             return View(vmdl);
         }

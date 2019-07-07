@@ -63,7 +63,7 @@
                                     <option value="all">-- Select Rack Type --</option>
                                     @foreach (InvRackType src in Model.VM_INVRACK_TYPES)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_INVRACK.rack_type_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVRACK.rack_type_id")
@@ -75,7 +75,7 @@
                                     <option value="all">-- Select Warehouse --</option>
                                     @foreach (InvWarehouse src in Model.VM_INVWAREHOUSES)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_INVRACK.warehouse_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_INVRACK.warehouse_id")

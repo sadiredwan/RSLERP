@@ -57,7 +57,7 @@
                                     <option value="all">-- Select Section --</option>
                                     @foreach (HrmSection src in Model.VM_HRM_SECTIONS)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_HRM_SUB_SECTION.section_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SUB_SECTION.section_id")

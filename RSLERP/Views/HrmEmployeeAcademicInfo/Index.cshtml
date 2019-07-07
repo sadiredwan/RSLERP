@@ -5,20 +5,18 @@
 @{
     ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutHrm.cshtml";
-    String defaultParentName = "Top Most Employee";
-    int defaultParentId = 0;
 }
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Employee Academic Info
+            Employee Academic Information
             @*<small>Preview</small>*@
         </h1>
         <ol class="breadcrumb">
             <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Employee Academic Infos</a></li>
+            <li><a href="#">Employee Academic Information</a></li>
         </ol>
     </section>
 
@@ -28,9 +26,9 @@
         <!-- left column -->
         <!-- /.box-header -->
         <!-- form start -->
-       @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); } 
+        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
         @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
-            {
+        {
             @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-md-8">
@@ -55,11 +53,8 @@
                                     </div>
                                     <level id="lblLoadingMsg"></level>
 
-
-
                                 </div>
                             </div>
-
 
                         </div>
                     </div>
@@ -69,9 +64,9 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" height="250" width="300" id="empImage" src="" alt="User profile picture" />
 
-                            <h3 class="profile-username text-center" id="employee_name">Nina Mcintire</h3>
+                            <h3 class="profile-username text-center" id="employee_name"></h3>
 
-                            <p class="text-muted text-center" id="desig_name">Software Engineer</p>
+                            <p class="text-muted text-center" id="desig_name"></p>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
@@ -150,39 +145,39 @@
 
             </div>
 
-                <div class="row partialLoad">
-                        <div class="col-md-12">
-                            <div class="box">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Employee Academic Infos</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <table class="table table-bordered" id="tblEduLvls">
-                                        <thead>
-                                            <tr>
-                                                <th>Education Level</th>
-                                                <th>Institute</th>
-                                                <th>Board</th>
-                                                <th>Passing Year</th>
-                                                <th>Group</th>
-                                                <th>Result</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
+            <div class="row partialLoad">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Employee Academic Information</h3>
                         </div>
-
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered" id="tblEduLvls">
+                                <thead>
+                                    <tr>
+                                        <th>Education Level</th>
+                                        <th>Institute</th>
+                                        <th>Board</th>
+                                        <th>Passing Year</th>
+                                        <th>Group</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
                 </div>
 
+            </div>
 
-                <!-- /.box-body -->
-                            <div class="box-footer partialLoad">
-                                <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
-                            </div>
+
+            <!-- /.box-body -->
+            <div class="box-footer partialLoad">
+                <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
+            </div>
 
 
         }
@@ -199,7 +194,7 @@
         $(document).ready(function () {
 
             Init();
-          
+
             var htmlTblItems = [];
             //Add Button Click
             $("#addEduLvl").click(function () {

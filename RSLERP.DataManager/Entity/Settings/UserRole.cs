@@ -22,13 +22,6 @@ namespace RSLERP.DataManager.Entity
         public DateTime? modified_at { get; set; }
         public int? CompanyId { get; set; }
         public int? app_id { get; set; }
-
-        [NotMapped]
-        public String UserName { get; set; }
-
-        [NotMapped]
-        public String RoleName { get; set; }
-
-
+        
     }
 }

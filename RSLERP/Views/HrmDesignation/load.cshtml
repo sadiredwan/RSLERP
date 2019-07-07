@@ -62,7 +62,7 @@
                                     {
                                         if (src.id != Model.VM_HRM_DESIGNATION.id)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_DESIGNATION.parent_designation_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     }
                                 </select>

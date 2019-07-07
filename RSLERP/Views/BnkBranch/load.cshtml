@@ -46,7 +46,7 @@
                                     <option value="all">-- Select Bank --</option>
                                     @foreach (BankInfo src in Model.VM_BANK_INFOS)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_BNK_BRANCH.s_BankInfo_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_BNK_BRANCH.s_BankInfo_id")
