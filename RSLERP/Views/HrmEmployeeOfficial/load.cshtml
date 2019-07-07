@@ -5,8 +5,6 @@
 @{
     ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutHrm.cshtml";
-    String defaultParentName = "Top Most Employee";
-    int defaultParentId = 0;
 }
 
 <div class="content-wrapper">
@@ -40,6 +38,7 @@
                     @Html.AntiForgeryToken()
                     <div class="box-body">
                         <input type="hidden" name="VM_HRM_EMPLOYEE_OFFICIAL.id" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.id" />
+                        <input type="hidden" name="VM_HRM_EMPLOYEE_OFFICIAL.picture" value="@Model.VM_HRM_EMPLOYEE_OFFICIAL.picture" />
 
                         <div class="row">
                             <div class="col-md-8">
@@ -61,7 +60,7 @@
                                         <option value="all">-- Select Designation --</option>
                                         @foreach (HrmDesignation src in Model.VM_HRM_DESIGNATIONS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.designation_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.designation_id")
@@ -73,7 +72,7 @@
                                         <option value="all">-- Select Department --</option>
                                         @foreach (Department src in Model.VM_DEPARTMENTS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.department_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.department_id")
@@ -85,7 +84,7 @@
                                         <option value="all">-- Select Section --</option>
                                         @foreach (HrmSection src in Model.VM_HRM_SECTIONS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.section_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.section_id")
@@ -97,7 +96,7 @@
                                         <option value="all">-- Select Sub-Section --</option>
                                         @foreach (HrmSubSection src in Model.VM_HRM_SUB_SECTIONS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.subsection_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.subsection_id")
@@ -107,12 +106,11 @@
                                     <label>Reporting Officer</label>
                                     <select name="VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id" class="form-control select2">
                                         <option value="all">-- Select Reporting Officer --</option>
-                                        <option value="@defaultParentId">@defaultParentName</option>
                                         @foreach (HrmEmployeeOfficial src in Model.VM_HRM_EMPLOYEE_OFFICIALS)
                                         {
                                             if (src.id != Model.VM_HRM_EMPLOYEE_OFFICIAL.id)
                                             {
-                                                <option value="@src.id">@src.name</option>
+                                                <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id == src.id ? "selected" : "")>@src.name</option>
                                             }
                                         }
                                     </select>
@@ -125,7 +123,7 @@
                                         <option value="all">-- Select Business Sector --</option>
                                         @foreach (BusinessSector src in Model.VM_BUSINESS_SECTORS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.business_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.subsection_id")
@@ -137,7 +135,7 @@
                                         <option value="all">-- Select Project Segment --</option>
                                         @foreach (ProjectSegment src in Model.VM_PROJECT_SEGMENTS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.project_segment_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.project_segment_id")
@@ -171,7 +169,7 @@
                                         <option value="all">-- Select Shift --</option>
                                         @foreach (HrmShift src in Model.VM_HRM_SHIFTS)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.shift_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.shift_id")
@@ -183,7 +181,7 @@
                                         <option value="all">-- Select Employee Type --</option>
                                         @foreach (HrmEmployeeType src in Model.VM_HRM_EMPLOYEE_TYPES)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.employee_type_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.employee_type_id")
@@ -195,7 +193,7 @@
                                         <option value="all">-- Select Employment Type --</option>
                                         @foreach (HrmEmploymentType src in Model.VM_HRM_EMPLOYMENT_TYPES)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.employment_type_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     </select>
                                     @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_OFFICIAL.employment_type_id")
@@ -258,7 +256,6 @@
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">@(Model.VM_HRM_EMPLOYEE_OFFICIAL.id == 0 ? "Save" : "Update")</button>
                         </div>
-                        }
                     </div>
                 }
             </div>

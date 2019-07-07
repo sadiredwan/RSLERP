@@ -44,7 +44,6 @@
                                 <input type="text" class="form-control" name="VM_COMPANE.c_Name" id="input_companyname" placeholder="Name" value="@Model.VM_COMPANE.c_Name">
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_COMPANE.c_Name")
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <input type="text" class="form-control" name="VM_COMPANE.c_Email" id="input_companyemail" placeholder="Email" value="@Model.VM_COMPANE.c_Email">
@@ -83,9 +82,20 @@
         $(function () {
 
             $('.select2').select2();
+            $('.timepicker').timepicker();
 
         });
-
+        $('.form_time').datetimepicker({
+            language: 'en',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
 
         $('.datepicker').datepicker({
             format: 'dd MM yyyy',

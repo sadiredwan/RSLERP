@@ -53,7 +53,7 @@
                                     <option value="all">-- Select SDP Type --</option>
                                     @foreach (SlsSDPType src in Model.VM_SLSSDP_TYPES)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_SLSSDP.slssdp_type_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSSDP.slssdp_type_id")
@@ -68,7 +68,7 @@
                                     {
                                         if (src.id != Model.VM_SLSSDP.id)
                                         {
-                                            <option value="@src.id">@src.name</option>
+                                            <option value="@src.id" @(Model.VM_SLSSDP.parent_slssdp_id == src.id ? "selected" : "")>@src.name</option>
                                         }
                                     }
                                 </select>
@@ -99,7 +99,7 @@
                                     <option value="all">-- Select Account COA --</option>
                                     @foreach (AnFCOA src in Model.VM_ANFCOAS)
                                     {
-                                        <option value="@src.Id">@src.Particular</option>
+                                        <option value="@src.Id" @(Model.VM_SLSSDP.AnFCOA_id == src.Id ? "selected" : "")>@src.Particular</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_SLSSDP.AnFCOA_id")

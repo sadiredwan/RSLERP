@@ -5,11 +5,14 @@
  * This file is for demo purposes only.
  */
 $(function () {
+	
+	  alertify.set('notifier', 'position', 'top-right');
   'use strict'
 
-  /**
-   * Get access to plugins
-   */
+
+  $(".fadeObj").fadeOut(4000);
+
+
 
   $('[data-toggle="control-sidebar"]').controlSidebar()
   $('[data-toggle="push-menu"]').pushMenu()

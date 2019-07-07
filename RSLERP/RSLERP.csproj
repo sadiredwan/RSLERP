@@ -225,6 +225,7 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmSectionController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmShiftController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeAcademicInfoController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePersonalInfoController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
@@ -7452,6 +7453,10 @@
     <Content Include="bower_components\select2\tests\vendor\qunit-1.23.1.css" />
     <Content Include="bower_components\select2\tests\vendor\qunit-1.23.1.js" />
     <Content Include="bower_components\select2\vendor\jquery-2.1.0.js" />
+    <Content Include="bower_components\timepicker\bootstrap-timepicker.css" />
+    <Content Include="bower_components\timepicker\bootstrap-timepicker.js" />
+    <Content Include="bower_components\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="bower_components\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jsTree\docs.css" />
@@ -7510,6 +7515,7 @@
     <Content Include="dist\css\alt\AdminLTE-without-plugins.css" />
     <Content Include="dist\css\alt\AdminLTE-without-plugins.min.css" />
     <Content Include="dist\css\bootcomplete.css" />
+    <Content Include="dist\css\custom.css" />
     <Content Include="dist\css\skins\skin-black-light.css" />
     <Content Include="dist\css\skins\skin-black-light.min.css" />
     <Content Include="dist\css\skins\skin-black.css" />
@@ -9081,9 +9087,8 @@
     <Content Include="Views\HrmShift\load.cshtml" />
     <Content Include="Views\HrmEmployeeOfficial\Index.cshtml" />
     <Content Include="Views\HrmEmployeeOfficial\load.cshtml" />
+    <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
     <Content Include="Views\HrmEmployeePersonalInfo\Index.cshtml" />
-    <Content Include="Views\HrmEmployeePersonalInfo\load.cshtml" />
-    <Content Include="Views\HrmEmployeePersonalInfo\_PartialTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

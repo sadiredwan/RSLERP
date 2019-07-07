@@ -1,6 +1,13 @@
-﻿$(function () {
+﻿
+
+
+$(function () {
+
+    
     //Initialize Select2 Elements
     $('.select').select2();
+
+  
 
     $('#example2').DataTable({
 

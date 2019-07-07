@@ -1,82 +1,9 @@
-﻿@using RSLERP.DataManager.Entity
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@*@using RSLERP.DataManager*@
 @model RSLERP.Models.ViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutHrm.cshtml";
 }
 
-<div class="content-wrapper">
-
-    <section class="content-header">
-        <h1>Human Resource Management</h1>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-
-            <div class="col-xs-12">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
-                        <h3 class="box-title">Personal Information</h3>
-                        <a class="btn btn-primary pull-right" href="@Url.Action("load",HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())"><span class="fa fa-plus"></span> Add</a>
-                        <div class="box-tools">
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-
-                        <table id="example2" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Official ID</th>
-                                    <th>Name</th>
-                                    <th>Personal Contact No.</th>
-                                    <th>Emergency Contact</th>
-                                    <th>Relation</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            @foreach (HrmEmployeePersonalInfo src in Model.VM_HRM_EMPLOYEE_PERSONAL_INFOS)
-                            {
-                                Model.VM_HRM_EMPLOYEE_OFFICIAL = Model.VM_HRM_EMPLOYEE_OFFICIALS.Find(x => x.id == src.hrm_employee_official_id);
-                                Model.VM_HRM_EMPLOYEE_RELATION = Model.VM_HRM_EMPLOYEE_RELATIONS.Find(x => x.id == src.hrm_employee_relation_id);
-                                <tr>
-                                    <td>@Model.VM_HRM_EMPLOYEE_OFFICIAL.employee_id</td>
-                                    <td>@Model.VM_HRM_EMPLOYEE_OFFICIAL.name</td>
-                                    <td>@src.personal_contact_no</td>
-                                    <td>@src.emergency_contact_name</td>
-                                    <td>@Model.VM_HRM_EMPLOYEE_RELATION.name</td>
-
-                                    <td><a href="~/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Load?id=@src.id"><span class="fa fa-pencil"></span></a></td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer clearfix page">
-                        <p class="demo demo4_top pull-right"></p>
-                    </div>
-                </div>
-                <!-- /.box -->
-            </div>
-        </div>
-    </section>
-
-</div>
-
-@section masterJs
-{
-    <script>
-        $(function () {
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-        })
-    </script>
-}

@@ -51,7 +51,7 @@
                                     <option value="all">-- Select Employee Type --</option>
                                     @foreach (HrmEmployeeType src in Model.VM_HRM_EMPLOYEE_TYPES)
                                     {
-                                        <option value="@src.id">@src.name</option>
+                                        <option value="@src.id" @(Model.VM_HRM_EMPLOYMENT_TYPE.employee_type_id == src.id ? "selected" : "")>@src.name</option>
                                     }
                                 </select>
                                 @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYMENT_TYPE.employee_type_ids")
