@@ -53,13 +53,24 @@ namespace RSLERP.Controllers.Accounts
             List<s_User> checkCredUsrs = secBll.CheckUserLogin(vmdl.VM_USER);
             if (checkCredUsrs.Count > 0)
             {
-                FormsAuthentication.SetAuthCookie(vmdl.VM_USER.u_LoginName, false);
+                ApplicationState apState = new ApplicationState();
+               
+                using (var contxt = new DBContext())
+                {                   
+                    apState.user_id = checkCredUsrs[0].u_ID;
+                    apState.TimeStamp = DateTime.Now;
+                    apState.status = true;            
+                    contxt.ApplicationStates.Add(apState);
+                    contxt.SaveChanges();
+                }
+
+                FormsAuthentication.SetAuthCookie(""+apState.id, false);
                 //HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_COMPANY] = "" + checkCredUsrs[0].company_id;
-                HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID] = "" + checkCredUsrs[0].u_ID;
-                HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS] = checkCredUsrs[0];
+                //HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID] = "" + checkCredUsrs[0].u_ID;
+                //HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS] = checkCredUsrs[0];
                 String role = "";
                 
-                HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_ROLE] = "" + role;
+                //HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_ROLE] = "" + role;
 
                 return RedirectToAction("Index", "SigninCompany");
             }

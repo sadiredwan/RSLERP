@@ -129,6 +129,7 @@
     <Compile Include="Entity\Settings\Currency.cs" />
     <Compile Include="Entity\Settings\Financialyear.cs" />
     <Compile Include="Entity\Settings\Country.cs" />
+    <Compile Include="Entity\Settings\Group.cs" />
     <Compile Include="Entity\Settings\Module.cs" />
     <Compile Include="Entity\Settings\PriorityLevel.cs" />
     <Compile Include="Entity\Settings\ProjectSegment.cs" />

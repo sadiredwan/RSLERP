@@ -30,15 +30,20 @@ namespace RSLERP.Controllers
 
             List<TreeMenu> lstChildMenu = new List<TreeMenu>();
             List<Menus> lstMenu = new List<Menus>();
-           
-            if(HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_MODULES]!=null && (List<Menus>)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_MODULES]!= null)
+
+            String sessionName = GLobalSessionName.GLOBAL_SESSION_MODULES;
+            
+
+            if (Session[sessionName]!=null && (List<Menus>)Session[sessionName] != null)
             {
-                lstMenu = (List<Menus>)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_MODULES];
+                //lstMenu = new SecurityUserAccessBLL().SECURITY_ACCESS_MENUS();
+                lstMenu = (List<Menus>)Session[sessionName];
             }
             else
             {
-                lstMenu = new ModuleBLL().getMenu();
-                HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_MODULES] = lstMenu;
+                //lstMenu = new ModuleBLL().getMenu();
+                lstMenu = new SecurityUserAccessBLL().SECURITY_ACCESS_MENUS();
+                Session[GLobalSessionName.GLOBAL_SESSION_MODULES] = lstMenu;
             }
             int applicationID = Convert.ToInt32(appID);
             //if(lstMenu.FindAll(x => x.url.ToLower() == path.ToLower()).Count>0)

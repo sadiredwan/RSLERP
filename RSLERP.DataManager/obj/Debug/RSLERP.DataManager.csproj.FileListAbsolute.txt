@@ -40,11 +40,13 @@ C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CoreC
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csproj.CopyComplete
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
+C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\RSLERP.DataManager.dll.config
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\RSLERP.DataManager.dll
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\RSLERP.DataManager.pdb
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\EntityFramework.dll
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\EntityFramework.SqlServer.dll
+D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Linq.Dynamic.dll
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.Mvc.dll
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.Razor.dll
 D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.Razor.dll
@@ -62,7 +64,3 @@ D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Web.WebPages.Deployment.xm
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojResolveAssemblyReference.cache
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.dll
 D:\Project\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.pdb
-C:\Workspace\RSLERP\RSLERP.DataManager\obj\Debug\RSLERP.DataManager.csprojAssemblyReference.cache
-
-D:\Project\RSLERP\RSLERP.DataManager\bin\Debug\System.Linq.Dynamic.dll
-

@@ -15,7 +15,7 @@ namespace RSLERP.DataManager.DLL
 
         public List<CmnTransactionalYears> GetCmnTYear(String id="",String companyID="")
         {
-           String userID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
+           String userID = RSLERPApplication.CurrentState().user_id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@userID", Value = userID, SqlDbType = SqlDbType.VarChar });

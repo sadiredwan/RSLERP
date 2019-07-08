@@ -26,7 +26,7 @@ namespace RSLERP.Controllers.Settings.Security
         /// </summary>
         /// <returns></returns>
         // GET: Company
-        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] {AccessLevel.View})]
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View,AccessLevel.Delete })]
         public ActionResult Index()
         {
            
@@ -48,6 +48,8 @@ namespace RSLERP.Controllers.Settings.Security
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create, AccessLevel.Update })]
         public ActionResult load(String id)
         {
             //Get Current UserName

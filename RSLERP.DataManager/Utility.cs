@@ -230,7 +230,8 @@ namespace RSLERP.DataManager
     {
         public static ApplicationState CurrentState()
         {
-            int app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
+            int app_id = Convert.ToInt32(HttpContext.Current.User.Identity.Name);
+           // int app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
             return new DBContext().ApplicationStates.Find(app_id);
         }
     }

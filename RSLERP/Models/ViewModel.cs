@@ -218,7 +218,10 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeRelation> VM_HRM_EMPLOYEE_RELATIONS { get; set; }
 
-        public IQueryable VM_IQUERY { get; set; }
+
+        public Group VM_GROUP { get; set; }
+
+        public List<Group> VM_GROUPS { get; set; }
 
     }
 

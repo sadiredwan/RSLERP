@@ -113,6 +113,9 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmEmployeeRelation> HrmEmployeeRelations { get; set; }
 
+
+        public DbSet<Group> Groups { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
@@ -121,7 +124,7 @@ namespace RSLERP.DataManager
             
             try
             {
-                app_id = Convert.ToInt32(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]);
+                app_id = RSLERPApplication.CurrentState().id;
                 ApplicationState appState = new DBContext().ApplicationStates.Find(app_id);
                 user_id = appState.user_id;
                 company_id = appState.company_id;
@@ -138,7 +141,10 @@ namespace RSLERP.DataManager
                     ((IBaseModel)entity.Entity).created_at = DateTime.Now;
                     ((IBaseModel)entity.Entity).created_by = user_id;
                 }
-                ((IBaseModel)entity.Entity).CompanyId = company_id;
+                if (company_id != 0)
+                {
+                    ((IBaseModel)entity.Entity).CompanyId = company_id;
+                }
                 ((IBaseModel)entity.Entity).app_id = app_id;
                 ((IBaseModel)entity.Entity).modified_at = DateTime.Now;
                 ((IBaseModel)entity.Entity).modified_by = user_id;

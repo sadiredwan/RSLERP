@@ -14,5 +14,9 @@ namespace RSLERP.DataManager
         public static string s_spSS_User_NSelectByLoginName = "s_spSS_User_NSelectByLoginName";
 
         public static string spSS_Get_LoginCheck = "spSS_Get_LoginCheck";
+
+        public static string spSS_Get_Security_Access_Menu = "spSS_Get_Security_Access_Menu";
+
+        public static string spSS_Get_Security_Access_Check = "spSS_Get_Security_Access_Check";
     }
 }

@@ -23,5 +23,10 @@ namespace RSLERP.DataManager.Entity
         public int? CompanyId { get; set; }
         public int? app_id { get; set; }
         
+        [NotMapped]
+        public String UserName { get; set; }
+
+        [NotMapped]
+        public String RoleName { get; set; }
     }
 }

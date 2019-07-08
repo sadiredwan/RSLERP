@@ -22,7 +22,7 @@ namespace RSLERP.DataManager.DLL
         {
             pageIndex = pageIndex == 0 ? 1 : pageIndex;
             pageSize = (pageSize == 0 ? Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]) : pageSize);
-            String appID= HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@appID", Value = appID, SqlDbType = SqlDbType.VarChar });
@@ -34,7 +34,7 @@ namespace RSLERP.DataManager.DLL
 
         public List<RolePermissions> GetRolePermission(String rolePermissionID="", String roleID="",String resourceID="",String userID="",String moduleID="")
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@rpID", Value = rolePermissionID, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@roleID", Value = roleID, SqlDbType = SqlDbType.VarChar });
@@ -62,7 +62,7 @@ namespace RSLERP.DataManager.DLL
                                             , String rp_m_ID
                                             )
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "rp_ID", Value = rp_ID, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "rp_rl_ID", Value = rp_rl_ID, SqlDbType = SqlDbType.VarChar });
@@ -89,7 +89,7 @@ namespace RSLERP.DataManager.DLL
                                            , String companyID=""
                                            )
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@roleID", Value = roleID, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@moduleID", Value = moduleID, SqlDbType = SqlDbType.VarChar });

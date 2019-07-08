@@ -23,7 +23,7 @@ namespace RSLERP.DataManager.DLL
             , int pageSize = 0)
         {
             pageSize = (pageSize == 0 ? Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]) : pageSize);
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@type", Value = type, SqlDbType = SqlDbType.VarChar });
@@ -37,7 +37,7 @@ namespace RSLERP.DataManager.DLL
         public void InsertSupportType(String id, String type, String remarks, DateTime created_date)
         {
             List<SqlParameter> parametrs = new List<SqlParameter>();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@type", Value = type, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@remarks", Value = remarks, SqlDbType = SqlDbType.VarChar });

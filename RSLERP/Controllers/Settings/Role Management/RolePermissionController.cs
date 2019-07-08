@@ -45,20 +45,25 @@ namespace RSLERP.Controllers.SecurityNSettings.RoleManagement
         [HttpPost]
         public ActionResult Store(ViewModel vmdl)
         {
+           
             String r_mid = "" + vmdl.VM_MDULE.m_ID.ToString().PadLeft(2, '0');
             String msg = GLobalMessage.Global_Success_Message;
             vmdl.VM_MODULE_RESOURCES = new DBContext().Resources.Where(x => x.R_M_ID == r_mid).Where(x => x.Parent_R_ID > 0).Where(x => x.Is_Menu == true).ToList();
             vmdl.VM_ROLEPERMISSIONS = new List<RolePermission>();
             foreach (Resource resource in vmdl.VM_MODULE_RESOURCES)
             {
+                List<Resource> parentLst = new List<Resource>();
                 RolePermission rpMdl = new RolePermission();
                 rpMdl.rp_rl_ID = vmdl.VM_ROLE.Id;
                 rpMdl.rp_r_ID = resource.R_ID;
                 rpMdl.rp_m_ID = vmdl.VM_MDULE.m_ID;
-                rpMdl.rp_companyID = 2;
-                
-                if (Request.Form.GetValues("chk_view_" + resource.R_ID) != null && Request.Form.Get("chk_view_" + resource.R_ID)=="on")
+                rpMdl.rp_companyID =Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
+
+                if (Request.Form.GetValues("chk_view_" + resource.R_ID) != null && Request.Form.Get("chk_view_" + resource.R_ID) == "on")
+                {
+                    parentLst = parentResources(Convert.ToInt32(resource.Parent_R_ID), parentLst);
                     rpMdl.rp_ReadOnly = true;
+                }
                 else
                     rpMdl.rp_ReadOnly = false;
 
@@ -77,7 +82,25 @@ namespace RSLERP.Controllers.SecurityNSettings.RoleManagement
                 else
                     rpMdl.rp_Delete = false;
 
+                //Parent Resources
+                parentLst.ForEach(x =>
+                {                    
+                    vmdl.VM_ROLEPERMISSIONS.Add(new RolePermission {
+                                                                    rp_add =true,
+                                                                    rp_Edit =true,
+                                                                    rp_ReadOnly =true,
+                                                                    rp_Delete =true,
+                                                                    rp_rl_ID = vmdl.VM_ROLE.Id,
+                                                                    rp_r_ID= x.R_ID,
+                                                                    rp_m_ID = vmdl.VM_MDULE.m_ID,
+                                                                    rp_companyID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId)
+                                                                });
+                });
+
                 vmdl.VM_ROLEPERMISSIONS.Add(rpMdl);
+
+
+
             }
 
             using (var contxt = new DBContext())
@@ -132,6 +155,23 @@ namespace RSLERP.Controllers.SecurityNSettings.RoleManagement
             vmdl.VM_ROLE = new DBContext().Roles.Find(rlID);
            
             return PartialView(vmdl);
+        }
+
+        public List<Resource> parentResources(int prID, List<Resource> rsourcesParents)
+        {
+            if (new DBContext().Resources.Where(x => x.R_ID == prID).Count() > 0)
+            {
+                var prentRsrc = new DBContext().Resources.Where(x => x.R_ID == prID).FirstOrDefault();
+                rsourcesParents.Add(prentRsrc);
+                return parentResources(Convert.ToInt32(prentRsrc.Parent_R_ID), rsourcesParents);
+            }
+            else
+            {
+                return rsourcesParents;
+            }
+
+
+
         }
 
     }
