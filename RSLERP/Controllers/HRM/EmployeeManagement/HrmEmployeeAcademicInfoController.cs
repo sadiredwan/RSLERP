@@ -92,8 +92,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
             }
             GLobalStatus.Global_Status<ViewModel>(ref vmdl, true);    
             TempData["ViewModel"] = vmdl;
-            return RedirectToAction("index");                      
-           
+            return RedirectToAction("index");
 
         }
 
