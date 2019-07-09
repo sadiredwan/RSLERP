@@ -70,19 +70,16 @@
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Department</b> <p id="dep_name" class="pull-right"></p>
+                                    <b>Employee ID</b> <p id="emp_id" class="pull-right"></p>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Employee ID</b> <p id="emp_id" class="pull-right"></p>
+                                    <b>Department</b> <p id="dep_name" class="pull-right"></p>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
 
             <div class="row partialLoad">
                 <div class="col-md-12">
@@ -173,12 +170,10 @@
 
             </div>
 
-
             <!-- /.box-body -->
             <div class="box-footer partialLoad">
                 <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_ACADEMIC_INFO.id == 0 ? "Save" : "Update")</button>
             </div>
-
 
         }
 
@@ -272,7 +267,7 @@
 
         // Delete Remove Row
         $(document).on('click', '.deleteEduLvls', function () {
-            if (confirm('Are you Sure want to delete?')) {
+            if (confirm('Are you sure you want to delete?')) {
                 $(this).parent().parent().remove();
 
             }
@@ -328,9 +323,6 @@
 
                     }
                 });
-
-
-
             // alert(id);
         }
 
@@ -383,10 +375,15 @@
         //    });
         //}
 
-    $(function () {
-        //Initialize Select2 Elements
-        $('.select2').select2();
-                });
+        $(function () {
+            $('.select2').select2();
+        });
+
+
+        $('.datepicker').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
 
     </script>
 }

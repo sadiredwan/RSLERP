@@ -102,7 +102,6 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmShift> HrmShifts { get; set; }
 
-
         public DbSet<HrmEmployeeAcademicInfo> HrmEmployeeAcademicInfos { get; set; }
 
         public DbSet<HrmEducationLevel> HrmEducationLevels { get; set; }
