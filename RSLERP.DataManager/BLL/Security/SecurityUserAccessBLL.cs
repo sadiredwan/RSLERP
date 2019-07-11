@@ -34,5 +34,24 @@ namespace RSLERP.DataManager.BLL
         {
             return new SecurityAccessDLL().CheckUserLogin(usr.u_LoginName,usr.u_Password);
         }
+
+        public List<Menus> SECURITY_ACCESS_MENUS( String applicationID = "", String path = "",String Accesslevels="",String flag="")
+        {
+            return new SecurityAccessDLL().GetSecurityAccessMenu(applicationID, path, Accesslevels);
+        }
+
+        public bool CHECK_SECURITY_ACCESS_MENUS(String applicationID = "", String path = "", String Accesslevels = "", String flag = "")
+        {
+            if(new SecurityAccessDLL().CheckSecurityAccessCount(applicationID, path, Accesslevels)>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+           
+        }
     }
 }

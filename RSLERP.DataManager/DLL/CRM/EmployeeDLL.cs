@@ -27,7 +27,7 @@ namespace RSLERP.DataManager.DLL
             , int pageSize = 0)
         {
             pageSize = (pageSize == 0 ? Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]) : pageSize);
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@user_id", Value = user_id, SqlDbType = SqlDbType.VarChar });
@@ -44,7 +44,7 @@ namespace RSLERP.DataManager.DLL
         }
         public void InsertEmployee(String id, String user_id, String name, String email, String mobile, String address, DateTime birthdate, DateTime joining_date)
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@user_id", Value = user_id, SqlDbType = SqlDbType.VarChar });

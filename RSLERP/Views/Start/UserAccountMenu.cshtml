@@ -8,18 +8,18 @@
                 <!-- The user image in the navbar-->
                 <img src="~/dist/img/avatar.png" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">@Model.VM_USER.u_LoginName</span>
+                <span class="hidden-xs">@Model.VM_COMPANY_USER.u_LoginName</span>
             </a>
             <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
                     <img src="~/dist/img/avatar.png" class="img-circle" alt="User Image">
                     <p>
-                     @Model.VM_USER.u_LoginName
-                        @if (Model.VM_COMPANY != null)
+                     @Model.VM_COMPANY_USER.u_LoginName
+                        @if (Model.VM_COMPANE != null)
                         {
-                            <small>@Model.VM_COMPANY.c_Name</small>
-                            <small>@Model.VM_COMPANY.GroupName</small>
+                            <small>@Model.VM_COMPANE.c_Name</small>
+                            <small>@Model.VM_GROUP.g_Name</small>
                           
                         }
                       

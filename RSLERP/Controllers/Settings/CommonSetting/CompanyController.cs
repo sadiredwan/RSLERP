@@ -1,4 +1,5 @@
-﻿using RSLERP.DataManager;
+﻿using RSLERP.Authorization;
+using RSLERP.DataManager;
 using RSLERP.DataManager.Entity;
 using RSLERP.Models;
 using System;
@@ -20,6 +21,7 @@ namespace RSLERP.Controllers.Settings
         /// </summary>
         /// <returns></returns>
         // GET: Company
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View })]
         public ActionResult Index()
         {
 
@@ -39,6 +41,7 @@ namespace RSLERP.Controllers.Settings
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create,AccessLevel.Update })]
         public ActionResult load(String id)
         {
             //Get Current UserName
@@ -84,6 +87,7 @@ namespace RSLERP.Controllers.Settings
         /// </summary>
         /// <param name="vmdl"></param>
         /// <returns></returns>
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create })]
         public ActionResult store(ViewModel vmdl)
         {
             //Check Model state is valid or not
@@ -97,6 +101,7 @@ namespace RSLERP.Controllers.Settings
                     //CompanyMdl.updated_at = DateTime.Now;
                     using (var contxt = new DBContext())
                     {
+                        vmdl.VM_COMPANE.c_g_ID = RSLERPApplication.CurrentState().group_id;
                         contxt.Companies.Attach(vmdl.VM_COMPANE);
                         contxt.Entry(vmdl.VM_COMPANE).State = EntityState.Modified;
                         contxt.SaveChanges();

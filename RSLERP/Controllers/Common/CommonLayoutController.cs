@@ -48,28 +48,24 @@ namespace RSLERP.Controllers.CommonLayout
         {
             vm.VM_MODULE = new s_Modules();
             vm.VM_MODULE.m_ID = applicationid;
-            if (HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS] != null)
-            {
-                vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];
-            }
-            else
-            {
-                vm.VM_USER = new s_User();
-            }
+            vm.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(RSLERPApplication.CurrentState().user_id);
+          
             return PartialView(vm);
         }
 
 
         public PartialViewResult UserAccountMenu()
         {
-            if (HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS] != null)
-            {
-                vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];
-            }
-            else
-            {
-                vm.VM_USER = new s_User();
-            }
+            //if (HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS] != null)
+            //{
+            //    vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];
+            //}
+            //else
+            //{
+            vm.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(RSLERPApplication.CurrentState().user_id);
+            vm.VM_COMPANE = new DBContext().Companies.Find(RSLERPApplication.CurrentState().CompanyId);
+            vm.VM_GROUP = new DBContext().Groups.Find(RSLERPApplication.CurrentState().group_id);
+           // }
 
             return PartialView(vm);
         }

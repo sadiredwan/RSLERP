@@ -20,7 +20,10 @@ namespace RSLERP.Controllers.Home
         //[RSLERPAuthorize(AccessLevel = "User")]
         public ActionResult Index()
         {          
-
+            if(TempData["ViewModel"]!=null)
+            {
+                vm= (ViewModel)TempData["ViewModel"];
+            }
             vm.VM_MENUS = mdBll.getApplicationMenu(User.Identity.Name);
             string name = User.Identity.Name;
 
@@ -33,20 +36,24 @@ namespace RSLERP.Controllers.Home
 
         public PartialViewResult UserAccountMenu()
         {
-            if (HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID] != null)
-            {
-                String uID = HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-                List<s_User> usrs = new List<s_User>();
-                vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];// new SecurityUserAccessBLL().GetUserByUserID(uID).FirstOrDefault();
-                vm.VM_COMPANY=(s_Company)HttpContext.Application[GLobalSessionName.GLOBAL_COMPANY_GROUP];
-                //vm.VM_FINANCIALYEAR=(CmnTransactionalYears)HttpContext.Application[GLobalSessionName.GLOBAL_TRANSECTIONAL_YEAR];
-            }
-            else
-            {
-                vm.VM_USER = new s_User();
-                vm.VM_COMPANY = new s_Company();
+            //if (HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID] != null)
+            //{
+            //    String uID = HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
+            //    List<s_User> usrs = new List<s_User>();
+            //    vm.VM_USER = (s_User)HttpContext.Application[GLobalSessionName.GLOBAL_SESSION_USERINFOS];// new SecurityUserAccessBLL().GetUserByUserID(uID).FirstOrDefault();
+            //    vm.VM_COMPANY=(s_Company)HttpContext.Application[GLobalSessionName.GLOBAL_COMPANY_GROUP];
+            //    //vm.VM_FINANCIALYEAR=(CmnTransactionalYears)HttpContext.Application[GLobalSessionName.GLOBAL_TRANSECTIONAL_YEAR];
+            //}
+            //else
+            // {
+
+                vm.VM_COMPANY_USER = new DBContext().CompanyUsers.Find(RSLERPApplication.CurrentState().user_id);
+                vm.VM_COMPANE = new DBContext().Companies.Find(RSLERPApplication.CurrentState().company_id);
+                vm.VM_GROUP = new DBContext().Groups.Find(RSLERPApplication.CurrentState().group_id);
+                //vm.VM_USER = new s_User();
+               // vm.VM_COMPANY = new s_Company();
                 //vm.VM_FINANCIALYEAR = new CmnTransactionalYears();
-            }
+            //}
 
             return PartialView(vm);
         }

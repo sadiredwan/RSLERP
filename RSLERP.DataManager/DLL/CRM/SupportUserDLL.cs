@@ -24,7 +24,7 @@ namespace RSLERP.DataManager.DLL
             , int pageSize = 0)
         {
             pageSize = (pageSize == 0 ? Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]) : pageSize);
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@name", Value = name, SqlDbType = SqlDbType.VarChar });
@@ -39,7 +39,7 @@ namespace RSLERP.DataManager.DLL
         public void InsertSupportUser(String id, String name, String email, String mobile, String address)
         {
             List<SqlParameter> parametrs = new List<SqlParameter>();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@name", Value = name, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@email", Value = email, SqlDbType = SqlDbType.VarChar });

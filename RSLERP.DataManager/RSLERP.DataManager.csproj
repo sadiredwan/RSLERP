@@ -46,6 +46,10 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.Services" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -104,6 +108,7 @@
     <Compile Include="Entity\HRM\HrmDesignation.cs" />
     <Compile Include="Entity\HRM\HrmEducationLevel.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeAcademicInfo.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeExperience.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeOfficial.cs" />
     <Compile Include="Entity\HRM\HrmEmployeePersonalInfo.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeRelation.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="Entity\Settings\Currency.cs" />
     <Compile Include="Entity\Settings\Financialyear.cs" />
     <Compile Include="Entity\Settings\Country.cs" />
+    <Compile Include="Entity\Settings\Group.cs" />
     <Compile Include="Entity\Settings\Module.cs" />
     <Compile Include="Entity\Settings\PriorityLevel.cs" />
     <Compile Include="Entity\Settings\ProjectSegment.cs" />

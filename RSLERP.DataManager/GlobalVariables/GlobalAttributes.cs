@@ -109,6 +109,7 @@ namespace RSLERP.DataManager
         public static string GLOBAL_TRANSECTIONAL_YEAR = "GLOBAL_TRANSECTIONAL_YEAR";
     }
 
+ 
 
     public static class GlobalMessageCode
     {

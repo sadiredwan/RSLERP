@@ -15,8 +15,8 @@ namespace RSLERP.DataManager.DLL
 
         public List<s_Company> GetCompany( String c_ID="",String flag="")
         {
-            String userID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            if (flag=="all")
+            String userID = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             {
                 userID = "";
             }           

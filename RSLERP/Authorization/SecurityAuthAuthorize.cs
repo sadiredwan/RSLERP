@@ -1,4 +1,6 @@
 ﻿using RSLERP.DataManager;
+using RSLERP.DataManager.BLL;
+using RSLERP.DataManager.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,57 +19,75 @@ namespace RSLERP.Authorization
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-
             bool haveAccess = true;
             var isAuthorized = base.AuthorizeCore(httpContext);
 
+            String path = "";
+
             string name = httpContext.User.Identity.Name;
+            string id = "";
 
             var routeValues = HttpContext.Current.Request.RequestContext.RouteData.Values;
             string current_Cname = routeValues["controller"].ToString();
             string current_Aname = routeValues["action"].ToString();
 
-            String userId = "" + RSLERPApplication.CurrentState().user_id;
+            if (routeValues.ContainsKey("id"))
+                id= (string)routeValues["id"];
+            else if (HttpContext.Current.Request.QueryString.AllKeys.Contains("id"))
+                id= HttpContext.Current.Request.QueryString["id"];
 
-            int user_id = Convert.ToInt32(userId);
+            String appID = "" + RSLERPApplication.CurrentState().id;
 
-            //List<RolePermission> rpLst = new List<RolePermission>();
+            path = current_Cname + "/Index";
 
-            //using (var contxt = new DBContext())
-            //{
-            //    rpLst = (from ru in contxt.userRoles
-            //             join rp in contxt.rolePermissions on ru.role_id equals rp.role_id
-            //             join md in contxt.modules on rp.module_id equals md.Id
-            //             where ru.user_id == user_id && md.ControllerName.ToLower() == current_Cname.ToLower()
-            //             && md.Action.ToLower() == current_Aname.ToLower()
-            //             select rp).ToList();
-            //}
+            if (current_Aname.ToLower()=="load")
+            {
+                if (string.IsNullOrEmpty(id))
+                {
+                    //Create/Add Permission
+                    if (AccessLevels.Contains(AccessLevel.Create))
+                    {
+                        haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.Create.ToString());
+                    }
+                }
+                else
+                {
+                    //Update/Edit Permission
+                    if (AccessLevels.Contains(AccessLevel.Update))
+                    {
+                        haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.Update.ToString());
+                    }
 
-            //foreach (AccessLevel slvl in AccessLevels)
-            //{
-            //    switch (slvl)
-            //    {
-            //        case AccessLevel.View:
-            //            haveAccess = rpLst.FindAll(x => x.Is_View == true).Count() > 0 ? true : false;
-            //            break;
-            //        case AccessLevel.Create:
-            //            haveAccess = rpLst.FindAll(x => x.Is_Create == true).Count() > 0 ? true : false;
-            //            break;
-            //        case AccessLevel.Delete:
-            //            haveAccess = rpLst.FindAll(x => x.Is_Delete == true).Count() > 0 ? true : false;
-            //            break;
-            //        case AccessLevel.Update:
-            //            haveAccess = rpLst.FindAll(x => x.Is_Update == true).Count() > 0 ? true : false;
-            //            break;
+                }
+            }
+            else if(current_Aname.ToLower()=="store")
+            {
+                //Create/Add Permission
+                if (AccessLevels.Contains(AccessLevel.Create))
+                {
+                    haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.Create.ToString());
+                }
+                if (AccessLevels.Contains(AccessLevel.Update) && !haveAccess)
+                {
+                    haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.Update.ToString());
+                }
+            }
+            else
+            {
+                if (AccessLevels.Contains(AccessLevel.View))
+                {                
+                    //View/Index Permission          
+                    haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.View.ToString());
+                }
+                else if(AccessLevels.Contains(AccessLevel.Delete))
+                {
+                    //Delete Permission          
+                    haveAccess = new SecurityUserAccessBLL().CHECK_SECURITY_ACCESS_MENUS(appID, path, AccessLevel.Delete.ToString());
+                }
+            }
 
-            //    }
+            
 
-            //    if (haveAccess)
-            //    {
-            //        break;
-            //    }
-
-            //}
 
             return haveAccess;
 
@@ -77,11 +97,12 @@ namespace RSLERP.Authorization
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             // Returns HTTP 401 - see comment in HttpUnauthorizedResult.cs.
+           
             filterContext.Result = new RedirectToRouteResult(
                                        new RouteValueDictionary
                                        {
                                        { "action", "denied" },
-                                       { "controller", "permission" }
+                                       { "controller", "access" }
                                        });
         }
     }

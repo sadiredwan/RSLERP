@@ -1,4 +1,5 @@
-﻿using RSLERP.DataManager;
+﻿using RSLERP.Authorization;
+using RSLERP.DataManager;
 using RSLERP.DataManager.BLL;
 using RSLERP.DataManager.Entity;
 using RSLERP.Global;
@@ -20,7 +21,9 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
     public class HrmEmployeeAcademicInfoController : Controller
     {
         ViewModel vmdl = new ViewModel();
+
         // GET: HrmEmployeeAcademicInfo
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View })]
         public ActionResult Index()
         {
             int COMPANY_ID = Convert.ToInt32(RSLERPApplication.CurrentState().CompanyId);
@@ -36,9 +39,11 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
             {
                 vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new HrmEmployeeOfficial();
             }
+
             vmdl.VM_HRM_EDUCATIONS_LEVELS = new DBContext().HrmEducationLevels.ToList();
             vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = new DBContext().HrmEmployeeAcademicInfos.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
+
             return View(vmdl);
         }
 
@@ -49,6 +54,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
         /// </summary>
         /// <param name="vmdl"></param>
         /// <returns></returns>
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create })]
         public ActionResult store(ViewModel vmdl)
         {
             //Current Company
@@ -97,7 +103,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
         }
 
 
-
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create })]
         public JsonResult JsonEmployeeLoad(String empID)
         {
             int eID = Convert.ToInt32(empID);
@@ -107,7 +113,6 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
                 vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture = Utility.GetBaseUrl() + "/" + vmdl.VM_HRM_EMPLOYEE_OFFICIAL.picture;
                 vmdl.VM_HRM_DESIGNATION = new DBContext().HrmDesignations.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.designation_id);
                 vmdl.VM_DEPARTMENT = new DBContext().Departments.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
-                vmdl.VM_IQUERY = null;
                 vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = new DBContext().HrmEmployeeAcademicInfos.Where(x => x.HrmEmployeeOfficial_ID == eID).ToList();
                 using (var contxt = new DBContext())
                 {

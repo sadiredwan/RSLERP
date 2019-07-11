@@ -1,4 +1,5 @@
-﻿using RSLERP.Authorization;
+﻿using Newtonsoft.Json;
+using RSLERP.Authorization;
 using RSLERP.DataManager;
 using RSLERP.DataManager.Entity;
 using RSLERP.Models;
@@ -7,8 +8,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using static RSLERP.DataManager.Utility;
 namespace RSLERP.Controllers.Settings.Security
 {
@@ -22,16 +26,18 @@ namespace RSLERP.Controllers.Settings.Security
         /// </summary>
         /// <returns></returns>
         // GET: Company
-        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] {AccessLevel.View})]
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View,AccessLevel.Delete })]
         public ActionResult Index()
         {
+           
+
 
             if (TempData["ViewModel"] != null)
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
 
             }
-            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+            //vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
 
 
             return View(vmdl);
@@ -42,6 +48,8 @@ namespace RSLERP.Controllers.Settings.Security
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+
+        [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.Create, AccessLevel.Update })]
         public ActionResult load(String id)
         {
             //Get Current UserName
@@ -144,9 +152,79 @@ namespace RSLERP.Controllers.Settings.Security
 
         }
 
-     
+
+        public JsonResult JsonDataForDatable()
+        {
+            //Search Query value
+            String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
+
+            //Draw Datatable
+            int draw =Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+
+            //Start Page 
+            int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+
+            //Perpage
+            int perPage =Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
+
+            //Sort Columns
+            int sortColumnId = Convert.ToInt32(Request.Form.GetValues("order[0][column]").FirstOrDefault());
+            String sortColumn = "columns["+sortColumnId+"][name]";
+            var sortColumnName = Request.Form.GetValues(sortColumn).FirstOrDefault();
+            var sortColumnDirection = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
 
 
+            var returnDataArr = new object[0];
+            int recordsTotal = 0;
+            int filteredTotal = 0;
+            List<UserRole> jsonReturnRecords = new List<UserRole>();
+            using (var contxt = new DBContext())
+            {
+
+
+                var linQTotal = (from usrs in contxt.CompanyUsers
+                                 join usrls in contxt.UserRoles on usrs.u_ID equals usrls.ur_u_ID into sub1
+                                 from t1 in sub1.DefaultIfEmpty()
+                                 join rols in contxt.Roles on t1.ur_rl_ID equals rols.Id into sub2
+                                 from t2 in sub2.DefaultIfEmpty()
+                                 where usrs.u_LoginName.Contains(searchQuery) || t2.Name.Contains(searchQuery)
+                                 select new
+                                 {
+                                     UserID=usrs.u_ID,
+                                     UserName = "" + usrs.u_LoginName,
+                                     RoleName = t2.Name
+
+                                 })
+                .ToList().Select(x => new UserRole()
+                {
+                    ur_u_ID=x.UserID,
+                    UserName = x.UserName,
+                    RoleName = x.RoleName
+                }).ToList();
+
+
+          
+
+                recordsTotal = linQTotal.Count();
+
+                var linQFiltered = OrderByDynamic<UserRole>(linQTotal, sortColumnName, sortColumnDirection).Skip(start).Take(perPage).ToList();
+
+                filteredTotal = linQFiltered.Count();
+                jsonReturnRecords = linQFiltered;
+
+            }
+           
+            JsonResult json = Json(new
+            {
+                draw = Convert.ToInt32(draw),
+                recordsTotal = recordsTotal, // calculated field
+                recordsFiltered = recordsTotal, // calculated field
+                data = jsonReturnRecords
+            }, JsonRequestBehavior.AllowGet);
+
+
+            return json;
+        }
 
 
 

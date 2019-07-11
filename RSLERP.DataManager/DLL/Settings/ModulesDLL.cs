@@ -14,8 +14,8 @@ namespace RSLERP.DataManager.DLL
     {
         public List<Menus> GetMenu(String userID, String Application,String path="",String flag="")
         {
-             userID= HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+             userID= RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@application_id", Value = Application, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@path", Value = path, SqlDbType = SqlDbType.VarChar });
@@ -24,9 +24,11 @@ namespace RSLERP.DataManager.DLL
             return new SqlHelper().GetRecords<Menus>(GlobalSp_Menu.spSS_Get_Menu, parametrs);
         }
 
+
+
         public List<s_Modules> GetApplicationModules(String userID="", String m_ID = "")
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@m_ID", Value = @m_ID, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@appID", Value = appID, SqlDbType = SqlDbType.VarChar });
@@ -35,11 +37,7 @@ namespace RSLERP.DataManager.DLL
 
         public List<Menus> GetApplicationMenu(String userID, String Application)
         {
-            String appID = "";
-            if(HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID]!=null)
-            { 
-                appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
-            }
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@appID", Value = appID, SqlDbType = SqlDbType.VarChar });
             return new SqlHelper().GetRecords<Menus>(GlobalSp_Menu.spSS_Get_Applications_Menu, parametrs);

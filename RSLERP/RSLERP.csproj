@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Bank\Settings\BnkBranchController.cs" />
     <Compile Include="Controllers\Common\CommonController.cs" />
     <Compile Include="Controllers\Common\CommonLayoutController.cs" />
+    <Compile Include="Controllers\Common\AccessController.cs" />
     <Compile Include="Controllers\Common\ReportController.cs" />
     <Compile Include="Controllers\Fixedasset\FixedAssetController.cs" />
     <Compile Include="Controllers\Fleet\FleetController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmShiftController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeAcademicInfoController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeExperienceController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePersonalInfoController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
@@ -9089,12 +9091,15 @@
     <Content Include="Views\HrmEmployeeOfficial\load.cshtml" />
     <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
     <Content Include="Views\HrmEmployeePersonalInfo\Index.cshtml" />
+    <Content Include="Views\Access\denied.cshtml" />
+    <Content Include="Views\HrmEmployeeExperience\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\uploads\" />
     <Folder Include="Controllers\CRM\" />
     <Folder Include="Views\Partials\OnChange\" />
+    <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

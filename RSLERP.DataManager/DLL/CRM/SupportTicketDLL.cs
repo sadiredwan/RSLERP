@@ -31,8 +31,8 @@ namespace RSLERP.DataManager.DLL
             String user_id = "")
         {
             pageSize = (pageSize == 0 ? Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]) : pageSize);
-            user_id = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            user_id = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@type_id", Value = type_id, SqlDbType = SqlDbType.VarChar });
@@ -54,8 +54,8 @@ namespace RSLERP.DataManager.DLL
 
         public void InsertSupportTicket(String id, String type_id, String support_user_id, String created_by, String support_title, String description, String status, DateTime? updated_date, String assigned_to, String solution, DateTime? completion_date, String user_id = "")
         {
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
-            user_id = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
+            user_id = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@type_id", Value = type_id, SqlDbType = SqlDbType.VarChar });

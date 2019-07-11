@@ -15,8 +15,8 @@ namespace RSLERP.DataManager.DLL
     {
         public List<Task_Comments> GetTask_Comment(String id = "", String task_id = "", String comment_by = "", DateTime? comment_date = null, String comment = "", String user_id = "")
         {
-            user_id = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            user_id = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@task_id", Value = task_id, SqlDbType = SqlDbType.VarChar });
@@ -28,8 +28,8 @@ namespace RSLERP.DataManager.DLL
         }
         public void InsertTaskComment(String id, String task_id, String comment_by, DateTime? comment_date = null, String comment = "")
         {
-            String user_id = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String user_id = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@task_id", Value = task_id, SqlDbType = SqlDbType.VarChar });
@@ -42,8 +42,8 @@ namespace RSLERP.DataManager.DLL
 
         public void DeleteTaskComment(String id, String task_id, String comment_by)
         {
-            String user_id = HttpContext.Current.Application[GLobalSessionName.GLOBAL_SESSION_USERID].ToString();
-            String appID = HttpContext.Current.Application[GLobalSessionName.GLOBAL_APPLICATION_ID].ToString();
+            String user_id = RSLERPApplication.CurrentState().user_id.ToString();
+            String appID = RSLERPApplication.CurrentState().id.ToString();
             List<SqlParameter> parametrs = new List<SqlParameter>();
             parametrs.Add(new SqlParameter { ParameterName = "@id", Value = id, SqlDbType = SqlDbType.VarChar });
             parametrs.Add(new SqlParameter { ParameterName = "@task_id", Value = task_id, SqlDbType = SqlDbType.VarChar });

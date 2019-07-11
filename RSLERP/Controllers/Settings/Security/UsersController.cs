@@ -31,7 +31,7 @@ namespace RSLERP.Controllers.Settings
                 vmdl = (ViewModel)TempData["ViewModel"];
 
             }
-            vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
+           // vmdl.VM_COMPANY_USERS = new DBContext().CompanyUsers.ToList();
 
 
             return View(vmdl);
@@ -269,7 +269,57 @@ namespace RSLERP.Controllers.Settings
         }
 
 
+        public JsonResult JsonDataForDatable()
+        {
+            //Search Query value
+            String searchQuery = Request.Form.GetValues("search[value]").FirstOrDefault();
 
+            //Draw Datatable
+            int draw = Convert.ToInt32(Request.Form.GetValues("draw").FirstOrDefault());
+
+            //Start Page 
+            int start = Convert.ToInt32(Request.Form.GetValues("start").FirstOrDefault());
+
+            //Perpage
+            int perPage = Convert.ToInt32(Request.Form.GetValues("length").FirstOrDefault());
+
+            //Sort Columns
+            int sortColumnId = Convert.ToInt32(Request.Form.GetValues("order[0][column]").FirstOrDefault());
+            String sortColumn = "columns[" + sortColumnId + "][name]";
+            var sortColumnName = Request.Form.GetValues(sortColumn).FirstOrDefault();
+            var sortColumnDirection = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+
+
+            var returnDataArr = new object[0];
+            int recordsTotal = 0;
+            int filteredTotal = 0;
+
+            List<CompanyUser> jsonReturnRecords = new List<CompanyUser>();
+            using (var contxt = new DBContext())
+            {
+                List<CompanyUser> linQTotal = (from ur in contxt.CompanyUsers
+                                 where ur.u_LoginName.Contains(searchQuery)
+                                 select ur).ToList();
+
+                recordsTotal = linQTotal.Count();
+
+                List<CompanyUser> filterRecords = linQTotal.OrderBy(x => x.u_LoginName).Skip(start).Take(perPage).ToList();
+                var linQFiltered = OrderByDynamic<CompanyUser>(linQTotal, sortColumnName, sortColumnDirection).Skip(start).Take(perPage).ToList();                
+                filteredTotal = linQFiltered.Count();
+                jsonReturnRecords = linQFiltered;
+            }
+           
+            JsonResult json = Json(new
+            {
+                draw = Convert.ToInt32(draw),
+                recordsTotal = recordsTotal, // calculated field
+                recordsFiltered = recordsTotal, // calculated field
+                data = jsonReturnRecords
+            }, JsonRequestBehavior.AllowGet);
+
+
+            return json;
+        }
 
 
 
