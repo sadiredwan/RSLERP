@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmShiftController.cs" />
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeAcademicInfoController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeExperienceController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePersonalInfoController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
@@ -9091,6 +9092,7 @@
     <Content Include="Views\HrmEmployeeAcademicInfo\Index.cshtml" />
     <Content Include="Views\HrmEmployeePersonalInfo\Index.cshtml" />
     <Content Include="Views\Access\denied.cshtml" />
+    <Content Include="Views\HrmEmployeeExperience\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

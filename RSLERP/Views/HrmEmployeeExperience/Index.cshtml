@@ -1,0 +1,382 @@
+﻿@using RSLERP.Models
+@using RSLERP.DataManager.Entity
+@*@using RSLERP.DataManager*@
+@model RSLERP.Models.ViewModel
+@{
+    ViewBag.Title = "load";
+    Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Employee Experience Information
+            @*<small>Preview</small>*@
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Employee Experience Information</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- left column -->
+        <!-- /.box-header -->
+        <!-- form start -->
+        @{Html.RenderAction("SubmitStatus", "Common", new { status = Model.CommitStatus, message = Model.SaveChangeMessage }); }
+        @using (Html.BeginForm("Store", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString(), FormMethod.Post, new { id = "form", data_toggle = "validator", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="box box-primary">
+
+                        <div class="box-body">
+                            <input type="hidden" name="VM_HRM_EMPLOYEE_EXPERIENCE.id" value="@Model.VM_HRM_EMPLOYEE_EXPERIENCE.id" />
+                            <input type="hidden" name="VM_HRM_EMPLOYEE_EXPERIENCE.from_date_json" value="@Model.VM_HRM_EMPLOYEE_EXPERIENCE.from_date_json" />
+                            <input type="hidden" name="VM_HRM_EMPLOYEE_EXPERIENCE.to_date_json" value="@Model.VM_HRM_EMPLOYEE_EXPERIENCE.to_date_json" />
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Employee</label>
+                                        <select id="ddlEmployee" name="VM_HRM_EMPLOYEE_OFFICIAL.id" class="form-control select2" onchange="onchangeemployee()">
+                                            <option value="0">-- Select Employee ID --</option>
+                                            @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
+                                            {
+                                                <option value="@emp.id" @(emp.id == Model.VM_HRM_EMPLOYEE_OFFICIAL.id ? "selected" : "")>@emp.employee_id</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <level id="lblLoadingMsg"></level>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 partialLoad">
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" height="250" width="300" id="empImage" src="" alt="User profile picture" />
+
+                            <h3 class="profile-username text-center" id="employee_name"></h3>
+
+                            <p class="text-muted text-center" id="desig_name"></p>
+
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Employee ID</b> <p id="emp_id" class="pull-right"></p>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Department</b> <p id="dep_name" class="pull-right"></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row partialLoad">
+                <div class="col-md-12">
+                    <div id="choseLvl" class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Add Experience</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Name of Organization</label>
+                                        <input type="text" class="form-control input-sm" id="company_name" placeholder="Name of Organization" name="company_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Designation</label>
+                                        <input type="text" class="form-control input-sm" id="job_title" placeholder="Designation" name="job_title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Department</label>
+                                        <input type="text" class="form-control input-sm" id="dept_name" placeholder="Department" name="dept_name">
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label>From Date:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input readonly="readonly" type="text" class="form-control pull-right datepicker2" id="from_date" name="from_date"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>To Date:</label>
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input readonly="readonly" type="text" class="form-control pull-right datepicker2" id="to_date" name="to_date" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Major Responsibility</label>
+                                        <input type="text" class="form-control input-sm" id="responsibility" placeholder="Major Responsibility" name="responsibility">
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+
+
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" id="addNewExp" class="btn btn-primary">Add</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row partialLoad">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Employee Experience Information</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered" id="tblExperience">
+                                <thead>
+                                    <tr>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Company/Organization</th>
+                                        <th>Designation</th>
+                                        <th>Department</th>
+                                        <th>Major Responsibilities</th>
+                                        <th>Duration (Days)</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- /.box-body -->
+            <div class="box-footer partialLoad">
+                <button type="submit" class="btn btn-primary pull-right partialLoad">@(Model.VM_HRM_EMPLOYEE_EXPERIENCE.id == 0 ? "Save" : "Update")</button>
+            </div>
+
+        }
+
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+@*<script src="~/Content/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>*@
+@section masterJs
+    {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            Init();
+
+            var htmlTblItems = [];
+            //Add Button Click
+            $("#addNewExp").click(function () {
+
+
+                var company_name = $("#company_name").val();
+                var job_title = $("#job_title").val();
+                var dept_name = $("#dept_name").val();
+                var from_date = $("#from_date").val();
+                var to_date = $("#to_date").val();
+                var responsibility = $("#responsibility").val();
+                var allSuccess = true;
+
+
+                if (!company_name)
+                {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Organization Name', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!job_title) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Designation Name', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!dept_name) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Department Name', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!from_date) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter From Date', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!to_date) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter To Date', 'warning', 5, function () { console.log('dismissed'); });
+                }
+                else if (!responsibility) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter Major Responsibility', 'warning', 5, function () { console.log('dismissed'); });
+                }
+
+                else if (allSuccess) {
+
+                    htmlTblItems.push({
+                        "company_name": company_name,
+                        "job_title": job_title,
+                        "dept_name": dept_name,
+                        "from_date": from_date,
+                        "to_date": to_date,
+                        "responsibility": responsibility,
+                    });
+
+                    GenerateTable(htmlTblItems, "tblExperience");
+
+                }
+            });
+
+
+
+        });
+
+
+        // Delete Remove Row
+        $(document).on('click', '.deleteExperience', function () {
+            if (confirm('Are you sure you want to delete?')) {
+                $(this).parent().parent().remove();
+
+            }
+
+        });
+
+        // Change When Select Employee
+        function onchangeemployee() {
+
+            $("#tblExperience > tbody").html("");
+            var htmlTblItems = [];
+            //where found Partial Load Class make it hidden
+            $(".partialLoad").addClass("hiddenPnl");
+
+            //Show Loading Message
+            $("#lblLoadingMsg").html("Loading...");
+
+
+                var empID = $("#ddlEmployee").val();
+                $.ajax({
+                    url: '/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/JsonEmployeeLoad?empID=' + empID,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.CommitStatus) {
+                            $("#lblLoadingMsg").html("");
+                            $(".partialLoad").removeClass("hiddenPnl");
+                            $(".partialLoad #employee_name").text(data.VM_HRM_EMPLOYEE_OFFICIAL.name);
+                            $(".partialLoad #desig_name").text(data.VM_HRM_DESIGNATION.name);
+                            $(".partialLoad #dep_name").text(data.VM_DEPARTMENT.name);
+                            $(".partialLoad #empImage").attr("src", data.VM_HRM_EMPLOYEE_OFFICIAL.picture);
+                            $(".partialLoad #emp_id").text(data.VM_HRM_EMPLOYEE_OFFICIAL.employee_id);
+
+                            $.each(data.VM_HRM_EMPLOYEE_EXPERIENCES, function (i, item) {
+                                htmlTblItems.push({
+                                    "company_name": item.company_name,
+                                    "job_title": item.job_title,
+                                    "dept_name": item.dept_name,
+                                    "from_date": item.from_date_json,
+                                    "to_date": item.to_date_json,
+                                    "responsibility": item.responsibility,
+                                    "duration_days": item.duration_days,
+                                });
+                            });
+                            GenerateTable(htmlTblItems, "tblExperience");
+                        }
+                        else
+                        {
+                            $("#lblLoadingMsg").html("No Employee Found");
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            // alert(id);
+        }
+
+        //Generate HTML Table for Experience
+        function GenerateTable(htmlTableObjs,tableName)
+        {
+            var tablehtml = "";
+            $.each(htmlTableObjs, function (i, item) {
+                tablehtml += "<tr>";
+                tablehtml += "<td>" + item.from_date + "<input type=\"hidden\" class=\"childTd\" propname=\"from_date\" name=\"from_date[]\" value='" + item.from_date + "' /></td></td>";
+                tablehtml += "<td>" + item.to_date + "<input type=\"hidden\" class=\"childTd\" propname=\"to_date\" name=\"to_date[]\" value='" + item.to_date + "'  /></td></td>";
+                tablehtml += "<td>" + item.company_name + "<input type=\"hidden\" class=\"childTd\" propname=\"company_name\" name=\"company_name[]\" value=" + item.company_name + "  /></td></td>";
+                tablehtml += "<td>" + item.job_title + "<input type=\"hidden\" class=\"childTd\" propname=\"job_title\" name=\"job_title[]\" value=" + item.job_title + "  /></td></td>";
+                tablehtml += "<td>" + item.dept_name + "<input type=\"hidden\" class=\"childTd\" propname=\"dept_name\" name=\"dept_name[]\" value=" + item.dept_name + "  /></td></td>";
+                tablehtml += "<td>" + item.responsibility + "<input type=\"hidden\" class=\"childTd\" propname=\"responsibility\" name=\"responsibility[]\" value=" + item.responsibility + "  /></td></td>";
+                tablehtml += "<td>" + item.duration_days + "<input type=\"hidden\" class=\"childTd\" propname=\"responsibility\" name=\"responsibility[]\" value=" + item.duration_days + " +  /></td></td>";
+                tablehtml += "<td> <div   class=\"btn btn-primary deleteExperience\">Delete</div></td>";
+                tablehtml += "</tr>";
+            });
+
+
+            $("#"+tableName).append(tablehtml);
+        }
+
+
+        function Init()
+        {
+            if($("#ddlEmployee").val()>0)
+            {
+                onchangeemployee();
+            }
+            else
+            {
+                $(".partialLoad").addClass("hiddenPnl");
+            }
+
+        }
+
+
+        //function reArrangeDomIDs() {
+        //    var i = 1;
+        //    var countTr = $("table#tblEduLvls > tbody > tr").length;
+        //    $("table#tblEduLvls > tbody > tr").each(function (row, tr) {
+        //        var t = $(this).find("td:nth-child(1)").find(".childTd").val();
+        //        $(this).find("td").each(function (column, index) {
+        //            var getName = $(this).find(".childTd").attr("propname");
+        //            var newName = getName + "_" + i;
+        //            $(this).find(".childTd").attr("name", newName);
+        //        });
+        //        i++;
+        //    });
+        //}
+
+        $(function () {
+            $('.select2').select2();
+        });
+
+
+        $('.datepicker2').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+
+    </script>
+}
