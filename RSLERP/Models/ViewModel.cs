@@ -218,10 +218,13 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeRelation> VM_HRM_EMPLOYEE_RELATIONS { get; set; }
 
-
         public Group VM_GROUP { get; set; }
 
         public List<Group> VM_GROUPS { get; set; }
+
+        public HrmEmployeeExperience VM_HRM_EMPLOYEE_EXPERIENCE { get; set; }
+
+        public List<HrmEmployeeExperience> VM_HRM_EMPLOYEE_EXPERIENCES { get; set; }
 
     }
 

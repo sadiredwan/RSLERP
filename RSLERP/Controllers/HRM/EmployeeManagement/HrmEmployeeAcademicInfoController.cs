@@ -21,9 +21,8 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
     public class HrmEmployeeAcademicInfoController : Controller
     {
         ViewModel vmdl = new ViewModel();
+
         // GET: HrmEmployeeAcademicInfo
-
-
         [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View })]
         public ActionResult Index()
         {
@@ -40,9 +39,11 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
             {
                 vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new HrmEmployeeOfficial();
             }
+
             vmdl.VM_HRM_EDUCATIONS_LEVELS = new DBContext().HrmEducationLevels.ToList();
             vmdl.VM_HRM_EMPLOYEE_ACADEMIC_INFOS = new DBContext().HrmEmployeeAcademicInfos.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
+
             return View(vmdl);
         }
 
