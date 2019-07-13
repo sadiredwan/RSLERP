@@ -116,6 +116,8 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmEmployeeTraining> HrmEmployeeTrainings { get; set; }
 
+        public DbSet<HrmEmployeeMembership> HrmEmployeeMemberships { get; set; }
+
         public DbSet<Group> Groups { get; set; }
 
         private void OnBeforeSaving()

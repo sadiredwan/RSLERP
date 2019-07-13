@@ -228,6 +228,7 @@
     <Compile Include="Controllers\HRM\BasicSetup\HrmSubSectionController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeAcademicInfoController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeExperienceController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeMembershipController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePersonalInfoController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeTrainingController.cs" />
@@ -9095,6 +9096,7 @@
     <Content Include="Views\Access\denied.cshtml" />
     <Content Include="Views\HrmEmployeeExperience\Index.cshtml" />
     <Content Include="Views\HrmEmployeeTraining\Index.cshtml" />
+    <Content Include="Views\HrmEmployeeMembership\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
