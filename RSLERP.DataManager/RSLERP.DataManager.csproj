@@ -112,6 +112,7 @@
     <Compile Include="Entity\HRM\HrmEmployeeOfficial.cs" />
     <Compile Include="Entity\HRM\HrmEmployeePersonalInfo.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeRelation.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeTraining.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />

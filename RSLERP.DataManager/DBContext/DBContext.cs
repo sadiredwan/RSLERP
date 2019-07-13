@@ -114,6 +114,7 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmEmployeeExperience> HrmEmployeeExperiences { get; set; }
 
+        public DbSet<HrmEmployeeTraining> HrmEmployeeTrainings { get; set; }
 
         public DbSet<Group> Groups { get; set; }
 
