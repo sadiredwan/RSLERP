@@ -231,6 +231,7 @@
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeMembershipController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeOfficialController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePersonalInfoController.cs" />
+    <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePublisherController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeTrainingController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
@@ -9097,6 +9098,7 @@
     <Content Include="Views\HrmEmployeeExperience\Index.cshtml" />
     <Content Include="Views\HrmEmployeeTraining\Index.cshtml" />
     <Content Include="Views\HrmEmployeeMembership\Index.cshtml" />
+    <Content Include="Views\HrmEmployeePublisher\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

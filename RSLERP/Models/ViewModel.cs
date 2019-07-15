@@ -234,6 +234,9 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeMembership> VM_HRM_EMPLOYEE_MEMBERSHIPS { get; set; }
 
+        public HrmEmployeePublisher VM_HRM_EMPLOYEE_PUBLISHER { get; set; }
+
+        public List<HrmEmployeePublisher> VM_HRM_EMPLOYEE_PUBLISHERS { get; set; }
     }
 
    
