@@ -226,6 +226,17 @@ namespace RSLERP.Models
 
         public List<HrmEmployeeExperience> VM_HRM_EMPLOYEE_EXPERIENCES { get; set; }
 
+        public HrmEmployeeTraining VM_HRM_EMPLOYEE_TRAINING { get; set; }
+
+        public List<HrmEmployeeTraining> VM_HRM_EMPLOYEE_TRAININGS { get; set; }
+
+        public HrmEmployeeMembership VM_HRM_EMPLOYEE_MEMBERSHIP { get; set; }
+
+        public List<HrmEmployeeMembership> VM_HRM_EMPLOYEE_MEMBERSHIPS { get; set; }
+
+        public HrmEmployeePublisher VM_HRM_EMPLOYEE_PUBLISHER { get; set; }
+
+        public List<HrmEmployeePublisher> VM_HRM_EMPLOYEE_PUBLISHERS { get; set; }
     }
 
    

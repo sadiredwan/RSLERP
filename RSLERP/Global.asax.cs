@@ -29,8 +29,8 @@ namespace RSLERP
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);         
-            
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace RSLERP
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -54,14 +54,12 @@ namespace RSLERP
             if (HttpContext.Current.User != null)
             {
                 int appID = Convert.ToInt32(HttpContext.Current.User.Identity.Name);
-   
+
 
                 if (new DBContext().ApplicationStates.Where(x => x.id == appID && x.status == true).Count() < 1)
-                    {
-                        FormsAuthentication.SignOut();
-                    }
-                
-              
+                {
+                    FormsAuthentication.SignOut();
+                }
             }
         }
 
