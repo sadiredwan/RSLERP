@@ -95,15 +95,15 @@
                             <div class="col-lg-6">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Name of Organization</label>
+                                        <label>Name of Organization</label>
                                         <input type="text" class="form-control input-sm" id="company_name" placeholder="Name of Organization" name="company_name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Designation</label>
+                                        <label>Designation</label>
                                         <input type="text" class="form-control input-sm" id="job_title" placeholder="Designation" name="job_title">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Department</label>
+                                        <label>Department</label>
                                         <input type="text" class="form-control input-sm" id="dept_name" placeholder="Department" name="dept_name">
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                             <div class="col-lg-6">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label>From Date:</label>
+                                        <label>From Date</label>
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>To Date:</label>
+                                        <label>To Date</label>
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Major Responsibility</label>
+                                        <label>Major Responsibility</label>
                                         <input type="text" class="form-control input-sm" id="responsibility" placeholder="Major Responsibility" name="responsibility">
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
 
                         </div>
                         <div class="box-footer">
-                            <button type="button" id="addNewExp" class="btn btn-primary">Add</button>
+                            <button type="button" id="add_new_exp" class="btn btn-primary">Add</button>
                         </div>
 
                     </div>
@@ -199,17 +199,18 @@
 
             var htmlTblItems = [];
             //Add Button Click
-            $("#addNewExp").click(function () {
-
-
+            $("#add_new_exp").click(function () {
+                
                 var company_name = $("#company_name").val();
                 var job_title = $("#job_title").val();
                 var dept_name = $("#dept_name").val();
                 var from_date = $("#from_date").val();
                 var to_date = $("#to_date").val();
                 var responsibility = $("#responsibility").val();
+                var start = $("#from_date").datepicker("getDate");
+                var end = $("#to_date").datepicker("getDate");
+                var duration_days = (end - start) / (1000 * 60 * 60 * 24);
                 var allSuccess = true;
-
 
                 if (!company_name)
                 {
@@ -236,7 +237,10 @@
                     allSuccess = false;
                     alertify.notify('Please Enter Major Responsibility', 'warning', 5, function () { console.log('dismissed'); });
                 }
-
+                else if (duration_days < 0) {
+                    allSuccess = false;
+                    alertify.notify('Please Enter A Valid Time Span', 'warning', 5, function () { console.log('dismissed'); });
+                }
                 else if (allSuccess) {
 
                     htmlTblItems.push({
@@ -246,6 +250,7 @@
                         "from_date": from_date,
                         "to_date": to_date,
                         "responsibility": responsibility,
+                        "duration_days": duration_days,
                     });
 
                     GenerateTable(htmlTblItems, "tblExperience");
@@ -330,8 +335,8 @@
                 tablehtml += "<td>" + item.job_title + "<input type=\"hidden\" class=\"childTd\" propname=\"job_title\" name=\"job_title[]\" value=" + item.job_title + "  /></td></td>";
                 tablehtml += "<td>" + item.dept_name + "<input type=\"hidden\" class=\"childTd\" propname=\"dept_name\" name=\"dept_name[]\" value=" + item.dept_name + "  /></td></td>";
                 tablehtml += "<td>" + item.responsibility + "<input type=\"hidden\" class=\"childTd\" propname=\"responsibility\" name=\"responsibility[]\" value=" + item.responsibility + "  /></td></td>";
-                tablehtml += "<td>" + item.duration_days + "<input type=\"hidden\" class=\"childTd\" propname=\"responsibility\" name=\"responsibility[]\" value=" + item.duration_days + " +  /></td></td>";
-                tablehtml += "<td> <div   class=\"btn btn-primary deleteExperience\">Delete</div></td>";
+                tablehtml += "<td>" + item.duration_days + "<input type=\"hidden\" class=\"childTd\" propname=\"duration_days\" name=\"duration_days[]\" value=" + item.duration_days + " +  /></td></td>";
+                tablehtml += "<td> <div class=\"btn btn-primary deleteExperience\">Delete</div></td>";
                 tablehtml += "</tr>";
             });
 
@@ -373,7 +378,12 @@
         });
 
 
-        $('.datepicker2').datepicker({
+        $('#from_date').datepicker({
+            format: 'dd MM yyyy',
+            autoclose: true
+        });
+
+        $('#to_date').datepicker({
             format: 'dd MM yyyy',
             autoclose: true
         });

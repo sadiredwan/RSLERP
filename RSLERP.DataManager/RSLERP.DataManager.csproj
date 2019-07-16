@@ -109,9 +109,12 @@
     <Compile Include="Entity\HRM\HrmEducationLevel.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeAcademicInfo.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeExperience.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeMembership.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeOfficial.cs" />
     <Compile Include="Entity\HRM\HrmEmployeePersonalInfo.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeePublisher.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeRelation.cs" />
+    <Compile Include="Entity\HRM\HrmEmployeeTraining.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />

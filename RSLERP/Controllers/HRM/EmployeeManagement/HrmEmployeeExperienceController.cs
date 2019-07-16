@@ -22,7 +22,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
     {
         ViewModel vmdl = new ViewModel();
 
-        // GET: HrmEmployeeExperiences
+        // GET: HrmEmployeeExperience
         [SecurityAuthAuthorize(AccessLevels = new AccessLevel[] { AccessLevel.View })]
         public ActionResult Index()
         {
@@ -72,6 +72,7 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
                     hrmEx.from_date = DateTime.Parse(Request.Form.GetValues("from_date[]")[i].ToString());
                     hrmEx.to_date = DateTime.Parse(Request.Form.GetValues("to_date[]")[i].ToString());
                     hrmEx.responsibility = Request.Form.GetValues("responsibility[]")[i].ToString();
+                    hrmEx.duration_days = Convert.ToInt32(Request.Form.GetValues("duration_days[]")[i]);
                     vmdl.VM_HRM_EMPLOYEE_EXPERIENCES.Add(hrmEx);
                 }
 
@@ -116,7 +117,6 @@ namespace RSLERP.Controllers.HRM.EmployeeManagement
                 {
                     exp.from_date_json = exp.from_date.ToShortDateString();
                     exp.to_date_json = exp.to_date.ToShortDateString();
-                    exp.duration_days = exp.to_date.Subtract(exp.from_date).Days;
                 }
                 vmdl.CommitStatus = true;
             }
