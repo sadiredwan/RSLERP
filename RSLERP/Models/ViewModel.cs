@@ -237,6 +237,14 @@ namespace RSLERP.Models
         public HrmEmployeePublisher VM_HRM_EMPLOYEE_PUBLISHER { get; set; }
 
         public List<HrmEmployeePublisher> VM_HRM_EMPLOYEE_PUBLISHERS { get; set; }
+
+        public HrmSalaryHeadType VM_HRM_SALARY_HEAD_TYPE { get; set; }
+
+        public List<HrmSalaryHeadType> VM_HRM_SALARY_HEAD_TYPES { get; set; }
+
+        public HrmSalaryHead VM_HRM_SALARY_HEAD { get; set; }
+
+        public List<HrmSalaryHead> VM_HRM_SALARY_HEADS { get; set; }
     }
 
    

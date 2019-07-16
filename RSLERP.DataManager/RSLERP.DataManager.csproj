@@ -117,6 +117,8 @@
     <Compile Include="Entity\HRM\HrmEmployeeTraining.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeType.cs" />
     <Compile Include="Entity\HRM\HrmEmploymentType.cs" />
+    <Compile Include="Entity\HRM\HrmSalaryHead.cs" />
+    <Compile Include="Entity\HRM\HrmSalaryHeadType.cs" />
     <Compile Include="Entity\HRM\HrmSection.cs" />
     <Compile Include="Entity\HRM\HrmShift.cs" />
     <Compile Include="Entity\HRM\HrmSubSection.cs" />
