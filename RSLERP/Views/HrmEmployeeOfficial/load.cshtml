@@ -5,6 +5,8 @@
 @{
     ViewBag.Title = "load";
     Layout = "~/Views/Shared/_LayoutHrm.cshtml";
+    int default_reporting_employee_id = 0;
+    String default_reporting_employee_name = "Top Most Employee";
 }
 
 <div class="content-wrapper">
@@ -108,9 +110,9 @@
                                         <option value="all">-- Select Reporting Officer --</option>
                                         @foreach (HrmEmployeeOfficial src in Model.VM_HRM_EMPLOYEE_OFFICIALS)
                                         {
-                                            if (src.id != Model.VM_HRM_EMPLOYEE_OFFICIAL.id)
+                                            if (src.id != Model.VM_HRM_EMPLOYEE_OFFICIAL.id || src.id == 0)
                                             {
-                                                <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id == src.id ? "selected" : "")>@src.name</option>
+                                                <option value="@src.id" @((Model.VM_HRM_EMPLOYEE_OFFICIAL.reporting_employee_id == src.id) && (src.id != 0) ? "selected" : "")>@src.name</option>
                                             }
                                         }
                                     </select>
@@ -118,7 +120,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Business</label>
+                                    <label>Business Sector</label>
                                     <select name="VM_HRM_EMPLOYEE_OFFICIAL.business_id" class="form-control select2">
                                         <option value="all">-- Select Business Sector --</option>
                                         @foreach (BusinessSector src in Model.VM_BUSINESS_SECTORS)

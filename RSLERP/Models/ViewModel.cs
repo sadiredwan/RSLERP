@@ -245,6 +245,10 @@ namespace RSLERP.Models
         public HrmSalaryHead VM_HRM_SALARY_HEAD { get; set; }
 
         public List<HrmSalaryHead> VM_HRM_SALARY_HEADS { get; set; }
+
+        public HrmSalaryBreakDown VM_HRM_SALARY_BREAKDOWN { get; set; }
+
+        public List<HrmSalaryBreakDown> VM_HRM_SALARY_BREAKDOWNS { get; set; }
     }
 
    

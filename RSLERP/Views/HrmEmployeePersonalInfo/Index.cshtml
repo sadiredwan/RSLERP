@@ -35,7 +35,7 @@
                     <div class="box box-primary">
 
                         <div class="box-body">
-                            <input type="hidden" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.id" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.id" />
+                            <input type="hidden" id="personal_info_id" name="VM_HRM_EMPLOYEE_PERSONAL_INFO.id" value="@Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.id" />
 
                             <div class="row">
                                 <div class="col-md-4">
@@ -47,7 +47,7 @@
                                             <option value="0">-- Select Employee ID --</option>
                                             @foreach (HrmEmployeeOfficial emp in Model.VM_HRM_EMPLOYEE_OFFICIALS)
                                             {
-                                                <option value="@emp.id">@emp.employee_id</option>
+                                                <option value="@emp.id" @(Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id == emp.id ? "selected" : "")>@emp.employee_id</option>
                                             }
                                         </select>
                                     </div>
@@ -215,7 +215,7 @@
                                             <option value="all">-- Select --</option>
                                             @foreach (HrmEmployeeRelation src in Model.VM_HRM_EMPLOYEE_RELATIONS)
                                             {
-                                                <option value="@src.id" @(Model.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id == src.id ? "selected" : "")>@src.name</option>
+                                                <option value="@src.id" >@src.name</option>
                                             }
                                         </select>
                                         @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id")
@@ -246,8 +246,7 @@
 
         function onchangeemployee() {
 
-            $("#tblEduLvls > tbody").html("");
-            var htmlTblItems = [];
+            resetAll();
             //where found Partial Load Class make it hidden
             $(".partialLoad").addClass("hiddenPnl");
 
@@ -272,6 +271,9 @@
                     success: function (data) {
                         if (data.CommitStatus) {
                             $("#lblLoadingMsg").html("");
+                            if (data.VM_HRM_EMPLOYEE_PERSONAL_INFO) {
+                                $("#personal_info_id").val(data.VM_HRM_EMPLOYEE_PERSONAL_INFO.id);
+                            }
                             $(".partialLoad").removeClass("hiddenPnl");
                             $(".partialLoad #employee_name").text(data.VM_HRM_EMPLOYEE_OFFICIAL.name);
                             $(".partialLoad #desig_name").text(data.VM_HRM_DESIGNATION.name);
@@ -297,7 +299,7 @@
                             $(".partialLoad #input_epiecp").val(data.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_name);
                             $(".partialLoad #input_epieca").val(data.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_address);
                             $(".partialLoad #input_epiecn").val(data.VM_HRM_EMPLOYEE_PERSONAL_INFO.emergency_contact_no);
-                            $(".partialLoad #input_epirelation").val(data.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id);
+                            $(".partialLoad #input_epirelation").select2('val', '' + data.VM_HRM_EMPLOYEE_RELATION.id + '');
                         }
                         else
                         {
@@ -321,5 +323,34 @@
             autoclose: true
         });
 
+        function resetAll() {
+            $("#personal_info_id").val('0');
+            $(".partialLoad #employee_name").text('');
+            $(".partialLoad #desig_name").text('');
+            $(".partialLoad #dep_name").text('');
+            $(".partialLoad #empImage").attr('');
+            $(".partialLoad #emp_id").text('');
+            $(".partialLoad #sec_name").text('');
+            $(".partialLoad #subsec_name").text('');
+            $(".partialLoad #input_epifname").val('');
+            $(".partialLoad #input_epimname").val('');
+            $(".partialLoad #datepicker2").val('');
+            $(".partialLoad #input_epigender").val('');
+            $(".partialLoad #input_epireligion").val('');
+            $(".partialLoad #input_epinationality").val('');
+            $(".partialLoad #input_epinid").val('');
+            $(".partialLoad #input_epitin").val('');
+            $(".partialLoad #input_epibg").val('');
+            $(".partialLoad #input_epims").val('');
+            $(".partialLoad #input_epipcn").val('');
+            $(".partialLoad #input_epiemail").val('');
+            $(".partialLoad #input_epiprad").val('');
+            $(".partialLoad #input_epipmad").val('');
+            $(".partialLoad #input_epiecp").val('');
+            $(".partialLoad #input_epieca").val('');
+            $(".partialLoad #input_epiecn").val('');
+            $(".partialLoad #input_epirelation").select2('val', '');
+        }
+    
     </script>
 }

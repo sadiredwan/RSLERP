@@ -124,6 +124,8 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmSalaryHead> HrmSalaryHeads { get; set; }
 
+        public DbSet<HrmSalaryBreakDown> HrmSalaryBreakDowns { get; set; }
+
         public DbSet<Group> Groups { get; set; }
 
         private void OnBeforeSaving()
