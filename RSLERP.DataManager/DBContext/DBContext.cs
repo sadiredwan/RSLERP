@@ -128,6 +128,8 @@ namespace RSLERP.DataManager
 
         public DbSet<Group> Groups { get; set; }
 
+        public DbSet<HrmLeaveType> HrmLeaveTypes { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;

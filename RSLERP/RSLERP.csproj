@@ -234,6 +234,7 @@
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeePublisherController.cs" />
     <Compile Include="Controllers\HRM\EmployeeManagement\HrmEmployeeTrainingController.cs" />
     <Compile Include="Controllers\HRM\HRMController.cs" />
+    <Compile Include="Controllers\HRM\LeaveManagement\HrmLeaveTypeController.cs" />
     <Compile Include="Controllers\HRM\PayrollManagement\HrmSalaryBreakDownController.cs" />
     <Compile Include="Controllers\HRM\PayrollManagement\HrmSalaryHeadController.cs" />
     <Compile Include="Controllers\Production\ProductionController.cs" />
@@ -9104,6 +9105,8 @@
     <Content Include="Views\HrmSalaryHead\Index.cshtml" />
     <Content Include="Views\HrmSalaryHead\load.cshtml" />
     <Content Include="Views\HrmSalaryBreakDown\Index.cshtml" />
+    <Content Include="Views\HrmLeaveType\Index.cshtml" />
+    <Content Include="Views\HrmLeaveType\load.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

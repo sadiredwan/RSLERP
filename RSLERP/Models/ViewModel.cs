@@ -249,6 +249,10 @@ namespace RSLERP.Models
         public HrmSalaryBreakDown VM_HRM_SALARY_BREAKDOWN { get; set; }
 
         public List<HrmSalaryBreakDown> VM_HRM_SALARY_BREAKDOWNS { get; set; }
+
+        public HrmLeaveType VM_HRM_LEAVE_TYPE { get; set; }
+
+        public List<HrmLeaveType> VM_HRM_LEAVE_TYPES { get; set; }
     }
 
    
