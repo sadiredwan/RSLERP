@@ -120,7 +120,17 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmEmployeePublisher> HrmEmployeePublishers { get; set; }
 
+        public DbSet<HrmSalaryHeadType> HrmSalaryHeadTypes { get; set; }
+
+        public DbSet<HrmSalaryHead> HrmSalaryHeads { get; set; }
+
+        public DbSet<HrmSalaryBreakDown> HrmSalaryBreakDowns { get; set; }
+
         public DbSet<Group> Groups { get; set; }
+
+        public DbSet<HrmLeaveType> HrmLeaveTypes { get; set; }
+
+        public DbSet<HrmAttendenceTimeSetup> HrmAttendenceTimeSetups { get; set; }
 
         private void OnBeforeSaving()
         {

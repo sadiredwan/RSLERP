@@ -29,6 +29,7 @@ namespace RSLERP.Controllers.Settings
             {
                 vmdl = (ViewModel)TempData["ViewModel"];
                 vmdl.VM_HRM_EMPLOYEE_OFFICIAL = new DBContext().HrmEmployeeOfficials.Find(vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_official_id);
+                vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO = new DBContext().HrmEmployeePersonalInfos.Find(vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO.id);
                 vmdl.VM_HRM_SECTION = new DBContext().HrmSections.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.section_id);
                 vmdl.VM_HRM_SUB_SECTION = new DBContext().HrmSubSections.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.subsection_id);
                 vmdl.VM_HRM_DESIGNATION = new DBContext().HrmDesignations.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.designation_id);
@@ -41,6 +42,7 @@ namespace RSLERP.Controllers.Settings
 
             vmdl.VM_HRM_EMPLOYEE_OFFICIALS = new DBContext().HrmEmployeeOfficials.Where(x => x.CompanyId == COMPANY_ID).ToList();
             vmdl.VM_HRM_EMPLOYEE_RELATIONS = new DBContext().HrmEmployeeRelations.ToList();
+
             return View(vmdl);
         }
 
@@ -112,6 +114,10 @@ namespace RSLERP.Controllers.Settings
                 vmdl.VM_HRM_DESIGNATION = new DBContext().HrmDesignations.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.designation_id);
                 vmdl.VM_DEPARTMENT = new DBContext().Departments.Find(vmdl.VM_HRM_EMPLOYEE_OFFICIAL.department_id);
                 vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO = new DBContext().HrmEmployeePersonalInfos.Where(x => x.hrm_employee_official_id == eID).FirstOrDefault();
+                if (vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO != null)
+                {
+                    vmdl.VM_HRM_EMPLOYEE_RELATION = new DBContext().HrmEmployeeRelations.Where(x => x.id == vmdl.VM_HRM_EMPLOYEE_PERSONAL_INFO.hrm_employee_relation_id).FirstOrDefault();
+                }
                
                 vmdl.CommitStatus = true;
             }
