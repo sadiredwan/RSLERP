@@ -105,6 +105,7 @@
     <Compile Include="Entity\CRM\TasksSummarys.cs" />
     <Compile Include="Entity\CRM\Task_Comments.cs" />
     <Compile Include="Entity\CRM\Users.cs" />
+    <Compile Include="Entity\HRM\HrmAttendenceTimeSetup.cs" />
     <Compile Include="Entity\HRM\HrmDesignation.cs" />
     <Compile Include="Entity\HRM\HrmEducationLevel.cs" />
     <Compile Include="Entity\HRM\HrmEmployeeAcademicInfo.cs" />

@@ -53,7 +53,7 @@
                                             <option value="all">-- Select Hour --</option>
                                             @for (int i = 1; i <= 24; i++)
                                             {
-                                                <option value="@i" @(Model.VM_HRM_SHIFT.from_hour == i ? "selected" : "")>@i</option>
+                                                <option value="@i" @(Model.VM_HRM_SHIFT.from_time.Hours == i ? "selected" : "")>@i</option>
                                             }
                                         </select>
                                         @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.from_hour")
@@ -66,7 +66,7 @@
                                             <option value="all">-- Select Minute --</option>
                                             @for (int i = 1; i <= 60; i++)
                                             {
-                                                <option value="@i" @(Model.VM_HRM_SHIFT.from_minute == i ? "selected" : "")>@i</option>
+                                                <option value="@i" @(Model.VM_HRM_SHIFT.from_time.Minutes == i ? "selected" : "")>@i</option>
                                             }
                                         </select>
                                         @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.from_minute")
@@ -82,7 +82,7 @@
                                             <option value="all">-- Select Hour --</option>
                                             @for (int i = 1; i <= 24; i++)
                                             {
-                                                <option value="@i" @(Model.VM_HRM_SHIFT.to_hour == i ? "selected" : "")>@i</option>
+                                                <option value="@i" @(Model.VM_HRM_SHIFT.to_time.Hours == i ? "selected" : "")>@i</option>
                                             }
                                         </select>
                                         @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.to_hour")
@@ -95,7 +95,7 @@
                                             <option value="all">-- Select Minute --</option>
                                             @for (int i = 1; i <= 60; i++)
                                             {
-                                                <option value="@i" @(Model.VM_HRM_SHIFT.to_minute == i ? "selected" : "")>@i</option>
+                                                <option value="@i" @(Model.VM_HRM_SHIFT.to_time.Minutes == i ? "selected" : "")>@i</option>
                                             }
                                         </select>
                                         @UserHelper.ModelStateMsg(Model.Model_State, "VM_HRM_SHIFT.to_minute")

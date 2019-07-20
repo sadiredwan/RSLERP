@@ -253,6 +253,10 @@ namespace RSLERP.Models
         public HrmLeaveType VM_HRM_LEAVE_TYPE { get; set; }
 
         public List<HrmLeaveType> VM_HRM_LEAVE_TYPES { get; set; }
+
+        public HrmAttendenceTimeSetup VM_HRM_ATTENDENCE_TIME_SETUP { get; set; }
+
+        public List<HrmAttendenceTimeSetup> VM_HRM_ATTENDENCE_TIME_SETUPS { get; set; }
     }
 
    

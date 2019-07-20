@@ -130,6 +130,8 @@ namespace RSLERP.DataManager
 
         public DbSet<HrmLeaveType> HrmLeaveTypes { get; set; }
 
+        public DbSet<HrmAttendenceTimeSetup> HrmAttendenceTimeSetups { get; set; }
+
         private void OnBeforeSaving()
         {
             int user_id = 0;
